@@ -16,8 +16,9 @@ import { SearchBar } from "react-native-elements";
 import Icon from "../components/SvgIcon";
 
 import PopularStrains from "../components/PopularStrains";
-import NeedHelp from "../components/NeedHelp";
-import StrainSummary from "../components/StrainSummary";
+import StrainTypes from "../components/StrainTypes";
+import ProductTypes from "../components/ProductTypes";
+import StrainExperiences from "../components/StrainExperiences";
 import PopularProducts from "../components/PopularProducts";
 import MedicalUse from "../components/MedicalUse";
 import GoodVibesSearch from "../components/GoodVibesSearch";
@@ -52,25 +53,24 @@ class ExploreScreen extends Component {
   };
 
   static navigationOptions = {
-    headerTitle: (
-      <SearchBar
-        onChangeText={onSearchChange}
-        onClear={onSearchClear}
-        placeholder="Search Waven"
-      />
-    ),
+    headerTitle: <SearchBar placeholder="Search Waven" round />,
     headerStyle: {
       backgroundColor: "#ff5a5f"
     }
   };
   render() {
     return (
-      <ScrollView style={{ flex: 1, backgroundColor: "#f3f6f3", width: 360 }}>
+      <ScrollView style={{ flex: 1, backgroundColor: "#f3f6f3" }}>
+        <ProductTypes titletext="Product Types" />
+        <PopularProducts style={{ marginTop: 20 }} titletext="Popular Vapes" />
+        <StrainTypes titletext="Strain Types" />
         <PopularStrains />
-        <PopularProducts style={{ marginTop: 20 }} />
-        <NeedHelp />
-        <StrainSummary />
         <MedicalUse />
+        <PopularProducts
+          style={{ marginTop: 20 }}
+          titletext="Hot CBD Products"
+        />
+        <StrainExperiences />
         <GoodVibesSearch
           title="Looking for something else?"
           desc="Find it with GoodVibes Search"

@@ -35,7 +35,7 @@ SearchStack.navigationOptions = {
           height={24}
           width={24}
           viewBox="0 0 24 24"
-          fill="#00c853"
+          fill="#ff5a5f"
         />
       );
     } else {
@@ -51,7 +51,7 @@ SearchStack.navigationOptions = {
     }
   },
   tabBarOptions: {
-    activeTintColor: "#00c853",
+    activeTintColor: "#ff5a5f",
     inactiveTintColor: "#666"
   }
 };
@@ -72,7 +72,7 @@ MyVibeStack.navigationOptions = {
           height={24}
           width={24}
           viewBox="0 0 24 24"
-          fill="#00c853"
+          fill="#ff5a5f"
         />
       );
     } else {
@@ -88,7 +88,7 @@ MyVibeStack.navigationOptions = {
     }
   },
   tabBarOptions: {
-    activeTintColor: "#00c853",
+    activeTintColor: "#ff5a5f",
     inactiveTintColor: "#666"
   }
 };
@@ -110,7 +110,7 @@ ExploreStack.navigationOptions = {
           height={24}
           width={24}
           viewBox="0 0 24 24"
-          fill="#00c853"
+          fill="#ff5a5f"
         />
       );
     } else {
@@ -126,7 +126,7 @@ ExploreStack.navigationOptions = {
     }
   },
   tabBarOptions: {
-    activeTintColor: "#00c853",
+    activeTintColor: "#ff5a5f",
     inactiveTintColor: "#666"
   }
 };
@@ -140,7 +140,7 @@ export default createBottomTabNavigator(
   },
   {
     headerMode: "none",
-    activeColor: "#00c853",
+    activeColor: "#ff5a5f",
     inactiveColor: "#666"
   }
 );

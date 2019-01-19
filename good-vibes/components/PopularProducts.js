@@ -33,7 +33,7 @@ class PopularProducts extends Component {
             backgroundColor: "#b0b0b0"
           }}
         >
-          Popular Products
+          {this.props.titletext}
         </Text>
         <ScrollView
           style={{ marginTop: -41 }}
