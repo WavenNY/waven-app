@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 
+import StrainType from "../components/StrainType";
+
 class StrainTypes extends Component {
   render() {
     return (
@@ -38,7 +40,11 @@ class StrainTypes extends Component {
           style={{ marginTop: -41 }}
           horizontal={"true"}
           showsHorizontalScrollIndicator={false}
-        />
+        >
+          <StrainType title="Hybrid" />
+          <StrainType title="Sativa" />
+          <StrainType title="Indica" />
+        </ScrollView>
       </View>
     );
   }

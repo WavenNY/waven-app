@@ -65,12 +65,12 @@ class ExploreScreen extends Component {
         <PopularProducts style={{ marginTop: 20 }} titletext="Popular Vapes" />
         <StrainTypes titletext="Strain Types" />
         <PopularStrains />
-        <MedicalUse />
+        <MedicalUse titletext="Medical Use" />
         <PopularProducts
           style={{ marginTop: 20 }}
           titletext="Hot CBD Products"
         />
-        <StrainExperiences />
+        <StrainExperiences titletext="Strain Experiences" />
         <GoodVibesSearch
           title="Looking for something else?"
           desc="Find it with GoodVibes Search"

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-class StrainType extends Component {
+class MedicalEffect extends Component {
   render() {
     return (
       <View
@@ -16,8 +16,7 @@ class StrainType extends Component {
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.8,
           shadowRadius: 2,
-          elevation: 1,
-          borderRadius: 75 / 2
+          elevation: 1
         }}
       >
         <Text
@@ -33,7 +32,7 @@ class StrainType extends Component {
     );
   }
 }
-export default StrainType;
+export default MedicalEffect;
 
 const styles = StyleSheet.create({
   container: {
