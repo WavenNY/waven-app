@@ -53,9 +53,40 @@ class ExploreScreen extends Component {
   };
 
   static navigationOptions = {
-    headerTitle: <SearchBar placeholder="Search Waven" round />,
+    headerTitle: (
+      <SearchBar
+        placeholder="Search Waven"
+        round
+        inputContainerStyle={{
+          borderWidth: 0
+        }}
+        containerStyle={{
+          borderColor: "transparent",
+          borderWidth: 0,
+          borderTopWidth: 0,
+          borderBottomWidth: 0,
+          width: 245,
+          height: 35,
+          alignSelf: "center",
+          marginLeft: "30%",
+          backgroundColor: "transparent"
+        }}
+        inputStyle={{
+          backgroundColor: "#fff",
+          textAlign: "center"
+        }}
+        leftIconContainerStyle={{
+          marginRight: 0
+        }}
+      />
+    ),
     headerStyle: {
-      backgroundColor: "#ff5a5f"
+      backgroundColor: "#ff5a5f",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: 20,
+      paddingBottom: 20,
+      height: 75
     }
   };
   render() {
