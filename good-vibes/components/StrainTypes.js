@@ -28,10 +28,10 @@ class StrainTypes extends Component {
             fontSize: 16,
             paddingLeft: 20,
             paddingTop: 20,
-            color: "#fff",
+            color: "#212121",
             alignItems: "flex-start",
             height: 135,
-            backgroundColor: "#b0b0b0"
+            backgroundColor: "#f3f6f3"
           }}
         >
           {this.props.titletext}

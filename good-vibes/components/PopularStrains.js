@@ -28,10 +28,10 @@ class PopularStrains extends Component {
             fontSize: 16,
             paddingLeft: 20,
             paddingTop: 50,
-            color: "#fff",
+            color: "#212121",
             alignItems: "flex-start",
             height: 145,
-            backgroundColor: "#b0b0b0"
+            backgroundColor: "#f3f6f3"
           }}
         >
           Popular Strains
