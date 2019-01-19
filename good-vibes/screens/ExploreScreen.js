@@ -38,6 +38,8 @@ import GoodVibesSearch from "../components/GoodVibesSearch";
 //   }
 // ];
 
+// Constants
+
 class ExploreScreen extends Component {
   constructor() {
     super();
