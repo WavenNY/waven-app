@@ -285,27 +285,21 @@ class ProductTypes extends Component {
           }
         ]}
       >
-        <View
+        <Text
           style={{
-            flexDirection: "row"
+            fontSize: 16,
+            paddingLeft: 20,
+            paddingTop: 30,
+            color: "#212121",
+            alignItems: "flex-start",
+            height: 135,
+            backgroundColor: "#f3f6f3",
+            flex: 1
           }}
         >
-          <Text
-            style={{
-              fontSize: 16,
-              paddingLeft: 20,
-              paddingTop: 30,
-              color: "#212121",
-              alignItems: "flex-start",
-              height: 135,
-              backgroundColor: "#f3f6f3",
-              marginRight: 60
-            }}
-          >
-            {this.props.titletext}
-          </Text>
-          {ptimg}
-        </View>
+          {this.props.titletext}
+        </Text>
+        <View style={{ position: "absolute", top: 0, right: 0 }}>{ptimg}</View>
 
         <ScrollView
           style={{ marginTop: -41 }}
