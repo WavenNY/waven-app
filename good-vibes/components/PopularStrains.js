@@ -3,7 +3,48 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { LinearGradient } from "expo";
 import StrainData from "../components/StrainData";
 
+// Import firebase
+import firebase from "../Firebase";
+
 class PopularStrains extends Component {
+  // Init firebase and props in constructor
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection("strains");
+    this.unsubscribe = null;
+    this.state = {
+      strains: []
+    };
+  }
+
+  // Hook on the backend collection
+  onCollectionUpdate = querySnapshot => {
+    // Temp array
+    const strains = [];
+
+    // get data
+    querySnapshot.forEach(doc => {
+      const { strain_name, type_slug, ratings, main_pic } = doc.data();
+
+      // save to temp array
+      strains.push({
+        key: doc.id,
+        strain_name,
+        type_slug,
+        ratings,
+        main_pic
+      });
+    });
+
+    this.setState({
+      strains
+    });
+  };
+
+  // hook on component loading
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
   render() {
     return (
       <View
@@ -34,42 +75,20 @@ class PopularStrains extends Component {
         </Text>
         <LinearGradient colors={["#fff", "#f3f6f3"]}>
           <ScrollView
-            style={{ marginTop: -41 }}
+            style={{ marginTop: -41, paddingLeft: 15 }}
             horizontal={"true"}
             showsHorizontalScrollIndicator={false}
           >
-            <StrainData
-              style={{ marginLeft: 15, marginRight: 10 }}
-              strainName="Blue Dream"
-              strainType="Indica"
-              strainRating="2.5"
-              strainStars={2.5}
-              strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
-            />
-            <StrainData
-              style={{ marginRight: 10 }}
-              strainName="Blue Dream"
-              strainType="Indica"
-              strainRating="4.0"
-              strainStars={4}
-              strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
-            />
-            <StrainData
-              style={{ marginRight: 10 }}
-              strainName="Blue Dream"
-              strainType="Indica"
-              strainRating="4.0"
-              strainStars={4}
-              strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
-            />
-            <StrainData
-              style={{ marginRight: 10 }}
-              strainName="Blue Dream"
-              strainType="Indica"
-              strainStars="3.5"
-              strainRating={3.5}
-              strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
-            />
+            {this.state.strains.map((items, i) => (
+              <StrainData
+                style={{ marginRight: 10 }}
+                strainName={items.strain_name}
+                strainType={items.type_slug}
+                strainRating={items.ratings}
+                strainStars={items.ratings}
+                strainURL={items.main_pic}
+              />
+            ))}
           </ScrollView>
         </LinearGradient>
       </View>

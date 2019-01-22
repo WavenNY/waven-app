@@ -3,7 +3,49 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ProductData from "../components/ProductData";
 import { LinearGradient } from "expo";
 
+// Import firebase
+import firebase from "../Firebase";
+
 class PopularProducts extends Component {
+  // Init firebase and props in constructor
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection("products");
+    this.unsubscribe = null;
+    this.state = {
+      products: []
+    };
+  }
+
+  // Hook on the backend collection
+  onCollectionUpdate = querySnapshot => {
+    // Temp array
+    const products = [];
+
+    // get data
+    querySnapshot.forEach(doc => {
+      const { product_name, type_slug, ratings, main_pic } = doc.data();
+
+      // save to temp array
+      products.push({
+        key: doc.id,
+        doc,
+        product_name,
+        type_slug,
+        ratings,
+        main_pic
+      });
+    });
+
+    this.setState({
+      products
+    });
+  };
+
+  // hook on component loading
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
   render() {
     return (
       <View
@@ -34,42 +76,20 @@ class PopularProducts extends Component {
         </Text>
         <LinearGradient colors={["#fff", "#f3f6f3"]}>
           <ScrollView
-            style={{ marginTop: -41 }}
+            style={{ marginTop: -41, paddingLeft: 20 }}
             horizontal={"true"}
             showsHorizontalScrollIndicator={false}
           >
-            <ProductData
-              style={{ marginLeft: 20, marginRight: 30 }}
-              productName="Spectram Cannabis Oil"
-              productType="CDB"
-              productRating="3.5"
-              productStars={3.5}
-              productURL="https://ddd33q3967xhi.cloudfront.net/1UOATBAYEomQ0bzZzpw-eeWhdY0=/fit-in/1400x1400/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fF0xt2gjaSOuw7kJZQZgb_300.png"
-            />
-            <ProductData
-              style={{ marginRight: 30 }}
-              productName="Spectram Cannabis Oil"
-              productType="CDB"
-              productRating="3.5"
-              productStars={3.5}
-              productURL="https://ddd33q3967xhi.cloudfront.net/1UOATBAYEomQ0bzZzpw-eeWhdY0=/fit-in/1400x1400/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fF0xt2gjaSOuw7kJZQZgb_300.png"
-            />
-            <ProductData
-              style={{ marginRight: 30 }}
-              productName="Spectram Cannabis Oil"
-              productType="CDB"
-              productRating="3.5"
-              productStars={3.5}
-              productURL="https://ddd33q3967xhi.cloudfront.net/1UOATBAYEomQ0bzZzpw-eeWhdY0=/fit-in/1400x1400/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fF0xt2gjaSOuw7kJZQZgb_300.png"
-            />
-            <ProductData
-              style={{ marginRight: 30 }}
-              productName="Spectram Cannabis Oil"
-              productType="CDB"
-              productRating="3.5"
-              productStars={3.5}
-              productURL="https://ddd33q3967xhi.cloudfront.net/1UOATBAYEomQ0bzZzpw-eeWhdY0=/fit-in/1400x1400/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fF0xt2gjaSOuw7kJZQZgb_300.png"
-            />
+            {this.state.products.map((items, i) => (
+              <ProductData
+                style={{ marginRight: 30 }}
+                productName={items.product_name}
+                productType={items.type_slug}
+                productRating={items.ratings}
+                productStars={items.ratings}
+                productURL={items.main_pic}
+              />
+            ))}
           </ScrollView>
         </LinearGradient>
       </View>
