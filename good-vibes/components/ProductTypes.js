@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ProductType from "../components/ProductType";
 import Icon from "../components/SvgIcon";
 import { Constants, Svg, LinearGradient } from "expo";
+import firebase from "../Firebase";
 
 //constants
 const ptimg = (
@@ -267,6 +268,36 @@ const ptimg = (
 );
 
 class ProductTypes extends Component {
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection("product_types");
+    this.unsubscribe = null;
+    this.state = {
+      prodTypes: []
+    };
+  }
+
+  onCollectionUpdate = querySnapshot => {
+    const prodTypes = [];
+    querySnapshot.forEach(doc => {
+      const { category_name, subcat_id } = doc.data();
+      prodTypes.push({
+        key: doc.id,
+        doc,
+        category_name,
+        subcat_id
+      });
+    });
+
+    this.setState({
+      prodTypes
+    });
+  };
+
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
+
   render() {
     return (
       <View
@@ -298,17 +329,17 @@ class ProductTypes extends Component {
         <View style={{ position: "absolute", top: 0, right: 0 }}>{ptimg}</View>
         <LinearGradient colors={["#fff", "#f3f6f3"]} style={{ height: 85 }}>
           <ScrollView
-            style={{ marginTop: -41 }}
+            style={{ marginTop: -41, paddingLeft: 10 }}
             horizontal={"true"}
             showsHorizontalScrollIndicator={false}
           >
-            <ProductType
-              style={{ marginRight: 26, marginLeft: 20 }}
-              title="Vapes"
-            />
-            <ProductType style={{ marginRight: 20 }} title="Concentrates" />
-            <ProductType style={{ marginRight: 20 }} title="CBD" />
-            <ProductType style={{ marginRight: 20 }} title="Edibles" />
+            {this.state.prodTypes.map((item, i) => (
+              <ProductType
+                key={i}
+                style={{ marginRight: 20 }}
+                title={item.category_name}
+              />
+            ))}
           </ScrollView>
         </LinearGradient>
       </View>
