@@ -8,7 +8,7 @@ class GoodVibesSearch extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[this.props.style, styles.container]}>
         <Text style={{ fontSize: 12, color: "#717171" }}>
           {this.props.title || ""}
         </Text>

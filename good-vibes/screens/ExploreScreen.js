@@ -96,15 +96,16 @@ class ExploreScreen extends Component {
       <ScrollView style={{ flex: 1, backgroundColor: "#f3f6f3" }}>
         <ProductTypes titletext="Product Types" />
         <PopularProducts style={{ marginTop: 20 }} titletext="Popular Vapes" />
-        <StrainTypes titletext="Strain Types" />
-        <PopularStrains />
-        <MedicalUse titletext="Medical Use" />
+        <StrainTypes style={{ marginTop: 20 }} titletext="Strain Types" />
+        <PopularStrains style={{ marginTop: 20 }} />
+        <MedicalUse style={{ marginTop: 20 }} titletext="Medical Use" />
         <PopularProducts
           style={{ marginTop: 20 }}
           titletext="Hot CBD Products"
         />
         <StrainExperiences titletext="Strain Experiences" />
         <GoodVibesSearch
+          style={{ marginTop: 20 }}
           title="Looking for something else?"
           desc="Find it with GoodVibes Search"
           buttonTitle="Show me"
