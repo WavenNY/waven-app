@@ -343,7 +343,7 @@ class MedicalUse extends Component {
         <View style={{ position: "absolute", top: 0, right: 0 }}>{mimg}</View>
         <LinearGradient colors={["#fff", "#f3f6f3"]}>
           <ScrollView
-            style={{ marginTop: -41 }}
+            style={{ marginTop: -41, paddingLeft: 10 }}
             horizontal={"true"}
             showsHorizontalScrollIndicator={false}
           >

@@ -4,6 +4,9 @@ import GoodEffect from "../components/GoodEffect";
 
 import { Constants, Svg, LinearGradient } from "expo";
 
+// Import firebase
+import firebase from "../Firebase";
+
 const seimg = (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
@@ -151,6 +154,42 @@ const seimg = (
 );
 
 class StrainExperiences extends Component {
+  // Init firebase and props in constructor
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection("positive_effects");
+    this.unsubscribe = null;
+    this.state = {
+      positiveEffects: []
+    };
+  }
+
+  // Hook on the backend collection
+  onCollectionUpdate = querySnapshot => {
+    // Temp array
+    const positiveEffects = [];
+
+    // get data
+    querySnapshot.forEach(doc => {
+      const { effect_name } = doc.data();
+
+      // save to temp array
+      positiveEffects.push({
+        key: doc.id,
+        doc,
+        effect_name
+      });
+    });
+
+    this.setState({
+      positiveEffects
+    });
+  };
+
+  // hook on component loading
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
   render() {
     return (
       <View
@@ -182,17 +221,16 @@ class StrainExperiences extends Component {
         <View style={{ position: "absolute", top: 0, right: 0 }}>{seimg}</View>
         <LinearGradient colors={["#fff", "#f3f6f3"]} style={{ height: 85 }}>
           <ScrollView
-            style={{ marginTop: -41 }}
+            style={{ marginTop: -41, paddingLeft: 10 }}
             horizontal={"true"}
             showsHorizontalScrollIndicator={false}
           >
-            <GoodEffect
-              style={{ marginLeft: 10, marginRight: 15 }}
-              title="Happy & Active"
-            />
-            <GoodEffect style={{ marginRight: 15 }} title="Relax & Forget" />
-            <GoodEffect style={{ marginRight: 15 }} title="Boost Creativity" />
-            <GoodEffect style={{ marginRight: 15 }} title="Sleep Well" />
+            {this.state.positiveEffects.map((item, i) => (
+              <GoodEffect
+                style={{ marginRight: 15 }}
+                title={item.effect_name}
+              />
+            ))}
           </ScrollView>
         </LinearGradient>
       </View>
