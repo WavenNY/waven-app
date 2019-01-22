@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import OutlineButton from "../components/OutlineButton";
 import MedicalEffect from "../components/MedicalEffect";
 
-import { Constants, Svg } from "expo";
+import { Constants, Svg, LinearGradient } from "expo";
 
 const mimg = (
   <Svg
@@ -275,7 +275,7 @@ class MedicalUse extends Component {
           {
             flex: 1,
             borderColor: "#33000000",
-            backgroundColor: "#fff",
+            backgroundColor: "#f3f6f3",
             paddingBottom: 10
             // shadowColor: "#330000",
             // shadowOffset: { width: 0, height: 2 },
@@ -287,6 +287,7 @@ class MedicalUse extends Component {
       >
         <Text
           style={{
+            fontFamily: "cc-std-book",
             flex: 1,
             fontSize: 16,
             paddingLeft: 20,
@@ -300,17 +301,18 @@ class MedicalUse extends Component {
           {this.props.titletext}
         </Text>
         <View style={{ position: "absolute", top: 0, right: 0 }}>{mimg}</View>
-
-        <ScrollView
-          style={{ marginTop: -41 }}
-          horizontal={"true"}
-          showsHorizontalScrollIndicator={false}
-        >
-          <MedicalEffect title="Stress" />
-          <MedicalEffect title="Depression" />
-          <MedicalEffect title="Fatigue" />
-          <MedicalEffect title="Pain" />
-        </ScrollView>
+        <LinearGradient colors={["#fff", "#f3f6f3"]}>
+          <ScrollView
+            style={{ marginTop: -41 }}
+            horizontal={"true"}
+            showsHorizontalScrollIndicator={false}
+          >
+            <MedicalEffect title="Stress" />
+            <MedicalEffect title="Depression" />
+            <MedicalEffect title="Fatigue" />
+            <MedicalEffect title="Pain" />
+          </ScrollView>
+        </LinearGradient>
       </View>
     );
   }

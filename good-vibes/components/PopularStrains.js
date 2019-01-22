@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-
+import { LinearGradient } from "expo";
 import StrainData from "../components/StrainData";
 
 class PopularStrains extends Component {
@@ -12,7 +12,7 @@ class PopularStrains extends Component {
           {
             flex: 1,
             borderColor: "#33000000",
-            backgroundColor: "#fff",
+            backgroundColor: "#f3f6f3",
             paddingBottom: 10
           }
         ]}
@@ -20,6 +20,7 @@ class PopularStrains extends Component {
         <Text
           style={{
             flex: 1,
+            fontFamily: "cc-std-book",
             fontSize: 16,
             paddingLeft: 20,
             paddingTop: 50,
@@ -31,44 +32,46 @@ class PopularStrains extends Component {
         >
           Popular Strains
         </Text>
-        <ScrollView
-          style={{ marginTop: -41 }}
-          horizontal={"true"}
-          showsHorizontalScrollIndicator={false}
-        >
-          <StrainData
-            style={{ marginLeft: 15, marginRight: 10 }}
-            strainName="Blue Dream"
-            strainType="Indica"
-            strainRating="2.5"
-            strainStars={2.5}
-            strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
-          />
-          <StrainData
-            style={{ marginRight: 10 }}
-            strainName="Blue Dream"
-            strainType="Indica"
-            strainRating="4.0"
-            strainStars={4}
-            strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
-          />
-          <StrainData
-            style={{ marginRight: 10 }}
-            strainName="Blue Dream"
-            strainType="Indica"
-            strainRating="4.0"
-            strainStars={4}
-            strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
-          />
-          <StrainData
-            style={{ marginRight: 10 }}
-            strainName="Blue Dream"
-            strainType="Indica"
-            strainStars="3.5"
-            strainRating={3.5}
-            strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
-          />
-        </ScrollView>
+        <LinearGradient colors={["#fff", "#f3f6f3"]}>
+          <ScrollView
+            style={{ marginTop: -41 }}
+            horizontal={"true"}
+            showsHorizontalScrollIndicator={false}
+          >
+            <StrainData
+              style={{ marginLeft: 15, marginRight: 10 }}
+              strainName="Blue Dream"
+              strainType="Indica"
+              strainRating="2.5"
+              strainStars={2.5}
+              strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
+            />
+            <StrainData
+              style={{ marginRight: 10 }}
+              strainName="Blue Dream"
+              strainType="Indica"
+              strainRating="4.0"
+              strainStars={4}
+              strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
+            />
+            <StrainData
+              style={{ marginRight: 10 }}
+              strainName="Blue Dream"
+              strainType="Indica"
+              strainRating="4.0"
+              strainStars={4}
+              strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
+            />
+            <StrainData
+              style={{ marginRight: 10 }}
+              strainName="Blue Dream"
+              strainType="Indica"
+              strainStars="3.5"
+              strainRating={3.5}
+              strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
+            />
+          </ScrollView>
+        </LinearGradient>
       </View>
     );
   }

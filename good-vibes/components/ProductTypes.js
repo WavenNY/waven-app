@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ProductType from "../components/ProductType";
 import Icon from "../components/SvgIcon";
-import { Constants, Svg } from "expo";
+import { Constants, Svg, LinearGradient } from "expo";
 
 //constants
 const ptimg = (
@@ -275,13 +275,14 @@ class ProductTypes extends Component {
           {
             flex: 1,
             borderColor: "#33000000",
-            backgroundColor: "#fff",
+            backgroundColor: "#f3f6f3",
             paddingBottom: 10
           }
         ]}
       >
         <Text
           style={{
+            fontFamily: "cc-std-book",
             fontSize: 16,
             paddingLeft: 20,
             paddingTop: 90,
@@ -295,20 +296,21 @@ class ProductTypes extends Component {
           {this.props.titletext}
         </Text>
         <View style={{ position: "absolute", top: 0, right: 0 }}>{ptimg}</View>
-
-        <ScrollView
-          style={{ marginTop: -41 }}
-          horizontal={"true"}
-          showsHorizontalScrollIndicator={false}
-        >
-          <ProductType
-            style={{ marginRight: 26, marginLeft: 20 }}
-            title="Vapes"
-          />
-          <ProductType style={{ marginRight: 20 }} title="Concentrates" />
-          <ProductType style={{ marginRight: 20 }} title="CBD" />
-          <ProductType style={{ marginRight: 20 }} title="Edibles" />
-        </ScrollView>
+        <LinearGradient colors={["#fff", "#f3f6f3"]} style={{ height: 85 }}>
+          <ScrollView
+            style={{ marginTop: -41 }}
+            horizontal={"true"}
+            showsHorizontalScrollIndicator={false}
+          >
+            <ProductType
+              style={{ marginRight: 26, marginLeft: 20 }}
+              title="Vapes"
+            />
+            <ProductType style={{ marginRight: 20 }} title="Concentrates" />
+            <ProductType style={{ marginRight: 20 }} title="CBD" />
+            <ProductType style={{ marginRight: 20 }} title="Edibles" />
+          </ScrollView>
+        </LinearGradient>
       </View>
     );
   }

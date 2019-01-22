@@ -111,6 +111,7 @@ ExploreStack.navigationOptions = {
           width={24}
           viewBox="0 0 24 24"
           fill="#ff5a5f"
+          fillRule="nonzero"
         />
       );
     } else {
@@ -121,6 +122,7 @@ ExploreStack.navigationOptions = {
           width={24}
           viewBox="0 0 24 24"
           fill="#666"
+          fillRule="nonzero"
         />
       );
     }

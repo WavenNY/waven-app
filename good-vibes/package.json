@@ -17,6 +17,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
     "react-native-elements": "^0.19.1",
     "react-native-fab": "^1.0.8",
+    "react-native-firebase": "^5.2.1",
     "react-native-floating-action": "^1.13.0",
     "react-native-stars": "^1.1.5",
     "react-native-svg-icon": "^0.8.1",

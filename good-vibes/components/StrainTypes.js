@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { Constants, Svg } from "expo";
+import { Constants, Svg, LinearGradient } from "expo";
 
 import StrainType from "../components/StrainType";
 
@@ -117,7 +117,7 @@ class StrainTypes extends Component {
           {
             flex: 1,
             borderColor: "#33000000",
-            backgroundColor: "#fff",
+            backgroundColor: "#f3f6f3",
             paddingBottom: 10
           }
         ]}
@@ -125,6 +125,7 @@ class StrainTypes extends Component {
         <Text
           style={{
             flex: 1,
+            fontFamily: "cc-std-book",
             fontSize: 16,
             paddingLeft: 20,
             paddingTop: 50,
@@ -137,18 +138,20 @@ class StrainTypes extends Component {
           {this.props.titletext}
         </Text>
         <View style={{ position: "absolute", top: 0, right: 0 }}>{stimg}</View>
-        <ScrollView
-          style={{ marginTop: -41 }}
-          horizontal={"true"}
-          showsHorizontalScrollIndicator={false}
-        >
-          <StrainType
-            style={{ marginLeft: 25, marginRight: 30 }}
-            title="Hybrid"
-          />
-          <StrainType style={{ marginRight: 30 }} title="Sativa" />
-          <StrainType style={{ marginRight: 30 }} title="Indica" />
-        </ScrollView>
+        <LinearGradient colors={["#fff", "#f3f6f3"]}>
+          <ScrollView
+            style={{ marginTop: -41 }}
+            horizontal={"true"}
+            showsHorizontalScrollIndicator={false}
+          >
+            <StrainType
+              style={{ marginLeft: 25, marginRight: 30 }}
+              title="Hybrid"
+            />
+            <StrainType style={{ marginRight: 30 }} title="Sativa" />
+            <StrainType style={{ marginRight: 30 }} title="Indica" />
+          </ScrollView>
+        </LinearGradient>
       </View>
     );
   }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import GoodEffect from "../components/GoodEffect";
 
-import { Constants, Svg } from "expo";
+import { Constants, Svg, LinearGradient } from "expo";
 
 const seimg = (
   <Svg
@@ -159,7 +159,7 @@ class StrainExperiences extends Component {
           {
             flex: 1,
             borderColor: "#33000000",
-            backgroundColor: "#fff",
+            backgroundColor: "#f3f6f3",
             paddingBottom: 10
           }
         ]}
@@ -167,9 +167,10 @@ class StrainExperiences extends Component {
         <Text
           style={{
             flex: 1,
+            fontFamily: "cc-std-book",
             fontSize: 16,
             paddingLeft: 20,
-            paddingTop: 60,
+            paddingTop: 50,
             color: "#212121",
             alignItems: "flex-start",
             height: 135,
@@ -179,20 +180,21 @@ class StrainExperiences extends Component {
           {this.props.titletext}
         </Text>
         <View style={{ position: "absolute", top: 0, right: 0 }}>{seimg}</View>
-
-        <ScrollView
-          style={{ marginTop: -41 }}
-          horizontal={"true"}
-          showsHorizontalScrollIndicator={false}
-        >
-          <GoodEffect
-            style={{ marginLeft: 10, marginRight: 15 }}
-            title="Happy & Active"
-          />
-          <GoodEffect style={{ marginRight: 15 }} title="Relax & Forget" />
-          <GoodEffect style={{ marginRight: 15 }} title="Boost Creativity" />
-          <GoodEffect style={{ marginRight: 15 }} title="Sleep Well" />
-        </ScrollView>
+        <LinearGradient colors={["#fff", "#f3f6f3"]} style={{ height: 85 }}>
+          <ScrollView
+            style={{ marginTop: -41 }}
+            horizontal={"true"}
+            showsHorizontalScrollIndicator={false}
+          >
+            <GoodEffect
+              style={{ marginLeft: 10, marginRight: 15 }}
+              title="Happy & Active"
+            />
+            <GoodEffect style={{ marginRight: 15 }} title="Relax & Forget" />
+            <GoodEffect style={{ marginRight: 15 }} title="Boost Creativity" />
+            <GoodEffect style={{ marginRight: 15 }} title="Sleep Well" />
+          </ScrollView>
+        </LinearGradient>
       </View>
     );
   }
