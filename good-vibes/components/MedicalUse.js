@@ -5,6 +5,9 @@ import MedicalEffect from "../components/MedicalEffect";
 
 import { Constants, Svg, LinearGradient } from "expo";
 
+// Import firebase
+import firebase from "../Firebase";
+
 const mimg = (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
@@ -233,6 +236,43 @@ const mimg = (
 );
 
 class MedicalUse extends Component {
+  // Init firebase and props in constructor
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection("medical_effects");
+    this.unsubscribe = null;
+    this.state = {
+      medicalEffects: []
+    };
+  }
+
+  // Hook on the backend collection
+  onCollectionUpdate = querySnapshot => {
+    // Temp array
+    const medicalEffects = [];
+
+    // get data
+    querySnapshot.forEach(doc => {
+      const { effect_name } = doc.data();
+
+      // save to temp array
+      medicalEffects.push({
+        key: doc.id,
+        doc,
+        effect_name
+      });
+    });
+
+    this.setState({
+      medicalEffects
+    });
+  };
+
+  // hook on component loading
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
+
   _onPressTest = () => alert("hi");
   render() {
     return (
@@ -307,10 +347,10 @@ class MedicalUse extends Component {
             horizontal={"true"}
             showsHorizontalScrollIndicator={false}
           >
-            <MedicalEffect title="Stress" />
-            <MedicalEffect title="Depression" />
-            <MedicalEffect title="Fatigue" />
-            <MedicalEffect title="Pain" />
+            {// Loop and render data
+            this.state.medicalEffects.map((item, i) => (
+              <MedicalEffect title={item.effect_name} />
+            ))}
           </ScrollView>
         </LinearGradient>
       </View>
