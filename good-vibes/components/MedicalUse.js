@@ -276,12 +276,12 @@ class MedicalUse extends Component {
             flex: 1,
             borderColor: "#33000000",
             backgroundColor: "#fff",
-            paddingBottom: 10,
-            shadowColor: "#330000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 1
+            paddingBottom: 10
+            // shadowColor: "#330000",
+            // shadowOffset: { width: 0, height: 2 },
+            // shadowOpacity: 0.8,
+            // shadowRadius: 2,
+            // elevation: 1
           }
         ]}
       >
@@ -290,7 +290,7 @@ class MedicalUse extends Component {
             flex: 1,
             fontSize: 16,
             paddingLeft: 20,
-            paddingTop: 20,
+            paddingTop: 40,
             color: "#212121",
             alignItems: "flex-start",
             height: 135,

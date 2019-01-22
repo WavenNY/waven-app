@@ -105,7 +105,7 @@ class ExploreScreen extends Component {
         />
         <StrainExperiences titletext="Strain Experiences" />
         <GoodVibesSearch
-          style={{ marginTop: 20 }}
+          style={{ marginTop: 20, marginBottom: 20 }}
           title="Looking for something else?"
           desc="Find it with GoodVibes Search"
           buttonTitle="Show me"

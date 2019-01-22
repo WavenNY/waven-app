@@ -36,11 +36,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: "#fff",
     paddingTop: 20,
-    paddingBottom: 20,
-    shadowColor: "#330000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 1
+    paddingBottom: 20
+    // shadowColor: "#330000",
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.8,
+    // shadowRadius: 2,
+    // elevation: 1
   }
 });

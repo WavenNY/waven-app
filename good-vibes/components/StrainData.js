@@ -10,11 +10,14 @@ class StrainData extends Component {
   render() {
     return (
       <View
-        style={{
-          margin: 0,
-          padding: 0,
-          width: 110
-        }}
+        style={[
+          this.props.style,
+          {
+            margin: 0,
+            padding: 0,
+            width: 110
+          }
+        ]}
       >
         <Image
           style={{
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   myStarStyle: {
-    color: "#00c853",
+    color: "#ff5a5f",
     backgroundColor: "transparent"
   },
   myEmptyStarStyle: {

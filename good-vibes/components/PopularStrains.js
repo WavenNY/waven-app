@@ -13,12 +13,7 @@ class PopularStrains extends Component {
             flex: 1,
             borderColor: "#33000000",
             backgroundColor: "#fff",
-            paddingBottom: 10,
-            shadowColor: "#330000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 1
+            paddingBottom: 10
           }
         ]}
       >
@@ -42,6 +37,7 @@ class PopularStrains extends Component {
           showsHorizontalScrollIndicator={false}
         >
           <StrainData
+            style={{ marginLeft: 15, marginRight: 10 }}
             strainName="Blue Dream"
             strainType="Indica"
             strainRating="2.5"
@@ -49,6 +45,7 @@ class PopularStrains extends Component {
             strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
           />
           <StrainData
+            style={{ marginRight: 10 }}
             strainName="Blue Dream"
             strainType="Indica"
             strainRating="4.0"
@@ -56,6 +53,7 @@ class PopularStrains extends Component {
             strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
           />
           <StrainData
+            style={{ marginRight: 10 }}
             strainName="Blue Dream"
             strainType="Indica"
             strainRating="4.0"
@@ -63,6 +61,7 @@ class PopularStrains extends Component {
             strainURL="https://leafly-s3.s3.amazonaws.com/leafly/reviews/blue-dream_100x100_189e.jpg"
           />
           <StrainData
+            style={{ marginRight: 10 }}
             strainName="Blue Dream"
             strainType="Indica"
             strainStars="3.5"

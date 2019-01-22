@@ -21,7 +21,7 @@ class PopularProducts extends Component {
             flex: 1,
             fontSize: 16,
             paddingLeft: 20,
-            paddingTop: 40,
+            paddingTop: 50,
             color: "#212121",
             alignItems: "flex-start",
             height: 135,

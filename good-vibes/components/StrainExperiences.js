@@ -160,12 +160,7 @@ class StrainExperiences extends Component {
             flex: 1,
             borderColor: "#33000000",
             backgroundColor: "#fff",
-            paddingBottom: 10,
-            shadowColor: "#330000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 1
+            paddingBottom: 10
           }
         ]}
       >
@@ -174,7 +169,7 @@ class StrainExperiences extends Component {
             flex: 1,
             fontSize: 16,
             paddingLeft: 20,
-            paddingTop: 20,
+            paddingTop: 60,
             color: "#212121",
             alignItems: "flex-start",
             height: 135,
@@ -190,10 +185,13 @@ class StrainExperiences extends Component {
           horizontal={"true"}
           showsHorizontalScrollIndicator={false}
         >
-          <GoodEffect title="Happy & Active" />
-          <GoodEffect title="Relax & Forget" />
-          <GoodEffect title="Boost Creativity" />
-          <GoodEffect title="Sleep Well" />
+          <GoodEffect
+            style={{ marginLeft: 10, marginRight: 15 }}
+            title="Happy & Active"
+          />
+          <GoodEffect style={{ marginRight: 15 }} title="Relax & Forget" />
+          <GoodEffect style={{ marginRight: 15 }} title="Boost Creativity" />
+          <GoodEffect style={{ marginRight: 15 }} title="Sleep Well" />
         </ScrollView>
       </View>
     );

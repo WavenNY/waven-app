@@ -118,12 +118,7 @@ class StrainTypes extends Component {
             flex: 1,
             borderColor: "#33000000",
             backgroundColor: "#fff",
-            paddingBottom: 10,
-            shadowColor: "#330000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 1
+            paddingBottom: 10
           }
         ]}
       >
@@ -132,7 +127,7 @@ class StrainTypes extends Component {
             flex: 1,
             fontSize: 16,
             paddingLeft: 20,
-            paddingTop: 20,
+            paddingTop: 50,
             color: "#212121",
             alignItems: "flex-start",
             height: 135,
@@ -147,9 +142,12 @@ class StrainTypes extends Component {
           horizontal={"true"}
           showsHorizontalScrollIndicator={false}
         >
-          <StrainType title="Hybrid" />
-          <StrainType title="Sativa" />
-          <StrainType title="Indica" />
+          <StrainType
+            style={{ marginLeft: 25, marginRight: 30 }}
+            title="Hybrid"
+          />
+          <StrainType style={{ marginRight: 30 }} title="Sativa" />
+          <StrainType style={{ marginRight: 30 }} title="Indica" />
         </ScrollView>
       </View>
     );
