@@ -276,12 +276,7 @@ class ProductTypes extends Component {
             flex: 1,
             borderColor: "#33000000",
             backgroundColor: "#fff",
-            paddingBottom: 10,
-            shadowColor: "#330000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 1
+            paddingBottom: 10
           }
         ]}
       >
@@ -289,10 +284,10 @@ class ProductTypes extends Component {
           style={{
             fontSize: 16,
             paddingLeft: 20,
-            paddingTop: 30,
+            paddingTop: 90,
             color: "#212121",
             alignItems: "flex-start",
-            height: 135,
+            height: 176,
             backgroundColor: "#f3f6f3",
             flex: 1
           }}
@@ -306,10 +301,13 @@ class ProductTypes extends Component {
           horizontal={"true"}
           showsHorizontalScrollIndicator={false}
         >
-          <ProductType title="Vapes" />
-          <ProductType title="Concentrates" />
-          <ProductType title="CBD" />
-          <ProductType title="Edibles" />
+          <ProductType
+            style={{ marginRight: 26, marginLeft: 20 }}
+            title="Vapes"
+          />
+          <ProductType style={{ marginRight: 20 }} title="Concentrates" />
+          <ProductType style={{ marginRight: 20 }} title="CBD" />
+          <ProductType style={{ marginRight: 20 }} title="Edibles" />
         </ScrollView>
       </View>
     );

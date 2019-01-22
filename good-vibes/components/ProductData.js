@@ -7,13 +7,16 @@ class ProductData extends Component {
   render() {
     return (
       <View
-        style={{
-          margin: 0,
-          padding: 0,
-          width: 110,
-          paddingLeft: 10,
-          paddingRight: 10
-        }}
+        style={[
+          this.props.style,
+          {
+            margin: 0,
+            padding: 0,
+            width: 110,
+            paddingLeft: 10,
+            paddingRight: 10
+          }
+        ]}
       >
         <Image
           style={{
@@ -75,7 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   myStarStyle: {
-    color: "#00c853",
+    color: "#ff5a5f",
     backgroundColor: "transparent"
   },
   myEmptyStarStyle: {

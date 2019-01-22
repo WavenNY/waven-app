@@ -94,7 +94,7 @@ class ExploreScreen extends Component {
   render() {
     return (
       <ScrollView style={{ flex: 1, backgroundColor: "#f3f6f3" }}>
-        <ProductTypes titletext="Product Types" />
+        <ProductTypes titletext="Product Types" style={{ marginTop: 20 }} />
         <PopularProducts style={{ marginTop: 20 }} titletext="Popular Vapes" />
         <StrainTypes style={{ marginTop: 20 }} titletext="Strain Types" />
         <PopularStrains style={{ marginTop: 20 }} />

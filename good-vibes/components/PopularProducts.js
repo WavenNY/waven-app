@@ -12,12 +12,7 @@ class PopularProducts extends Component {
             flex: 1,
             borderColor: "#33000000",
             backgroundColor: "#fff",
-            paddingBottom: 10,
-            shadowColor: "#330000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 1
+            paddingBottom: 10
           }
         ]}
       >
@@ -26,7 +21,7 @@ class PopularProducts extends Component {
             flex: 1,
             fontSize: 16,
             paddingLeft: 20,
-            paddingTop: 20,
+            paddingTop: 40,
             color: "#212121",
             alignItems: "flex-start",
             height: 135,
@@ -41,6 +36,7 @@ class PopularProducts extends Component {
           showsHorizontalScrollIndicator={false}
         >
           <ProductData
+            style={{ marginLeft: 20, marginRight: 30 }}
             productName="Spectram Cannabis Oil"
             productType="CDB"
             productRating="3.5"
@@ -48,6 +44,7 @@ class PopularProducts extends Component {
             productURL="https://ddd33q3967xhi.cloudfront.net/1UOATBAYEomQ0bzZzpw-eeWhdY0=/fit-in/1400x1400/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fF0xt2gjaSOuw7kJZQZgb_300.png"
           />
           <ProductData
+            style={{ marginRight: 30 }}
             productName="Spectram Cannabis Oil"
             productType="CDB"
             productRating="3.5"
@@ -55,6 +52,7 @@ class PopularProducts extends Component {
             productURL="https://ddd33q3967xhi.cloudfront.net/1UOATBAYEomQ0bzZzpw-eeWhdY0=/fit-in/1400x1400/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fF0xt2gjaSOuw7kJZQZgb_300.png"
           />
           <ProductData
+            style={{ marginRight: 30 }}
             productName="Spectram Cannabis Oil"
             productType="CDB"
             productRating="3.5"
@@ -62,6 +60,7 @@ class PopularProducts extends Component {
             productURL="https://ddd33q3967xhi.cloudfront.net/1UOATBAYEomQ0bzZzpw-eeWhdY0=/fit-in/1400x1400/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fF0xt2gjaSOuw7kJZQZgb_300.png"
           />
           <ProductData
+            style={{ marginRight: 30 }}
             productName="Spectram Cannabis Oil"
             productType="CDB"
             productRating="3.5"
