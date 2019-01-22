@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { Constants, Svg, LinearGradient } from "expo";
 
+// Import firebase
+import firebase from "../Firebase";
+
 import StrainType from "../components/StrainType";
 
 const stimg = (
@@ -109,6 +112,42 @@ const stimg = (
 );
 
 class StrainTypes extends Component {
+  // Init firebase and props in constructor
+  constructor(props) {
+    super(props);
+    this.ref = firebase.firestore().collection("strain_types");
+    this.unsubscribe = null;
+    this.state = {
+      strainTypes: []
+    };
+  }
+  // Hook on the backend collection
+  onCollectionUpdate = querySnapshot => {
+    // Temp array
+    const strainTypes = [];
+
+    // get data
+    querySnapshot.forEach(doc => {
+      const { category_name } = doc.data();
+
+      // save to temp array
+      strainTypes.push({
+        key: doc.id,
+        doc,
+        category_name
+      });
+    });
+
+    this.setState({
+      strainTypes
+    });
+  };
+
+  // hook on component loading
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
+
   render() {
     return (
       <View
@@ -140,16 +179,17 @@ class StrainTypes extends Component {
         <View style={{ position: "absolute", top: 0, right: 0 }}>{stimg}</View>
         <LinearGradient colors={["#fff", "#f3f6f3"]}>
           <ScrollView
-            style={{ marginTop: -41 }}
+            style={{ marginTop: -41, paddingLeft: 25 }}
             horizontal={"true"}
             showsHorizontalScrollIndicator={false}
           >
-            <StrainType
-              style={{ marginLeft: 25, marginRight: 30 }}
-              title="Hybrid"
-            />
-            <StrainType style={{ marginRight: 30 }} title="Sativa" />
-            <StrainType style={{ marginRight: 30 }} title="Indica" />
+            {// Loop and render data
+            this.state.strainTypes.map((item, i) => (
+              <StrainType
+                style={{ marginRight: 30 }}
+                title={item.category_name}
+              />
+            ))}
           </ScrollView>
         </LinearGradient>
       </View>

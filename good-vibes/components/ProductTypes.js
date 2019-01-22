@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import ProductType from "../components/ProductType";
 import Icon from "../components/SvgIcon";
 import { Constants, Svg, LinearGradient } from "expo";
+
+// Import firebase
 import firebase from "../Firebase";
 
 //constants
@@ -268,6 +270,7 @@ const ptimg = (
 );
 
 class ProductTypes extends Component {
+  // Init firebase and props in constructor
   constructor(props) {
     super(props);
     this.ref = firebase.firestore().collection("product_types");
@@ -277,10 +280,16 @@ class ProductTypes extends Component {
     };
   }
 
+  // Hook on the backend collection
   onCollectionUpdate = querySnapshot => {
+    // temp array to hold data
     const prodTypes = [];
+
+    // get columns
     querySnapshot.forEach(doc => {
       const { category_name, subcat_id } = doc.data();
+
+      // Push to temp array
       prodTypes.push({
         key: doc.id,
         doc,
@@ -289,11 +298,13 @@ class ProductTypes extends Component {
       });
     });
 
+    // Set array globaly for consumption
     this.setState({
       prodTypes
     });
   };
 
+  // hook on component loading
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
@@ -333,7 +344,8 @@ class ProductTypes extends Component {
             horizontal={"true"}
             showsHorizontalScrollIndicator={false}
           >
-            {this.state.prodTypes.map((item, i) => (
+            {// Loop and render data
+            this.state.prodTypes.map((item, i) => (
               <ProductType
                 key={i}
                 style={{ marginRight: 20 }}
