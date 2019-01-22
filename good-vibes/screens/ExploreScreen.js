@@ -70,7 +70,7 @@ class ExploreScreen extends Component {
           width: 245,
           height: 35,
           alignSelf: "center",
-          marginLeft: "30%",
+          marginLeft: "20%",
           backgroundColor: "transparent"
         }}
         inputStyle={{
