@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 class CategoryScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: "Strain Types",
+      headerTitle: "Strains",
       headerStyle: {
         backgroundColor: "#ff5a5f"
       },
@@ -28,6 +28,7 @@ export default CategoryScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#f3f6f3",
     alignItems: "center",
     justifyContent: "center"
   }
