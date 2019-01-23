@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
 import { Constants, Svg, LinearGradient } from "expo";
 
 // Import firebase
@@ -185,10 +191,14 @@ class StrainTypes extends Component {
           >
             {// Loop and render data
             this.state.strainTypes.map((item, i) => (
-              <StrainType
-                style={{ marginRight: 30 }}
-                title={item.category_name}
-              />
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Category")}
+              >
+                <StrainType
+                  style={{ marginRight: 30 }}
+                  title={item.category_name}
+                />
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </LinearGradient>

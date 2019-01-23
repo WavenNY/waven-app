@@ -98,7 +98,11 @@ class ExploreScreen extends Component {
           style={{ marginTop: 20 }}
         />
         <PopularProducts style={{ marginTop: 10 }} titletext="Popular Vapes" />
-        <StrainTypes style={{ marginTop: 10 }} titletext="Strain Types" />
+        <StrainTypes
+          style={{ marginTop: 10 }}
+          titletext="Strain Types"
+          navigation={this.props.navigation}
+        />
         <PopularStrains style={{ marginTop: 10 }} />
         <MedicalUse style={{ marginTop: 10 }} titletext="Medical Use" />
         <PopularProducts
