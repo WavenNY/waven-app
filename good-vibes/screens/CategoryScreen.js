@@ -2,8 +2,17 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 class CategoryScreen extends Component {
-  static navigationOption = {
-    title: "Strain Type"
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: "Strain Types",
+      headerStyle: {
+        backgroundColor: "#ff5a5f"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        textAlign: "center"
+      }
+    };
   };
 
   render() {
