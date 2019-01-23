@@ -20,11 +20,6 @@ import CategoryScreen from "../screens/CategoryScreen";
  * setup Stack navigatos and thier navigation options
  */
 
-// Category screen stack navigator
-const CategoryStack = createStackNavigator({
-  Category: CategoryScreen
-});
-
 // Search screen stack navigator
 const SearchStack = createStackNavigator({
   Search: SearchScreen
@@ -101,7 +96,8 @@ MyVibeStack.navigationOptions = {
 
 // Explore screen stack navigator
 const ExploreStack = createStackNavigator({
-  Explore: ExploreScreen
+  Explore: ExploreScreen,
+  Category: CategoryScreen
 });
 
 // Explore screen stack navigation options
@@ -140,16 +136,20 @@ ExploreStack.navigationOptions = {
 };
 
 // Export BottomTabNavigator component with our 3 stack navigators
-export default createBottomTabNavigator(
+const bottomTabNavigator = createBottomTabNavigator(
   {
     ExploreStack,
     SearchStack,
-    MyVibeStack,
-    CategoryStack
+    MyVibeStack
   },
   {
     headerMode: "none",
     activeColor: "#ff5a5f",
     inactiveColor: "#666"
   }
+);
+
+export default createStackNavigator(
+  { bottomTabNavigator },
+  { headerMode: "none" }
 );

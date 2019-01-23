@@ -29,7 +29,6 @@ class PopularProducts extends Component {
       // save to temp array
       products.push({
         key: doc.id,
-        doc,
         product_name,
         type_slug,
         ratings,

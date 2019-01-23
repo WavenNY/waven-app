@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity
+} from "react-native";
 import ProductType from "../components/ProductType";
 import Icon from "../components/SvgIcon";
 import { Constants, Svg, LinearGradient } from "expo";
@@ -346,11 +352,15 @@ class ProductTypes extends Component {
           >
             {// Loop and render data
             this.state.prodTypes.map((item, i) => (
-              <ProductType
-                key={i}
-                style={{ marginRight: 20 }}
-                title={item.category_name}
-              />
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("Category")}
+              >
+                <ProductType
+                  key={i}
+                  style={{ marginRight: 20 }}
+                  title={item.category_name}
+                />
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </LinearGradient>
