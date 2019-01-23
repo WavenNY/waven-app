@@ -14,10 +14,16 @@ import Icon from "../components/SvgIcon";
 import ExploreScreen from "../screens/ExploreScreen";
 import MyVibesScreen from "../screens/MyVibesScreen";
 import SearchScreen from "../screens/SearchScreen";
+import CategoryScreen from "../screens/CategoryScreen";
 
 /**
  * setup Stack navigatos and thier navigation options
  */
+
+// Category screen stack navigator
+const CategoryStack = createStackNavigator({
+  Category: CategoryScreen
+});
 
 // Search screen stack navigator
 const SearchStack = createStackNavigator({
@@ -138,7 +144,8 @@ export default createBottomTabNavigator(
   {
     ExploreStack,
     SearchStack,
-    MyVibeStack
+    MyVibeStack,
+    CategoryStack
   },
   {
     headerMode: "none",
