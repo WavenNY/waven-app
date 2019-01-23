@@ -192,7 +192,12 @@ class StrainTypes extends Component {
             {// Loop and render data
             this.state.strainTypes.map((item, i) => (
               <TouchableOpacity
-                onPress={() => this.props.navigation.navigate("Category")}
+                onPress={() =>
+                  this.props.navigation.navigate("Category", {
+                    categoryName: item.category_name,
+                    db: "strains"
+                  })
+                }
               >
                 <StrainType
                   style={{ marginRight: 30 }}

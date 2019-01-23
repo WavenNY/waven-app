@@ -4,7 +4,8 @@ import { View, Text, StyleSheet } from "react-native";
 class CategoryScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: "Strains",
+      headerTitle: `${navigation.state.params.categoryName ||
+        "Category Title"}`,
       headerStyle: {
         backgroundColor: "#ff5a5f"
       },
@@ -14,11 +15,16 @@ class CategoryScreen extends Component {
       }
     };
   };
-
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text>CategoryScreen</Text>
+        <Text>
+          Database to be attached:{" "}
+          {this.props.navigation.state.params.db || "Default DB"}
+        </Text>
       </View>
     );
   }
