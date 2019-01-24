@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 class CategoryScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -20,12 +20,12 @@ class CategoryScreen extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Text>
           Database to be attached:{" "}
           {this.props.navigation.state.params.db || "Default DB"}
         </Text>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -34,8 +34,6 @@ export default CategoryScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f3f6f3",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "#f3f6f3"
   }
 });
