@@ -9,10 +9,17 @@ class GoodVibesSearch extends Component {
   render() {
     return (
       <View style={[this.props.style, styles.container]}>
-        <Text style={{ fontSize: 12, color: "#717171" }}>
+        <Text style={{ fontSize: 12, color: "#717171", fontFamily: "sf-text" }}>
           {this.props.title || ""}
         </Text>
-        <Text style={{ fontSize: 14, color: "#212121", marginTop: 10 }}>
+        <Text
+          style={{
+            fontSize: 14,
+            color: "#212121",
+            marginTop: 10,
+            fontFamily: "sf-text"
+          }}
+        >
           {this.props.desc || ""}
         </Text>
         <View style={{ flex: 1, marginTop: 10 }}>

@@ -26,7 +26,8 @@ class GoodEffect extends Component {
           style={{
             textAlignVertical: "center",
             textAlign: "center",
-            fontSize: 14
+            fontSize: 14,
+            fontFamily: "sf-text"
           }}
         >
           {this.props.title}

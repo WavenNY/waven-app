@@ -31,10 +31,24 @@ class StrainData extends Component {
           }}
         />
         <View>
-          <Text style={{ fontSize: 12, color: "#212121", textAlign: "center" }}>
+          <Text
+            style={{
+              fontSize: 12,
+              color: "#212121",
+              textAlign: "center",
+              fontFamily: "sf-text"
+            }}
+          >
             {this.props.strainName}
           </Text>
-          <Text style={{ fontSize: 12, color: "#717171", textAlign: "center" }}>
+          <Text
+            style={{
+              fontSize: 12,
+              color: "#717171",
+              textAlign: "center",
+              fontFamily: "sf-text"
+            }}
+          >
             {this.props.strainType}
           </Text>
           <View style={{ alignItems: "center" }}>
@@ -56,7 +70,14 @@ class StrainData extends Component {
               }
             />
           </View>
-          <Text style={{ fontSize: 22, color: "#212121", textAlign: "center" }}>
+          <Text
+            style={{
+              fontSize: 22,
+              color: "#212121",
+              textAlign: "center",
+              fontFamily: "sf-text"
+            }}
+          >
             {this.props.strainRating}
           </Text>
         </View>

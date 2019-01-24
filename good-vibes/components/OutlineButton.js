@@ -20,7 +20,14 @@ class OutlineButton extends Component {
             padding: 5
           }}
         >
-          <Text style={{ color: "#ff5a5f", fontSize: 14, textAlign: "center" }}>
+          <Text
+            style={{
+              color: "#ff5a5f",
+              fontSize: 14,
+              textAlign: "center",
+              fontFamily: "sf-text"
+            }}
+          >
             {this.props.title}
           </Text>
         </TouchableHighlight>

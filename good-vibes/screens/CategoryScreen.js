@@ -4,8 +4,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 class CategoryScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      headerTitle: `${navigation.state.params.categoryName ||
-        "Category Title"}`,
+      title: `${navigation.state.params.categoryName || "Category Title"}`,
       headerStyle: {
         backgroundColor: "#ff5a5f"
       },
@@ -21,6 +20,11 @@ class CategoryScreen extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
+        <View>
+          <Text style={{ fontFamily: "sf-text", fontSize: 16 }}>
+            1122 Total
+          </Text>
+        </View>
         <Text>
           Database to be attached:{" "}
           {this.props.navigation.state.params.db || "Default DB"}

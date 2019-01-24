@@ -34,12 +34,20 @@ class ProductData extends Component {
             style={{
               fontSize: 12,
               color: "#212121",
-              textAlign: "center"
+              textAlign: "center",
+              fontFamily: "sf-text"
             }}
           >
             {this.props.productName}
           </Text>
-          <Text style={{ fontSize: 12, color: "#717171", textAlign: "center" }}>
+          <Text
+            style={{
+              fontSize: 12,
+              color: "#717171",
+              textAlign: "center",
+              fontFamily: "sf-text"
+            }}
+          >
             {this.props.productType}
           </Text>
           <View style={{ alignItems: "center" }}>
@@ -61,7 +69,14 @@ class ProductData extends Component {
               }
             />
           </View>
-          <Text style={{ fontSize: 22, color: "#212121", textAlign: "center" }}>
+          <Text
+            style={{
+              fontSize: 22,
+              color: "#212121",
+              textAlign: "center",
+              fontFamily: "sf-text"
+            }}
+          >
             {this.props.productRating}
           </Text>
         </View>
