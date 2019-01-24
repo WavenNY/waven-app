@@ -36,7 +36,8 @@ class StrainData extends Component {
               fontSize: 12,
               color: "#212121",
               textAlign: "center",
-              fontFamily: "sf-text"
+              fontFamily: "sf-text",
+              fontWeight: "bold"
             }}
           >
             {this.props.strainName}
