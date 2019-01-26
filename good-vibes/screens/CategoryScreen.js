@@ -71,34 +71,67 @@ class CategoryScreen extends Component {
   }
   render() {
     return (
-      <ScrollView style={styles.container}>
-        <View>
-          <Text
-            style={{ fontFamily: "sf-text", fontSize: 16, color: "#717171" }}
-          >
-            {this.state.filterStrains.length} Total
-          </Text>
+      <View style={{ paddingTop: 0, margin: 0, flex: 1 }}>
+        <View
+          style={{
+            height: 40,
+            backgroundColor: "#e6ffffff",
+            flexDirection: "row",
+            shadowColor: "#19000000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.8,
+            shadowRadius: 2,
+            elevation: 1,
+            margin: 0
+          }}
+        >
+          <Text style={styles.navButton}>Filters</Text>
+          <Text style={styles.navButton}>Sativa</Text>
+          <Text style={styles.navButton}>Indica</Text>
+          <Text style={styles.navButton}>Hybrid</Text>
         </View>
-        {this.state.filterStrains.map((item, i) => {
-          return (
-            <StrainCard
-              title={item.doc.data().strain_name}
-              type={this.props.navigation.state.params.categoryName}
-              ratings={item.doc.data().ratings}
-              id={item.doc.id}
-              desc={item.doc.data().strain_desc}
-              image={item.doc.data().main_pic}
-              positive_effects=""
-            />
-          );
-        })}
-      </ScrollView>
+        <ScrollView style={styles.container}>
+          <View>
+            <Text
+              style={{ fontFamily: "sf-text", fontSize: 16, color: "#717171" }}
+            >
+              {this.state.filterStrains.length} Total
+            </Text>
+          </View>
+          {this.state.filterStrains.map((item, i) => {
+            return (
+              <StrainCard
+                title={item.doc.data().strain_name}
+                type={this.props.navigation.state.params.categoryName}
+                ratings={item.doc.data().ratings}
+                id={item.doc.id}
+                desc={item.doc.data().strain_desc}
+                image={item.doc.data().main_pic}
+                positive_effects=""
+              />
+            );
+          })}
+        </ScrollView>
+      </View>
     );
   }
 }
 export default CategoryScreen;
 
 const styles = StyleSheet.create({
+  navButton: {
+    paddingTop: 4,
+    paddingBottom: 4,
+    paddingLeft: 10,
+    paddingRight: 10,
+    marginRight: 17,
+    marginLeft: 17,
+    marginTop: 8,
+    marginBottom: 8,
+    fontFamily: "sf-text",
+    color: "#717171",
+    fontSize: 14
+  },
   container: {
     flex: 1,
     paddingLeft: 20,
