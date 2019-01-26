@@ -10,6 +10,9 @@ import {
 
 import StrainCard from "../components/StrainCard";
 
+// Import firebase
+import firebase from "../Firebase";
+
 class CategoryScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -23,8 +26,43 @@ class CategoryScreen extends Component {
       }
     };
   };
+
+  // Init firebase and props in constructor
   constructor(props) {
     super(props);
+    this.ref = firebase.firestore().collection("strains");
+    this.unsubscribe = null;
+    this.state = {
+      filterStrains: []
+    };
+  }
+
+  // Hook on the backend collection
+  onCollectionUpdate = querySnapshot => {
+    // temp array to hold data
+    const filterStrains = [];
+
+    // get columns
+    querySnapshot.forEach(doc => {
+      //const { category_name, subcat_id } = doc.data();
+      if (doc.type_id != this.props.navigation.state.params.typeId) {
+        // Push to temp array
+        filterStrains.push({
+          key: doc.id,
+          doc
+        });
+      }
+    });
+
+    // Set array globaly for consumption
+    this.setState({
+      filterStrains
+    });
+  };
+
+  // hook on component loading
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
   }
   render() {
     return (
@@ -36,27 +74,25 @@ class CategoryScreen extends Component {
             1122 Total
           </Text>
         </View>
-        <StrainCard 
-          title="Blue Dream"
-          type="Indica"
-          ratings={4.0}
-          id = "1"
-          desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in
-          lacus id sem facilisi vehic ut sed dui. Lorem ipsum calargare sitorm
-          am…"
-          image="https://d3ix816x6wuc0d.cloudfront.net/cdn/strain-photo/666001/b/girl-scout-cookies__primary_31a7.jpg"
-        />
-        <StrainCard title="Test Dream"
-          type="Sativa"
-          ratings={3.0}
-          id = "1"
-          desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in
-          lacus id sem facilisi vehic ut sed dui. Lorem ipsum calargare sitorm
-          am…"
-          image="https://d3ix816x6wuc0d.cloudfront.net/cdn/strain-photo/666001/b/girl-scout-cookies__primary_31a7.jpg"/>
-        <Text style={{ marginTop: 20 }}>
+        {this.state.filterStrains.map((item, i) => (
+          <StrainCard
+            title={item.doc.strain_name}
+            type={this.props.navigation.state.params.categoryName}
+            ratings={item.doc.ratings}
+            id={i}
+            desc={item.doc.strain_description}
+            image={item.doc.main_pic}
+          />
+        ))}
+
+        <Text style={{ marginTop: 20, marginBottom: 40 }}>
           Database to be attached:{" "}
           {this.props.navigation.state.params.db || "Default DB"}
+          Category type id: {this.props.navigation.state.params.typeId}
+          Data:
+          {this.state.filterStrains.map((item, i) => {
+            item.doc;
+          })}
         </Text>
       </ScrollView>
     );

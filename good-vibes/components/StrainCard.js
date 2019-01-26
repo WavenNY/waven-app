@@ -39,7 +39,7 @@ class StrainCard extends Component {
                 color: "#212121"
               }}
             >
-              {this.props.title}{" "}
+              {this.props.title}
             </Text>
             <Text
               style={{

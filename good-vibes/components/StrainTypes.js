@@ -195,7 +195,8 @@ class StrainTypes extends Component {
                 onPress={() =>
                   this.props.navigation.navigate("Category", {
                     categoryName: item.category_name,
-                    db: "strains"
+                    db: "strains",
+                    typeId: item.key
                   })
                 }
               >
