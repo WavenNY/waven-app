@@ -45,7 +45,8 @@ class CategoryScreen extends Component {
     // get columns
     querySnapshot.forEach(doc => {
       //const { category_name, subcat_id } = doc.data();
-      if (doc.type_id != this.props.navigation.state.params.typeId) {
+      //  console.info(doc.data());
+      if (doc.data().type_id == this.props.navigation.state.params.typeId) {
         // Push to temp array
         filterStrains.push({
           key: doc.id,
@@ -71,28 +72,26 @@ class CategoryScreen extends Component {
           <Text
             style={{ fontFamily: "sf-text", fontSize: 16, color: "#717171" }}
           >
-            1122 Total
+            {this.state.filterStrains.length} Total
           </Text>
         </View>
-        {this.state.filterStrains.map((item, i) => (
-          <StrainCard
-            title={item.doc.strain_name}
-            type={this.props.navigation.state.params.categoryName}
-            ratings={item.doc.ratings}
-            id={i}
-            desc={item.doc.strain_description}
-            image={item.doc.main_pic}
-          />
-        ))}
+        {this.state.filterStrains.map((item, i) => {
+       
+          return (
+            <StrainCard
+              title={item.doc.data().strain_name}
+              type={this.props.navigation.state.params.categoryName}
+              ratings={item.doc.data().ratings}
+              id={i}
+              desc={item.doc.data().strain_desc}
+              image={item.doc.data().main_pic}
+            />
+          );
+        })}
 
         <Text style={{ marginTop: 20, marginBottom: 40 }}>
-          Database to be attached:{" "}
+          Database attached:{" "}
           {this.props.navigation.state.params.db || "Default DB"}
-          Category type id: {this.props.navigation.state.params.typeId}
-          Data:
-          {this.state.filterStrains.map((item, i) => {
-            item.doc;
-          })}
         </Text>
       </ScrollView>
     );

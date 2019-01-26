@@ -89,7 +89,7 @@ class StrainCard extends Component {
                 color: "#212121"
               }}
             >
-              4.0
+              {this.props.ratings}
             </Text>
             <Text
               style={{
