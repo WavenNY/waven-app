@@ -28,6 +28,7 @@
     "android": {
       "package": "com.waven.wavenapp"
     },
-    "description": ""
+    "description": "",
+    "githubUrl": "https://github.com/WavenNY/waven-app.git"
   }
 }

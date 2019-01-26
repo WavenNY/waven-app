@@ -18,7 +18,8 @@ class CategoryScreen extends Component {
     return {
       title: `${navigation.state.params.categoryName || "Category Title"}`,
       headerStyle: {
-        backgroundColor: "#ff5a5f"
+        backgroundColor: "#ff5a5f",
+        textAlign: "center"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
