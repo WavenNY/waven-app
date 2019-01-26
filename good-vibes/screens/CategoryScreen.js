@@ -76,7 +76,6 @@ class CategoryScreen extends Component {
           </Text>
         </View>
         {this.state.filterStrains.map((item, i) => {
-       
           return (
             <StrainCard
               title={item.doc.data().strain_name}
