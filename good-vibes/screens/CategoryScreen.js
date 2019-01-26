@@ -44,16 +44,20 @@ class CategoryScreen extends Component {
 
     // get columns
     querySnapshot.forEach(doc => {
-      //const { category_name, subcat_id } = doc.data();
-      //  console.info(doc.data());
+      //  console.debug(positive_effects);
       if (doc.data().type_id == this.props.navigation.state.params.typeId) {
         // Push to temp array
+
         filterStrains.push({
           key: doc.id,
           doc
         });
       }
     });
+
+    // console.info("Logging");
+    // console.info(positive_effects.length);
+    // console.info("Logging End");
 
     // Set array globaly for consumption
     this.setState({
@@ -81,17 +85,13 @@ class CategoryScreen extends Component {
               title={item.doc.data().strain_name}
               type={this.props.navigation.state.params.categoryName}
               ratings={item.doc.data().ratings}
-              id={i}
+              id={item.doc.id}
               desc={item.doc.data().strain_desc}
               image={item.doc.data().main_pic}
+              positive_effects=""
             />
           );
         })}
-
-        <Text style={{ marginTop: 20, marginBottom: 40 }}>
-          Database attached:{" "}
-          {this.props.navigation.state.params.db || "Default DB"}
-        </Text>
       </ScrollView>
     );
   }

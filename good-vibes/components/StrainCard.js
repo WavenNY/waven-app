@@ -9,8 +9,52 @@ import {
 
 import Stars from "react-native-stars";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+// Import firebase
+import firebase from "../Firebase";
 
 class StrainCard extends Component {
+  // Init firebase and props in constructor
+  constructor(props) {
+    super(props);
+    this.ref = firebase
+      .firestore()
+      .collection("strains")
+      .doc(props.id)
+      .collection("positive_effects");
+
+    this.unsubscribe = null;
+    this.state = {
+      positiveEffects: []
+    };
+  }
+
+  // Hook on the backend collection
+  onCollectionUpdate = querySnapshot => {
+    // temp array to hold data
+    const positiveEffects = [];
+
+    // get columns
+    querySnapshot.forEach(doc => {
+      //  console.debug(positive_effects);
+      // Push to temp array
+
+      positiveEffects.push({
+        key: doc.id,
+        doc
+      });
+    });
+
+    // Set array globaly for consumption
+    this.setState({
+      positiveEffects
+    });
+  };
+
+  // hook on component loading
+  componentDidMount() {
+    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+  }
+
   render() {
     return (
       <View
@@ -103,26 +147,35 @@ class StrainCard extends Component {
           </View>
         </View>
 
-        <View
-          style={{
-            flex: 1,
-            paddingLeft: 60,
-            paddingRight: 60,
-            marginTop: 10
-          }}
-        >
-          <Text
-            style={{ fontFamily: "sf-text", color: "#212121", fontSize: 12 }}
-          >
-            Relaxed
-          </Text>
-          <ProgressBarAndroid
-            styleAttr="Horizontal"
-            color="#ff5a5f"
-            progress={0.5}
-            indeterminate={false}
-          />
-        </View>
+        {this.state.positiveEffects.map((item, i) => {
+          return (
+            <View
+              style={{
+                flex: 1,
+                paddingLeft: 60,
+                paddingRight: 60,
+                marginTop: 10
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "sf-text",
+                  color: "#212121",
+                  fontSize: 12
+                }}
+              >
+                {item.doc.data().effect_name}
+              </Text>
+              <ProgressBarAndroid
+                styleAttr="Horizontal"
+                color="#ff5a5f"
+                progress={item.doc.data().scale / 10}
+                indeterminate={false}
+              />
+            </View>
+          );
+        })}
+
         <View style={{ marginTop: 10 }}>
           <Text style={{ fontFamily: "sf-text", color: "#666", fontSize: 14 }}>
             {this.props.desc}
