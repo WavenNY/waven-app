@@ -70,7 +70,6 @@ class StrainCard extends Component {
   // hook on component loading
   componentDidMount() {
     //this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    console.debug("Effects: " + JSON.stringify(this.props.positiveEffects));
     const positiveEffects = this.props.positiveEffects;
     this.setState({
       positiveEffects
