@@ -5,9 +5,11 @@ import {
   StyleSheet,
   ScrollView,
   ProgressBarAndroid,
-  Image
+  Image,
+  ActivityIndicator
 } from "react-native";
 import { default as Sicon } from "../components/SvgIcon";
+import { AppLoading } from "expo";
 
 import StrainCard from "../components/StrainCard";
 
@@ -34,6 +36,7 @@ class CategoryScreen extends Component {
   // Init firebase and props in constructor
   constructor(props) {
     super(props);
+   
     this.ref = firebase.firestore().collection("strains");
 
     this.unsubscribe = null;
@@ -46,7 +49,8 @@ class CategoryScreen extends Component {
 
     this.state = {
       filterStrains: [],
-      subHeaderItems: []
+      subHeaderItems: [],
+      isLoadingComplete: false
     };
   }
 
@@ -66,7 +70,8 @@ class CategoryScreen extends Component {
     });
     // Set array globaly for consumption
     this.setState({
-      filterStrains
+      filterStrains,
+      isLoadingComplete: true
     });
   };
 
@@ -94,14 +99,18 @@ class CategoryScreen extends Component {
 
     // Set array globaly for consumption
     this.setState({
-      filterStrains
+      filterStrains,
+      isLoadingComplete: true
     });
   };
 
   // hook on component loading
   componentDidMount() {
     //  this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-    this.unsubscribe = this.testData.onSnapshot(this.onCollectionUpdateTest);
+    this.unsubscribe = this.testData.onSnapshot(
+      { includeMetadataChanges: true },
+      this.onCollectionUpdateTest
+    );
     this.subheaderRef =
       this.props.navigation.state.params.db === "strains"
         ? firebase.firestore().collection("strain_types")
@@ -117,96 +126,111 @@ class CategoryScreen extends Component {
       });
     });
   }
-  render() {
-    return (
-      <View style={{ paddingTop: 0, margin: 0, flex: 1 }}>
-        <View
-          style={{
-            height: 40,
-            backgroundColor: "#fff",
-            flexDirection: "row",
-            shadowColor: "#19000000",
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.8,
-            shadowRadius: 2,
-            elevation: 1,
-            margin: 0
-          }}
-        >
-          <Sicon
-            name="Pen"
-            height={12}
-            width={12}
-            viewBox="0 0 12 12"
-            fill="#ff5a5f"
-            style={{
-              alignSelf: "center",
-              alignSelf: "center",
-              borderRadius: 0,
-              marginLeft: 20,
-              marginRight: 2
-            }}
-          />
 
-          <Text style={[styles.navButton, { marginLeft: 0 }]}>Filters</Text>
+  render() {
+    if (!this.state.isLoadingComplete) {
+      return (
+        <ActivityIndicator
+          color="#ff5a5f"
+          size="large"
+          style={styles.activityIndicator}
+        />
+      );
+    } else {
+      return (
+        <View style={{ paddingTop: 0, margin: 0, flex: 1 }}>
           <View
             style={{
-              borderWidth: 0.5,
-              width: 0.5,
-              height: 20,
-              borderColor: "#e0e0e0",
-              alignSelf: "center",
-              marginRight: 10,
-              marginTop: 8
+              height: 40,
+              backgroundColor: "#fff",
+              flexDirection: "row",
+              shadowColor: "#19000000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.8,
+              shadowRadius: 2,
+              elevation: 1,
+              margin: 0
             }}
-          />
-          <ScrollView
-            horizontal={"true"}
-            showsHorizontalScrollIndicator={false}
           >
-            {this.state.subHeaderItems.map((item, i) => {
+            <Sicon
+              name="Pen"
+              height={12}
+              width={12}
+              viewBox="0 0 12 12"
+              fill="#ff5a5f"
+              style={{
+                alignSelf: "center",
+                alignSelf: "center",
+                borderRadius: 0,
+                marginLeft: 20,
+                marginRight: 2
+              }}
+            />
+
+            <Text style={[styles.navButton, { marginLeft: 0 }]}>Filters</Text>
+            <View
+              style={{
+                borderWidth: 0.5,
+                width: 0.5,
+                height: 20,
+                borderColor: "#e0e0e0",
+                alignSelf: "center",
+                marginRight: 10,
+                marginTop: 8
+              }}
+            />
+            <ScrollView
+              horizontal={"true"}
+              showsHorizontalScrollIndicator={false}
+            >
+              {this.state.subHeaderItems.map((item, i) => {
+                return (
+                  <Text
+                    id={item.id}
+                    style={[
+                      styles.navButton,
+                      `${
+                        item.id === this.props.navigation.state.params.typeId
+                          ? styles.btnSelected
+                          : {}
+                      }`
+                    ]}
+                  >
+                    {item.data.category_name}
+                  </Text>
+                );
+              })}
+            </ScrollView>
+          </View>
+          <ScrollView style={styles.container}>
+            <View>
+              <Text
+                style={{
+                  fontFamily: "sf-text",
+                  fontSize: 16,
+                  color: "#717171"
+                }}
+              >
+                {this.state.filterStrains.length} Total
+              </Text>
+            </View>
+            {this.state.filterStrains.map((item, i) => {
               return (
-                <Text
-                  id={item.id}
-                  style={[
-                    styles.navButton,
-                    `${
-                      item.id === this.props.navigation.state.params.typeId
-                        ? styles.btnSelected
-                        : {}
-                    }`
-                  ]}
-                >
-                  {item.data.category_name}
-                </Text>
+                <StrainCard
+                  title={item.doc.data().Name}
+                  type={this.props.navigation.state.params.categoryName}
+                  ratings={item.doc.data().Rating}
+                  id={item.doc.id}
+                  desc={item.doc.data().ProductDescription}
+                  image={item.doc.data().main_pic}
+                  positiveEffects={item.doc.data().Effects || []}
+                />
               );
             })}
           </ScrollView>
         </View>
-        <ScrollView style={styles.container}>
-          <View>
-            <Text
-              style={{ fontFamily: "sf-text", fontSize: 16, color: "#717171" }}
-            >
-              {this.state.filterStrains.length} Total
-            </Text>
-          </View>
-          {this.state.filterStrains.map((item, i) => {
-            return (
-              <StrainCard
-                title={item.doc.data().Name}
-                type={this.props.navigation.state.params.categoryName}
-                ratings={item.doc.data().Rating}
-                id={item.doc.id}
-                desc={item.doc.data().ProductDescription}
-                image={item.doc.data().main_pic}
-                positiveEffects={item.doc.data().Effects}
-              />
-            );
-          })}
-        </ScrollView>
-      </View>
-    );
+      );
+    }
   }
 }
 export default CategoryScreen;
@@ -242,5 +266,11 @@ const styles = StyleSheet.create({
   },
   myEmptyStarStyle: {
     color: "#e7ede7"
+  },
+  activityIndicator: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    height: 80
   }
 });
