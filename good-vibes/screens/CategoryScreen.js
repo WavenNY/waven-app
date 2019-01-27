@@ -109,19 +109,29 @@ class CategoryScreen extends Component {
             margin: 0
           }}
         >
- <Image
-          style={{
-            height: 12,
-            width: 12,
-            alignSelf: "center",
-            borderRadius: 0
-          }}
-          source={
-             require("../assets/icons/Filters.png")
-          }
-        />          <Text style={styles.navButton}>Filters</Text>
+          <Image
+            style={{
+              height: 12,
+              width: 12,
+              alignSelf: "center",
+              borderRadius: 0,
+              marginLeft: 20,
+              marginRight: 2,
+              resizeMode: "cover"
+            }}
+            source={require("../assets/icons/Filters.png")}
+          />
+          <Text style={[styles.navButton, { marginLeft: 0 }]}>Filters</Text>
           <View
-            style={{ border: 1, width: 1, height: 20, borderColor: "e0e0e0" }}
+            style={{
+              borderWidth: 0.5,
+              width: 0.5,
+              height: 20,
+              borderColor: "#e0e0e0",
+              alignSelf: "center",
+              marginRight: 10,
+              marginTop: 8
+            }}
           />
           <ScrollView
             horizontal={"true"}
