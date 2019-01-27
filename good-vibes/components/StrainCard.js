@@ -69,7 +69,12 @@ class StrainCard extends Component {
 
   // hook on component loading
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    //this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    console.debug("Effects: " + JSON.stringify(this.props.positiveEffects));
+    const positiveEffects = this.props.positiveEffects;
+    this.setState({
+      positiveEffects
+    });
   }
 
   render() {
@@ -121,7 +126,8 @@ class StrainCard extends Component {
                 borderRadius: 75
               }}
               source={{
-                uri: this.props.image
+                uri: `${this.props.image ||
+                  "https://d3ix816x6wuc0d.cloudfront.net/cdn/strain-photo/666001/b/girl-scout-cookies__primary_31a7.jpg"}`
               }}
             />
           </View>
@@ -181,12 +187,14 @@ class StrainCard extends Component {
                   fontSize: 12
                 }}
               >
-                {item.doc.data().effect_name}
+                {/* {item.doc.data().effect_name} */ item.Name}
               </Text>
               <ProgressBarAndroid
                 styleAttr="Horizontal"
                 color="#ff5a5f"
-                progress={item.doc.data().scale / 10}
+                progress={
+                  /*item.doc.data().scale / 10*/ parseInt(item.Value) / 100
+                }
                 indeterminate={false}
               />
             </View>

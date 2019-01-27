@@ -35,14 +35,40 @@ class CategoryScreen extends Component {
   constructor(props) {
     super(props);
     this.ref = firebase.firestore().collection("strains");
+
     this.unsubscribe = null;
     this.subheaderRef = null;
+
+    this.testData = firebase
+      .firestore()
+      .collection("testdump_strains")
+      .where("Type", "==", props.navigation.state.params.categoryName);
 
     this.state = {
       filterStrains: [],
       subHeaderItems: []
     };
   }
+
+  // Hook on the backend collection
+  onCollectionUpdateTest = querySnapshot => {
+    // temp array to hold data
+    const filterStrains = [];
+
+    // get columns
+    querySnapshot.docs.map(doc => {
+      //  console.debug(positive_effects);
+
+      filterStrains.push({
+        key: doc.id,
+        doc
+      });
+    });
+    // Set array globaly for consumption
+    this.setState({
+      filterStrains
+    });
+  };
 
   // Hook on the backend collection
   onCollectionUpdate = querySnapshot => {
@@ -74,13 +100,13 @@ class CategoryScreen extends Component {
 
   // hook on component loading
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    //  this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    this.unsubscribe = this.testData.onSnapshot(this.onCollectionUpdateTest);
     this.subheaderRef =
       this.props.navigation.state.params.db === "strains"
         ? firebase.firestore().collection("strain_types")
         : firebase.firestore().collection("product_types");
 
-    console.debug("DB: " + this.props.navigation.state.params.db);
     this.subheaderRef.onSnapshot(qSnapshot => {
       const docs = qSnapshot.docs.map(doc => ({
         id: doc.id,
@@ -89,9 +115,6 @@ class CategoryScreen extends Component {
       this.setState({
         subHeaderItems: docs
       });
-      console.debug("Docs data:");
-      console.debug(JSON.stringify(docs));
-      console.debug(this.props);
     });
   }
   render() {
@@ -171,13 +194,13 @@ class CategoryScreen extends Component {
           {this.state.filterStrains.map((item, i) => {
             return (
               <StrainCard
-                title={item.doc.data().strain_name}
+                title={item.doc.data().Name}
                 type={this.props.navigation.state.params.categoryName}
-                ratings={item.doc.data().ratings}
+                ratings={item.doc.data().Rating}
                 id={item.doc.id}
-                desc={item.doc.data().strain_desc}
+                desc={item.doc.data().ProductDescription}
                 image={item.doc.data().main_pic}
-                positive_effects=""
+                positiveEffects={item.doc.data().Effects}
               />
             );
           })}

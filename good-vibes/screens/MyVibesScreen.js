@@ -5,6 +5,7 @@ import { Constants, Svg } from "expo";
 
 // Import firebase
 import firebase from "../Firebase";
+import { Button } from "react-native-elements";
 
 const ptimg = (
   <Svg width="187" height="173" viewBox="0 0 187 173">
@@ -270,11 +271,29 @@ const ptimg = (
 class MyVibesScreen extends Component {
   constructor(props) {
     super(props);
+    this.strainItems = [];
+    this.ref = firebase.firestore().collection("testdump_strains");
 
     this.hybridStrains = require("../assets/data/StrainData-2815.json");
-    this.strainArray = JSON.parse(this.hybridStrains);
+    // this.strainArray = JSON.parse(this.hybridStrains);
   }
 
+  updateData = () => {
+    // this.hybridStrains.Strain.map((item, i) => {
+    //   // this.strainItems.push({
+    //   //   id: i,
+    //   //   data: item
+    //   // })
+    //   this.ref
+    //     .add(item)
+    //     .then(snapshot => console.log("Added to database"))
+    //     .catch(err => console.log(err));
+    // });
+    console.log(this.hybridStrains.Strain[0]);
+    console.log(this.hybridStrains.Strain[1]);
+    console.log(this.hybridStrains.Strain[2]);
+    console.log(this.hybridStrains.Strain[3]);
+  };
   componentDidMount() {}
   render() {
     return (
@@ -282,8 +301,8 @@ class MyVibesScreen extends Component {
         <Text>This is my vibes page</Text>
         <View>{ptimg}</View>
         <Text>Now good</Text>
-        <Text>{this.strainArray.length}</Text>
-        <Text>Strains data</Text>
+        <Text>{this.hybridStrains.Strain.length}</Text>
+        <Button onPress={this.updateData} title="Update Database" />
       </View>
     );
   }
