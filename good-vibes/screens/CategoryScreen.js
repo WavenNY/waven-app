@@ -6,7 +6,8 @@ import {
   ScrollView,
   ProgressBarAndroid,
   Image,
-  ActivityIndicator
+  ActivityIndicator,
+  FlatList
 } from "react-native";
 import { default as Sicon } from "../components/SvgIcon";
 import { AppLoading } from "expo";
@@ -36,7 +37,7 @@ class CategoryScreen extends Component {
   // Init firebase and props in constructor
   constructor(props) {
     super(props);
-   
+
     this.ref = firebase.firestore().collection("strains");
 
     this.unsubscribe = null;
@@ -214,8 +215,10 @@ class CategoryScreen extends Component {
                 {this.state.filterStrains.length} Total
               </Text>
             </View>
-            {this.state.filterStrains.map((item, i) => {
-              return (
+
+            <FlatList
+              data={this.state.filterStrains}
+              renderItem={({ item }) => (
                 <StrainCard
                   title={item.doc.data().Name}
                   type={this.props.navigation.state.params.categoryName}
@@ -225,8 +228,8 @@ class CategoryScreen extends Component {
                   image={item.doc.data().main_pic}
                   positiveEffects={item.doc.data().Effects || []}
                 />
-              );
-            })}
+              )}
+            />
           </ScrollView>
         </View>
       );
