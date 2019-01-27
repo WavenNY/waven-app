@@ -203,8 +203,9 @@ class StrainCard extends Component {
             name="Pen"
             height={10}
             width={10}
-            viewBox="0 0 15 15"
+            viewBox="0 0 10 10"
             fill="#ff5a5f"
+            style={{ alignSelf: "center" }}
           />
           <Text
             style={{ fontFamily: "sf-text", color: "#212121", fontSize: 12 }}

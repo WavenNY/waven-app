@@ -15,8 +15,10 @@ import firebase from "../Firebase";
 
 class CategoryScreen extends Component {
   static navigationOptions = ({ navigation }) => {
+    const headerTitleText =
+      navigation.state.params.db === "strains" ? "Strains" : "Products";
     return {
-      title: `${navigation.state.params.categoryName || "Category Title"}`,
+      title: `${headerTitleText}`,
       headerStyle: {
         backgroundColor: "#ff5a5f",
         textAlign: "center"
@@ -33,8 +35,11 @@ class CategoryScreen extends Component {
     super(props);
     this.ref = firebase.firestore().collection("strains");
     this.unsubscribe = null;
+    this.subheaderRef = null;
+
     this.state = {
-      filterStrains: []
+      filterStrains: [],
+      subHeaderItems: []
     };
   }
 
@@ -69,6 +74,24 @@ class CategoryScreen extends Component {
   // hook on component loading
   componentDidMount() {
     this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    this.subheaderRef =
+      this.props.navigation.state.params.db === "strains"
+        ? firebase.firestore().collection("strain_types")
+        : firebase.firestore().collection("product_types");
+
+    console.debug("DB: " + this.props.navigation.state.params.db);
+    this.subheaderRef.onSnapshot(qSnapshot => {
+      const docs = qSnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      }));
+      this.setState({
+        subHeaderItems: docs
+      });
+      console.debug("Docs data:");
+      console.debug(JSON.stringify(docs));
+      console.debug(this.props);
+    });
   }
   render() {
     return (
@@ -76,7 +99,7 @@ class CategoryScreen extends Component {
         <View
           style={{
             height: 40,
-            backgroundColor: "#e6ffffff",
+            backgroundColor: "#fff",
             flexDirection: "row",
             shadowColor: "#19000000",
             shadowOffset: { width: 0, height: 2 },
@@ -86,10 +109,32 @@ class CategoryScreen extends Component {
             margin: 0
           }}
         >
-          <Text style={styles.navButton}>Filters</Text>
-          <Text style={styles.navButton}>Sativa</Text>
-          <Text style={styles.navButton}>Indica</Text>
-          <Text style={styles.navButton}>Hybrid</Text>
+ <Image
+          style={{
+            height: 12,
+            width: 12,
+            alignSelf: "center",
+            borderRadius: 0
+          }}
+          source={{
+            uri: require("../assets/icons/Filters.png")
+          }}
+        />          <Text style={styles.navButton}>Filters</Text>
+          <View
+            style={{ border: 1, width: 1, height: 20, borderColor: "e0e0e0" }}
+          />
+          <ScrollView
+            horizontal={"true"}
+            showsHorizontalScrollIndicator={false}
+          >
+            {this.state.subHeaderItems.map((item, i) => {
+              return (
+                <Text id={item.id} style={styles.navButton}>
+                  {item.data.category_name}
+                </Text>
+              );
+            })}
+          </ScrollView>
         </View>
         <ScrollView style={styles.container}>
           <View>
@@ -125,8 +170,7 @@ const styles = StyleSheet.create({
     paddingBottom: 4,
     paddingLeft: 10,
     paddingRight: 10,
-    marginRight: 17,
-    marginLeft: 17,
+    marginRight: 8,
     marginTop: 8,
     marginBottom: 8,
     fontFamily: "sf-text",
