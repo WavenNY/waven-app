@@ -3,6 +3,9 @@ import { View, Text, StyleSheet } from "react-native";
 import Icon from "../components/SvgIcon";
 import { Constants, Svg } from "expo";
 
+// Import firebase
+import firebase from "../Firebase";
+
 const ptimg = (
   <Svg width="187" height="173" viewBox="0 0 187 173">
     <Svg.G fill="none" fill-rule="evenodd">
@@ -265,12 +268,22 @@ const ptimg = (
 );
 
 class MyVibesScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.hybridStrains = require("../assets/data/StrainData-2815.json");
+    this.strainArray = JSON.parse(this.hybridStrains);
+  }
+
+  componentDidMount() {}
   render() {
     return (
       <View style={styles.container}>
         <Text>This is my vibes page</Text>
         <View>{ptimg}</View>
         <Text>Now good</Text>
+        <Text>{this.strainArray.length}</Text>
+        <Text>Strains data</Text>
       </View>
     );
   }
