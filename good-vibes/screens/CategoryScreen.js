@@ -116,9 +116,9 @@ class CategoryScreen extends Component {
             alignSelf: "center",
             borderRadius: 0
           }}
-          source={{
-            uri: require("../assets/icons/Filters.png")
-          }}
+          source={
+             require("../assets/icons/Filters.png")
+          }
         />          <Text style={styles.navButton}>Filters</Text>
           <View
             style={{ border: 1, width: 1, height: 20, borderColor: "e0e0e0" }}
