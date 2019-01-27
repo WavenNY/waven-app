@@ -7,6 +7,7 @@ import {
   ProgressBarAndroid,
   Image
 } from "react-native";
+import { default as Sicon } from "../components/SvgIcon";
 
 import StrainCard from "../components/StrainCard";
 
@@ -109,18 +110,21 @@ class CategoryScreen extends Component {
             margin: 0
           }}
         >
-          <Image
+          <Sicon
+            name="Pen"
+            height={12}
+            width={12}
+            viewBox="0 0 12 12"
+            fill="#ff5a5f"
             style={{
-              height: 12,
-              width: 12,
+              alignSelf: "center",
               alignSelf: "center",
               borderRadius: 0,
               marginLeft: 20,
-              marginRight: 2,
-              resizeMode: "cover"
+              marginRight: 2
             }}
-            source={require("../assets/icons/Filters.png")}
           />
+
           <Text style={[styles.navButton, { marginLeft: 0 }]}>Filters</Text>
           <View
             style={{
@@ -139,7 +143,17 @@ class CategoryScreen extends Component {
           >
             {this.state.subHeaderItems.map((item, i) => {
               return (
-                <Text id={item.id} style={styles.navButton}>
+                <Text
+                  id={item.id}
+                  style={[
+                    styles.navButton,
+                    `${
+                      item.id === this.props.navigation.state.params.typeId
+                        ? styles.btnSelected
+                        : {}
+                    }`
+                  ]}
+                >
                   {item.data.category_name}
                 </Text>
               );
@@ -186,6 +200,11 @@ const styles = StyleSheet.create({
     fontFamily: "sf-text",
     color: "#717171",
     fontSize: 14
+  },
+  btnSelected: {
+    borderRadius: 10,
+    color: "#fff",
+    backgroundColor: "#717171"
   },
   container: {
     flex: 1,
