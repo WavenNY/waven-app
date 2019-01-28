@@ -154,10 +154,10 @@ class CategoryScreen extends Component {
             }}
           >
             <Sicon
-              name="Pen"
+              name="Filters"
               height={12}
-              width={12}
-              viewBox="0 0 12 12"
+              width={13}
+              viewBox="0 0 13 12"
               fill="#ff5a5f"
               style={{
                 alignSelf: "center",
@@ -168,7 +168,9 @@ class CategoryScreen extends Component {
               }}
             />
 
-            <Text style={[styles.navButton, { marginLeft: 0 }]}>Filters</Text>
+            <Text style={[styles.navButton, { marginLeft: 0, paddingLeft: 0 }]}>
+              Filters
+            </Text>
             <View
               style={{
                 borderWidth: 0.5,
@@ -177,7 +179,8 @@ class CategoryScreen extends Component {
                 borderColor: "#e0e0e0",
                 alignSelf: "center",
                 marginRight: 10,
-                marginTop: 8
+                marginTop: 10,
+                marginBottom: 10
               }}
             />
             <ScrollView
