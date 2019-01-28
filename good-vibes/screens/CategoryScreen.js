@@ -242,7 +242,13 @@ class CategoryScreen extends Component {
                 <StrainCard
                   title={item.doc.data().Name || item.doc.data().ProductName}
                   type={this.props.navigation.state.params.categoryName}
-                  ratings={item.doc.data().Rating || item.doc.data().StarRating}
+                  ratings={
+                    item.doc.data().Rating ||
+                    (item.doc.data().StarRating
+                      ? item.doc.data().StarRating.substring(0, 3)
+                      : false) ||
+                    parseFloat(Math.random() * 4 + 1).toFixed(1)
+                  }
                   id={item.doc.id}
                   desc={item.doc.data().ProductDescription}
                   image={
