@@ -43,10 +43,20 @@ class CategoryScreen extends Component {
     this.unsubscribe = null;
     this.subheaderRef = null;
 
-    this.testData = firebase
-      .firestore()
-      .collection("testdump_strains")
-      .where("Type", "==", props.navigation.state.params.categoryName);
+    this.testData =
+      props.navigation.state.params.db.indexOf("products") == 0
+        ? firebase
+            .firestore()
+            .collection("test_products")
+            .where(
+              "category_name",
+              "==",
+              props.navigation.state.params.categoryName
+            )
+        : firebase
+            .firestore()
+            .collection("testdump_strains")
+            .where("Type", "==", props.navigation.state.params.categoryName);
 
     this.state = {
       filterStrains: [],
@@ -230,12 +240,15 @@ class CategoryScreen extends Component {
               data={this.state.filterStrains}
               renderItem={({ item }) => (
                 <StrainCard
-                  title={item.doc.data().Name}
+                  title={item.doc.data().Name || item.doc.data().ProductName}
                   type={this.props.navigation.state.params.categoryName}
-                  ratings={item.doc.data().Rating}
+                  ratings={item.doc.data().Rating || item.doc.data().StarRating}
                   id={item.doc.id}
                   desc={item.doc.data().ProductDescription}
-                  image={item.doc.data().main_pic}
+                  image={
+                    item.doc.data().main_pic ||
+                    "https://ddd33q3967xhi.cloudfront.net/OOyks6bxS8K8QF2NskhMGVVM4RA=/fit-in/700x700/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fqGlQJnAwSxmlWz41z3yR_yocan-magneto-black.jpg"
+                  }
                   positiveEffects={item.doc.data().Effects || []}
                 />
               )}

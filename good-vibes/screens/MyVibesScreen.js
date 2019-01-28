@@ -272,27 +272,22 @@ class MyVibesScreen extends Component {
   constructor(props) {
     super(props);
     this.strainItems = [];
-    this.ref = firebase.firestore().collection("testdump_strains");
+    this.ref = firebase.firestore().collection("test_products");
 
-    this.hybridStrains = require("../assets/data/StrainData-2815.json");
-    // this.strainArray = JSON.parse(this.hybridStrains);
+    //this.hybridStrains = require("../assets/data/Edibles_Snack-Foods.json");
   }
 
   updateData = () => {
-    // this.hybridStrains.Strain.map((item, i) => {
-    //   // this.strainItems.push({
-    //   //   id: i,
-    //   //   data: item
-    //   // })
+    // console.log("Total Records: " + this.hybridStrains.Product.length);
+    // this.hybridStrains.Product.map(item => {
+    //   tmpData = item;
+    //   tmpData.category_name = "Edibles";
+    //   tmpData.subcategory_name = "Snack Foods";
     //   this.ref
     //     .add(item)
-    //     .then(snapshot => console.log("Added to database"))
+    //     .then(snapshot => console.log("Added Record" + JSON.stringify(item)))
     //     .catch(err => console.log(err));
     // });
-    console.log(this.hybridStrains.Strain[0]);
-    console.log(this.hybridStrains.Strain[1]);
-    console.log(this.hybridStrains.Strain[2]);
-    console.log(this.hybridStrains.Strain[3]);
   };
   componentDidMount() {}
   render() {
@@ -301,7 +296,7 @@ class MyVibesScreen extends Component {
         <Text>This is my vibes page</Text>
         <View>{ptimg}</View>
         <Text>Now good</Text>
-        <Text>{this.hybridStrains.Strain.length}</Text>
+        <Text>Edibles_Snack-Foods</Text>
         <Button onPress={this.updateData} title="Update Database" />
       </View>
     );
