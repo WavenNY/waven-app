@@ -164,7 +164,7 @@ class CategoryScreen extends Component {
                 alignSelf: "center",
                 borderRadius: 0,
                 marginLeft: 20,
-                marginRight: 2
+                marginRight: 4
               }}
             />
 
@@ -259,7 +259,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontFamily: "sf-text",
     color: "#717171",
-    fontSize: 14
+    fontSize: 14,
+    height: 24
   },
 
   container: {
