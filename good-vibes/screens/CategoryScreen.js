@@ -188,18 +188,25 @@ class CategoryScreen extends Component {
               showsHorizontalScrollIndicator={false}
             >
               {this.state.subHeaderItems.map((item, i) => {
+                let txtStyle = [];
+                if (
+                  this.props.navigation.state.params.categoryName.indexOf(
+                    item.data.category_name
+                  ) == 0
+                ) {
+                  txtStyle = [
+                    styles.navButton,
+                    {
+                      borderRadius: 10,
+                      color: "#fff",
+                      backgroundColor: "#717171"
+                    }
+                  ];
+                } else {
+                  txtStyle = styles.navButton;
+                }
                 return (
-                  <Text
-                    id={item.id}
-                    style={[
-                      styles.navButton,
-                      `${
-                        item.id === this.props.navigation.state.params.typeId
-                          ? styles.btnSelected
-                          : {}
-                      }`
-                    ]}
-                  >
+                  <Text id={item.id} style={txtStyle}>
                     {item.data.category_name}
                   </Text>
                 );
@@ -254,11 +261,7 @@ const styles = StyleSheet.create({
     color: "#717171",
     fontSize: 14
   },
-  btnSelected: {
-    borderRadius: 10,
-    color: "#fff",
-    backgroundColor: "#717171"
-  },
+
   container: {
     flex: 1,
     paddingLeft: 20,
