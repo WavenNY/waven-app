@@ -274,7 +274,7 @@ class MyVibesScreen extends Component {
     this.strainItems = [];
     this.ref = firebase.firestore().collection("test_products");
 
-    this.hybridStrains = require("../assets/data/Cannabis_Flower.json");
+    //this.hybridStrains = require("../assets/data/Cannabis_Flower.json");
   }
 
   updateData = () => {
