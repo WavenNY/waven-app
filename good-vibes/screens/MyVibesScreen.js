@@ -2,10 +2,14 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Icon from "../components/SvgIcon";
 import { Constants, Svg } from "expo";
+import algoliasearch from "algoliasearch";
 
 // Import firebase
 import firebase from "../Firebase";
 import { Button } from "react-native-elements";
+
+const client = algoliasearch("LVTC40CNHH", "854d7053cfcc0d4b24bb8638dea0cdda");
+const index = client.initIndex("search_strain_products");
 
 const ptimg = (
   <Svg width="187" height="173" viewBox="0 0 187 173">
@@ -268,11 +272,13 @@ const ptimg = (
   </Svg>
 );
 
+const records = [];
+
 class MyVibesScreen extends Component {
   constructor(props) {
     super(props);
     this.strainItems = [];
-    this.ref = firebase.firestore().collection("test_products");
+    this.ref = firebase.firestore().collection("testdump_strains");
 
     //this.hybridStrains = require("../assets/data/Cannabis_Flower.json");
   }
@@ -288,6 +294,28 @@ class MyVibesScreen extends Component {
     //     .then(snapshot => console.log("Added Record: " + i))
     //     .catch(err => console.log(err));
     // });
+    alert("adding index to algolia");
+    this.ref
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          const childKey = doc.id;
+          const childData = doc.data();
+
+          childData.objectID = childKey;
+          records.push(childData);
+        });
+        alert(records.length);
+        index
+          .saveObjects(records)
+          .then(() => {
+            alert("Documents imported");
+          })
+          .catch(err => {
+            alert(err);
+          });
+      })
+      .catch(err => alert(err));
   };
   componentDidMount() {}
   render() {
@@ -297,7 +325,7 @@ class MyVibesScreen extends Component {
         <View>{ptimg}</View>
         <Text>Now good</Text>
         <Text>Concentrates-Terpenes</Text>
-        <Button onPress={this.updateData} title="Update Database" />
+        <Button onPress={this.updateData} title="Update Algolia" />
       </View>
     );
   }
