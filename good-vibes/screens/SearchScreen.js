@@ -12,7 +12,7 @@ import {
   connectInfiniteHits,
   connectSearchBox,
   connectHighlight,
-  SearchBoxProvided
+  connectAutoComplete
 } from "react-instantsearch-native";
 import { SearchBar } from "react-native-elements";
 import Icon from "../components/SvgIcon";
@@ -29,8 +29,8 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
 
   if (hits <= 0) return null;
   return (
-    <View>
-      <Text
+    <View style={{ padding: 0, margin: 0 }}>
+      {/* <Text
         style={{
           fontFamily: "sf-text",
           fontSize: 16,
@@ -40,16 +40,20 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
         }}
       >
         {hits.length} Search Results
-      </Text>
+      </Text> */}
 
       <FlatList
         data={hits}
         onEndReached={onEndReached}
         keyExtractor={(item, index) => item.objectID}
+        ItemSeparatorComponent={() => (
+          <View style={{ borderColor: "#f0f0f0", height: 0.5, flex: 1 }} />
+        )}
+        ListFooterComponent={() => <View style={{ height: 0.1, flex: 1 }} />}
         renderItem={({ item }) => {
           return (
-            <View style={{ marginTop: 5 }}>
-              <StrainCard
+            <View style={{ margin: 0, padding: 0 }}>
+              {/* <StrainCard
                 title={item.ProductName || item.Name}
                 type={item.category_name || item.Type}
                 ratings={
@@ -64,7 +68,38 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
                   "https://ddd33q3967xhi.cloudfront.net/OOyks6bxS8K8QF2NskhMGVVM4RA=/fit-in/700x700/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fqGlQJnAwSxmlWz41z3yR_yocan-magneto-black.jpg"
                 }
                 positiveEffects={[]}
-              />
+              /> */}
+              <View
+                style={{
+                  backgroundColor: "#fff",
+                  paddingLeft: 40,
+                  margin: 0,
+                  paddingTop: 14,
+                  paddingBottom: 14
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: "#212121",
+                    textAlign: "left",
+                    fontFamily: "sf-text",
+                    fontWeight: "bold"
+                  }}
+                >
+                  {item.ProductName || item.Name}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: "#717171",
+                    textAlign: "left",
+                    fontFamily: "sf-text"
+                  }}
+                >
+                  {item.category_name || item.Type}
+                </Text>
+              </View>
             </View>
           );
         }}
@@ -73,10 +108,10 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
   );
 });
 
+const HitAutoComplete = connectAutoComplete(Hits);
+
 const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
   const styles = {
-    padding: 10,
-
     flex: 1,
     backgroundColor: "transparent",
     textAlign: "center",
@@ -86,11 +121,13 @@ const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
     borderBottomColor: "#fff",
     alignSelf: "flex-end",
     width: 245,
-    height: 75
+    height: 40
   };
 
   return (
-    <View style={{ flex: 1, flexDirection: "row" }}>
+    <View
+      style={{ flex: 1, flexDirection: "row", alignContent: "space-around" }}
+    >
       <Icon
         name="SearchIcon"
         height={20}
@@ -110,7 +147,7 @@ const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
         underlineColorAndroid="transparent"
         autoFocus
         autoCapitalize={"none"}
-        searchAsYouType={false}
+        searchAsYouType={true}
       />
     </View>
   );
@@ -166,13 +203,20 @@ class SearchScreen extends Component {
           appId="LVTC40CNHH"
           apiKey="7d8b604b303f98f330876f9b177d1f73"
           indexName="search_strain_products"
+          searchFunction={({ helper }) => {
+            if (helper.getState().query === "") {
+              return null;
+            }
+            helper.search();
+          }}
         >
           <View style={{ flexDirection: "row" }}>
             <SearchBox />
           </View>
 
-          <Hits />
+          <HitAutoComplete />
         </InstantSearch>
+        <View style={{ height: 0.1, flex: 1 }} />
       </View>
     );
   }
@@ -182,7 +226,7 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 0,
     marginBottom: 10
   }
 });
