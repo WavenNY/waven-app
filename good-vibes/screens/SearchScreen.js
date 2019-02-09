@@ -27,6 +27,7 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
     }
   };
 
+  if (hits <= 0) return null;
   return (
     <View>
       <Text
@@ -34,7 +35,8 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
           fontFamily: "sf-text",
           fontSize: 16,
           color: "#717171",
-          marginBottom: 30
+          marginBottom: 30,
+          marginTop: 20
         }}
       >
         {hits.length} Search Results
@@ -61,7 +63,7 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
                   item.main_pic ||
                   "https://ddd33q3967xhi.cloudfront.net/OOyks6bxS8K8QF2NskhMGVVM4RA=/fit-in/700x700/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fqGlQJnAwSxmlWz41z3yR_yocan-magneto-black.jpg"
                 }
-                positiveEffects={item.Effects || []}
+                positiveEffects={[]}
               />
             </View>
           );
@@ -73,23 +75,44 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
 
 const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
   const styles = {
-    borderWidth: 1,
     padding: 10,
-    margin: 10,
-    flex: 1
+
+    flex: 1,
+    backgroundColor: "transparent",
+    textAlign: "center",
+    fontSize: 16,
+    fontFamily: "sf-text",
+    borderBottomWidth: 1,
+    borderBottomColor: "#fff",
+    alignSelf: "flex-end",
+    width: 245,
+    height: 75
   };
 
   return (
-    <TextInput
-      style={styles}
-      onChangeText={text => refine(text)}
-      value={currentRefinement}
-      placeholder={"Search a product..."}
-      clearButtonMode={"always"}
-      spellCheck={false}
-      autoCorrect={false}
-      autoCapitalize={"none"}
-    />
+    <View style={{ flex: 1, flexDirection: "row" }}>
+      <Icon
+        name="SearchIcon"
+        height={20}
+        width={20}
+        viewBox="0 0 20 20"
+        fill="#fff"
+        style={{ flex: 1, alignSelf: "flex-start" }}
+      />
+      <TextInput
+        style={styles}
+        onChangeText={text => refine(text)}
+        value={currentRefinement}
+        placeholder={"Search a product..."}
+        clearButtonMode="while-editing"
+        spellCheck={false}
+        autoCorrect={false}
+        underlineColorAndroid="transparent"
+        autoFocus
+        autoCapitalize={"none"}
+        searchAsYouType={false}
+      />
+    </View>
   );
 });
 
@@ -120,8 +143,7 @@ class SearchScreen extends Component {
           backgroundColor: "transparent",
           textAlign: "center",
           fontSize: 16,
-          fontFamily: "sf-text",
-          color: "#fff"
+          fontFamily: "sf-text"
         }}
         leftIconContainerStyle={{
           marginRight: 0,
@@ -160,6 +182,7 @@ export default SearchScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20
+    padding: 20,
+    marginBottom: 10
   }
 });
