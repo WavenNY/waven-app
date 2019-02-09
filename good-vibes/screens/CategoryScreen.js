@@ -55,7 +55,7 @@ class CategoryScreen extends Component {
             )
         : firebase
             .firestore()
-            .collection("testdump_strains")
+            .collection("strains2")
             .where("Type", "==", props.navigation.state.params.categoryName);
 
     this.state = {

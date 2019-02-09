@@ -278,44 +278,46 @@ class MyVibesScreen extends Component {
   constructor(props) {
     super(props);
     this.strainItems = [];
-    this.ref = firebase.firestore().collection("testdump_strains");
+    this.ref = firebase.firestore().collection("strains2");
 
-    //this.hybridStrains = require("../assets/data/Cannabis_Flower.json");
+    // this.hybridStrains = require("../StrainData.json");
   }
 
   updateData = () => {
-    // console.log("Total Records: " + this.hybridStrains.Product.length);
-    // this.hybridStrains.Product.map((item, i) => {
+    // alert("Total Records: " + this.hybridStrains.Strain.length);
+    // this.hybridStrains.Strain.map((item, i) => {
     //   tmpData = item;
-    //   tmpData.category_name = "Concentrates";
-    //   tmpData.subcategory_name = "Terpenes";
-    //   this.ref
-    //     .add(item)
-    //     .then(snapshot => console.log("Added Record: " + i))
-    //     .catch(err => console.log(err));
+    //   // tmpData.category_name = "Concentrates";
+    //   // tmpData.subcategory_name = "Terpenes";
+    //   if (tmpData && tmpData.Name !== undefined) {
+    //     this.ref
+    //       .add(item)
+    //       .then(snapshot => console.log("Added Record: " + i))
+    //       .catch(err => console.log(err));
+    //   }
     // });
-    alert("adding index to algolia");
-    this.ref
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          const childKey = doc.id;
-          const childData = doc.data();
+    // alert("adding index to algolia");
+    // this.ref
+    //   .get()
+    //   .then(snapshot => {
+    //     snapshot.forEach(doc => {
+    //       const childKey = doc.id;
+    //       const childData = doc.data();
 
-          childData.objectID = childKey;
-          records.push(childData);
-        });
-        alert(records.length);
-        index
-          .saveObjects(records)
-          .then(() => {
-            alert("Documents imported");
-          })
-          .catch(err => {
-            alert(err);
-          });
-      })
-      .catch(err => alert(err));
+    //       childData.objectID = childKey;
+    //       records.push(childData);
+    //     });
+    //     alert(records.length);
+    //     index
+    //       .saveObjects(records)
+    //       .then(() => {
+    //         alert("Documents imported");
+    //       })
+    //       .catch(err => {
+    //         alert(err);
+    //       });
+    //   })
+    //   .catch(err => alert(err));
   };
   componentDidMount() {}
   render() {
@@ -325,7 +327,7 @@ class MyVibesScreen extends Component {
         <View>{ptimg}</View>
         <Text>Now good</Text>
         <Text>Concentrates-Terpenes</Text>
-        <Button onPress={this.updateData} title="Update Algolia" />
+        <Button onPress={this.updateData} title="Nothing" />
       </View>
     );
   }
