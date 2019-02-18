@@ -76,8 +76,8 @@ class ExploreScreen extends Component {
         inputStyle={{
           backgroundColor: "#fff",
           textAlign: "center",
-          fontSize:14,
-          fontFamily:"sf-text"
+          fontSize: 14,
+          fontFamily: "sf-text"
         }}
         leftIconContainerStyle={{
           marginRight: 0

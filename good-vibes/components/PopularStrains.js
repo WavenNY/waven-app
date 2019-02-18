@@ -11,6 +11,8 @@ class PopularStrains extends Component {
   constructor(props) {
     super(props);
     this.ref = firebase.firestore().collection("strains");
+    // Paginate
+    this.ref.limit(10);
     this.unsubscribe = null;
     this.state = {
       strains: []
@@ -34,6 +36,7 @@ class PopularStrains extends Component {
         ratings,
         main_pic
       });
+      // console.log("[+] Strain Data: " + doc.data());
     });
 
     this.setState({

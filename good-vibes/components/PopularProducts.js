@@ -10,7 +10,13 @@ class PopularProducts extends Component {
   // Init firebase and props in constructor
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection("products");
+    this.ref = firebase
+      .firestore()
+      .collection("latestprods")
+      .limit(10)
+      .orderBy("StarRatings", "desc");
+    // // paginate
+    // this.ref.limit(10);
     this.unsubscribe = null;
     this.state = {
       products: []
@@ -24,16 +30,17 @@ class PopularProducts extends Component {
 
     // get data
     querySnapshot.forEach(doc => {
-      const { product_name, type_slug, ratings, main_pic } = doc.data();
+      const { ProductName, category_name, StarRatings, main_pic } = doc.data();
 
       // save to temp array
       products.push({
         key: doc.id,
-        product_name,
-        type_slug,
-        ratings,
+        ProductName,
+        category_name,
+        StarRatings,
         main_pic
       });
+      // console.log("[+] Product Data: " + doc.data());
     });
 
     this.setState({
@@ -82,11 +89,14 @@ class PopularProducts extends Component {
             {this.state.products.map((items, i) => (
               <ProductData
                 style={{ marginRight: 30 }}
-                productName={items.product_name}
-                productType={items.type_slug}
-                productRating={items.ratings}
-                productStars={items.ratings}
-                productURL={items.main_pic}
+                productName={items.ProductName}
+                productType={items.category_name}
+                productRating={items.StarRatings || 0}
+                productStars={items.StarRatings || 0}
+                productURL={
+                  items.main_pic ||
+                  "https://storage.googleapis.com/waven-backend.appspot.com/uploads/prod.png"
+                }
               />
             ))}
           </ScrollView>

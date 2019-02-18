@@ -47,7 +47,7 @@ class CategoryScreen extends Component {
       props.navigation.state.params.db.indexOf("products") == 0
         ? firebase
             .firestore()
-            .collection("test_products")
+            .collection("latestprods")
             .where(
               "category_name",
               "==",

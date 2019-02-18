@@ -23,7 +23,8 @@ class ProductData extends Component {
             height: 75,
             width: 75,
             alignSelf: "center",
-            borderRadius: 0
+            borderRadius: 0,
+            backgroundColor: "#fff"
           }}
           source={{
             uri: this.props.productURL
