@@ -22,6 +22,7 @@
     "react-native-fab": "^1.0.8",
     "react-native-firebase": "^5.2.1",
     "react-native-floating-action": "^1.13.0",
+    "react-native-scrollable-tab-view": "^0.10.0",
     "react-native-stars": "^1.1.5",
     "react-native-svg-icon": "^0.8.1",
     "react-native-underline-tabbar": "^1.3.6",

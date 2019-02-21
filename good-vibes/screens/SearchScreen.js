@@ -6,7 +6,7 @@ import {
   FlatList,
   Image,
   TextInput,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 import {
   InstantSearch,
@@ -19,6 +19,8 @@ import {
 import { SearchBar, Button } from "react-native-elements";
 import Icon from "../components/SvgIcon";
 import StrainCard from "../components/StrainCard";
+import ScrollableTabView from "react-native-scrollable-tab-view";
+import TabBar from "react-native-underline-tabbar";
 
 const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
   /* if there are still results, you can
@@ -268,7 +270,7 @@ class SearchScreen extends Component {
     this.state = {
       search: "",
       isSearching: true,
-      selectedTab: 'all-cannabis',
+      selectedTab: "all-cannabis",
       updateSearch: () => {}
     };
   }
@@ -310,68 +312,95 @@ class SearchScreen extends Component {
   render() {
     const { search, isSearching } = this.state;
     return (
+      // <ScrollableTabView
+      //   tabBarActiveTextColor="#ff5a5f"
+      //   renderTabBar={() => <TabBar underlineColor="#ff5a5f" />}
+      // >
+      //   <View tabLabel={{ label: "All Cannabis" }} label="All Cannabis"> </View>
+      //   <View tabLabel={{ label: "My Cannabis" }} label="My Cannabis">
+      //     <Text>My Cannabis </Text>
+      //   </View>
+      // </ScrollableTabView>
+
       <View style={styles.container}>
-        <View
-          style={{
-            margin: 0,
-            marginTop: 30,
-            paddingLeft: 67,
-            paddingRight: 67,
-            flex: 1,
-            paddingBottom: 70
+        <ScrollableTabView
+          tabBarActiveTextColor="#ff5a5f"
+          tabBarBackgroundColor="#fff"
+          tabBarInactiveTextColor="#ff5a5f"
+          tabBarTextStyle={{
+            fontSize: 14,
+            fontFamily: "sf-text",
+            fontWeight: "500"
           }}
+          style={{ margin: 0, height: 50 }}
+          renderTabBar={() => <TabBar underlineHeight={3} tabMargin={30} tabBarStyle={{ marginTop:-10, padding: 25, paddingBottom:0 }}
+          underlineColor="#ff5a5f" />}
         >
-          <TouchableOpacity
-            style={{
-              paddingTop: 15,
-              paddingBottom: 15,
-              backgroundColor: "#fff",
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: "#33000000",
-              height: 50,
-              width: 225
-            }}
-            activeOpacity={0.5}
-          >
-            <Text
+          <View tabLabel={{ label: "All Cannabis" }} label="All Cannabis">
+            <View
               style={{
-                color: "#ff5a5f",
-                textAlign: "center",
-                fontSize: 14,
-                fontFamily: "sf-text"
+                margin: 0,
+                marginTop: 30,
+                paddingLeft: 67,
+                paddingRight: 67,
+                flex: 1,
+                paddingBottom: 70
               }}
             >
-              + Add Custom
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <InstantSearch
-            appId="LVTC40CNHH"
-            apiKey="7d8b604b303f98f330876f9b177d1f73"
-            indexName="search_strain_products"
-            searchFunction={({ helper }) => {
-              if (helper.getState().query === "") {
-                return null;
-              }
-              helper.search();
-            }}
-          >
-            <View style={{ flexDirection: "row" }}>
-              <VirtualSearchBox
-                defaultRefinement={search}
-                searchText={search}
-              />
+              <TouchableOpacity
+                style={{
+                  paddingTop: 15,
+                  paddingBottom: 15,
+                  backgroundColor: "#fff",
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  borderColor: "#33000000",
+                  height: 50,
+                  width: 225
+                }}
+                activeOpacity={0.5}
+              >
+                <Text
+                  style={{
+                    color: "#ff5a5f",
+                    textAlign: "center",
+                    fontSize: 14,
+                    fontFamily: "sf-text"
+                  }}
+                >
+                  + Add Custom
+                </Text>
+              </TouchableOpacity>
             </View>
-            {isSearching ? (
-              <HitAutoComplete />
-            ) : (
-              <HitCardsAutoConplete defaultRefinement={search} />
-            )}
-          </InstantSearch>
-        </View>
-        <View style={{ height: 0.1, flex: 1 }} />
+            <View>
+              <InstantSearch
+                appId="LVTC40CNHH"
+                apiKey="7d8b604b303f98f330876f9b177d1f73"
+                indexName="search_strain_products"
+                searchFunction={({ helper }) => {
+                  if (helper.getState().query === "") {
+                    return null;
+                  }
+                  helper.search();
+                }}
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <VirtualSearchBox
+                    defaultRefinement={search}
+                    searchText={search}
+                  />
+                </View>
+                {isSearching ? (
+                  <HitAutoComplete />
+                ) : (
+                  <HitCardsAutoConplete defaultRefinement={search} />
+                )}
+              </InstantSearch>
+            </View>
+            <View style={{ height: 0.1, flex: 1 }} />
+          </View>
+          <View tabLabel={{ label: "My Cannabis" }} label="My Cannabis" />
+        </ScrollableTabView>
       </View>
     );
   }
@@ -382,6 +411,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 0,
+    margin: 0,
     marginBottom: 10
   }
 });

@@ -7,10 +7,9 @@ import algoliasearch from "algoliasearch";
 // Import firebase
 import firebase from "../Firebase";
 import { Button } from "react-native-elements";
-import ScrollableTabView, {
-  DefaultTabBar
-} from "react-native-scrollable-tab-view";
-
+// import ScrollableTabView,from "react-native-underline-tabbar";
+import ScrollableTabView from "react-native-scrollable-tab-view";
+import TabBar from "react-native-underline-tabbar";
 // const client = algoliasearch("LVTC40CNHH", "854d7053cfcc0d4b24bb8638dea0cdda");
 // const index = client.initIndex("search_strain_products");
 
@@ -276,6 +275,16 @@ const ptimg = (
 );
 
 const records = [];
+const Page = ({ label }) => (
+  <View style={styles.container}>
+    <Text style={styles.welcome}>{label}</Text>
+    <Text style={styles.instructions}>To get started, edit index.ios.js</Text>
+    <Text style={styles.instructions}>
+      Press Cmd+R to reload,{"\n"}
+      Cmd+D or shake for dev menu
+    </Text>
+  </View>
+);
 
 class MyVibesScreen extends Component {
   constructor(props) {
@@ -324,17 +333,9 @@ class MyVibesScreen extends Component {
   componentDidMount() {}
   render() {
     return (
-      <ScrollableTabView
-        style={{ marginTop: 20 }}
-        initialPage={1}
-        renderTabBar={() => <DefaultTabBar />}
-      >
-        <Text tabLabel="Tab #1">My</Text>
-
-        <Text tabLabel="Tab #2">favorite</Text>
-
-        <Text tabLabel="Tab #3">project</Text>
-      </ScrollableTabView>
+      <View style={[styles.container, { paddingTop: 20 }]}>
+       <Text>My Vibes Screen</Text>
+      </View>
     );
   }
 }
