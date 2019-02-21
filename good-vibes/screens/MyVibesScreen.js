@@ -7,9 +7,12 @@ import algoliasearch from "algoliasearch";
 // Import firebase
 import firebase from "../Firebase";
 import { Button } from "react-native-elements";
+import ScrollableTabView, {
+  DefaultTabBar
+} from "react-native-scrollable-tab-view";
 
-const client = algoliasearch("LVTC40CNHH", "854d7053cfcc0d4b24bb8638dea0cdda");
-const index = client.initIndex("search_strain_products");
+// const client = algoliasearch("LVTC40CNHH", "854d7053cfcc0d4b24bb8638dea0cdda");
+// const index = client.initIndex("search_strain_products");
 
 const ptimg = (
   <Svg width="187" height="173" viewBox="0 0 187 173">
@@ -303,7 +306,6 @@ class MyVibesScreen extends Component {
     //     snapshot.forEach(doc => {
     //       const childKey = doc.id;
     //       const childData = doc.data();
-
     //       childData.objectID = childKey;
     //       records.push(childData);
     //     });
@@ -322,13 +324,17 @@ class MyVibesScreen extends Component {
   componentDidMount() {}
   render() {
     return (
-      <View style={styles.container}>
-        <Text>This is my vibes page</Text>
-        <View>{ptimg}</View>
-        <Text>Now good</Text>
-        <Text>Concentrates-Terpenes</Text>
-        <Button onPress={this.updateData} title="Nothing" />
-      </View>
+      <ScrollableTabView
+        style={{ marginTop: 20 }}
+        initialPage={1}
+        renderTabBar={() => <DefaultTabBar />}
+      >
+        <Text tabLabel="Tab #1">My</Text>
+
+        <Text tabLabel="Tab #2">favorite</Text>
+
+        <Text tabLabel="Tab #3">project</Text>
+      </ScrollableTabView>
     );
   }
 }

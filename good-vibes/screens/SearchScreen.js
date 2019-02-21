@@ -6,7 +6,7 @@ import {
   FlatList,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import {
   InstantSearch,
@@ -99,7 +99,7 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
                     fontFamily: "sf-text"
                   }}
                 >
-                  {item.category_name || item.Type}
+                  Strain, {item.category_name || item.Type}
                 </Text>
               </View>
             </View>
@@ -268,6 +268,7 @@ class SearchScreen extends Component {
     this.state = {
       search: "",
       isSearching: true,
+      selectedTab: 'all-cannabis',
       updateSearch: () => {}
     };
   }
