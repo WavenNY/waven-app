@@ -5,16 +5,18 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  TextInput
+  TextInput,
+  TouchableOpacity
 } from "react-native";
 import {
   InstantSearch,
   connectInfiniteHits,
   connectSearchBox,
   connectHighlight,
-  connectAutoComplete
+  connectAutoComplete,
+  connectStats
 } from "react-instantsearch-native";
-import { SearchBar } from "react-native-elements";
+import { SearchBar, Button } from "react-native-elements";
 import Icon from "../components/SvgIcon";
 import StrainCard from "../components/StrainCard";
 
@@ -108,6 +110,19 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
   );
 });
 
+const HitStats = connectStats(({ nbHits }) => (
+  <Text
+    style={{
+      fontFamily: "sf-text",
+      fontSize: 16,
+      color: "#717171",
+      marginBottom: 30,
+      marginTop: 20
+    }}
+  >
+    {nbHits} Search Results
+  </Text>
+));
 const HitCardsInfinity = connectInfiniteHits(({ hits, hasMore, refine }) => {
   /* if there are still results, you can
   call the refine function to load more */
@@ -119,18 +134,8 @@ const HitCardsInfinity = connectInfiniteHits(({ hits, hasMore, refine }) => {
 
   if (hits <= 0) return null;
   return (
-    <View style={{ padding: 0, margin: 0 }}>
-      <Text
-        style={{
-          fontFamily: "sf-text",
-          fontSize: 16,
-          color: "#717171",
-          marginBottom: 30,
-          marginTop: 20
-        }}
-      >
-        {hits.length} Search Results
-      </Text>
+    <View style={{ padding: 0, marginLeft: 20, marginRight: 20 }}>
+      <HitStats />
 
       <FlatList
         data={hits}
@@ -305,26 +310,66 @@ class SearchScreen extends Component {
     const { search, isSearching } = this.state;
     return (
       <View style={styles.container}>
-        <InstantSearch
-          appId="LVTC40CNHH"
-          apiKey="7d8b604b303f98f330876f9b177d1f73"
-          indexName="search_strain_products"
-          searchFunction={({ helper }) => {
-            if (helper.getState().query === "") {
-              return null;
-            }
-            helper.search();
+        <View
+          style={{
+            margin: 0,
+            marginTop: 30,
+            paddingLeft: 67,
+            paddingRight: 67,
+            flex: 1,
+            paddingBottom: 70
           }}
         >
-          <View style={{ flexDirection: "row" }}>
-            <VirtualSearchBox defaultRefinement={search} searchText={search} />
-          </View>
-          {isSearching ? (
-            <HitAutoComplete />
-          ) : (
-            <HitCardsAutoConplete defaultRefinement={search} />
-          )}
-        </InstantSearch>
+          <TouchableOpacity
+            style={{
+              paddingTop: 15,
+              paddingBottom: 15,
+              backgroundColor: "#fff",
+              borderRadius: 50,
+              borderWidth: 1,
+              borderColor: "#33000000",
+              height: 50,
+              width: 225
+            }}
+            activeOpacity={0.5}
+          >
+            <Text
+              style={{
+                color: "#ff5a5f",
+                textAlign: "center",
+                fontSize: 14,
+                fontFamily: "sf-text"
+              }}
+            >
+              + Add Custom
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <InstantSearch
+            appId="LVTC40CNHH"
+            apiKey="7d8b604b303f98f330876f9b177d1f73"
+            indexName="search_strain_products"
+            searchFunction={({ helper }) => {
+              if (helper.getState().query === "") {
+                return null;
+              }
+              helper.search();
+            }}
+          >
+            <View style={{ flexDirection: "row" }}>
+              <VirtualSearchBox
+                defaultRefinement={search}
+                searchText={search}
+              />
+            </View>
+            {isSearching ? (
+              <HitAutoComplete />
+            ) : (
+              <HitCardsAutoConplete defaultRefinement={search} />
+            )}
+          </InstantSearch>
+        </View>
         <View style={{ height: 0.1, flex: 1 }} />
       </View>
     );
