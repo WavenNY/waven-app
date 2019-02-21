@@ -110,15 +110,20 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
 
 const HitAutoComplete = connectAutoComplete(Hits);
 
-const VirtualSearchBox = connectSearchBox(() => null);
+const VirtualSearchBox = connectSearchBox(
+  ({ refine, currentRefinement, isSearchStalled, searchText }) => {
+    refine(searchText);
+    return null;
+  }
+);
 
 class SearchScreen extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     headerTitle: (
       <SearchBar
         placeholder="Find strain and products"
-        onChangeText={() => this.updateSearch()}
-        value={this.getState("search")}
+        onChangeText={navigation.getParam("updateSearch", () => {})}
+        value={navigation.getParam("search", "")}
         inputContainerStyle={{
           borderWidth: 0
         }}
@@ -155,17 +160,28 @@ class SearchScreen extends Component {
       paddingBottom: 20,
       height: 75
     }
-  };
+  });
 
   constructor(props) {
     super(props);
-    this.sate = {
-      search: ""
+    this.state = {
+      search: "Blue Dream"
     };
   }
 
+  componentDidMount() {
+    console.log("component mounted");
+    this.props.navigation.setParams({
+      search: this.state.search,
+      updateSearch: this.updateSearch
+    });
+  }
   updateSearch = search => {
+    console.log("updateSearch function called");
     this.setState({ search });
+    this.props.navigation.setParams({
+      search: search
+    });
   };
 
   render() {
@@ -184,7 +200,7 @@ class SearchScreen extends Component {
           }}
         >
           <View style={{ flexDirection: "row" }}>
-            <VirtualSearchBox defaultRefinement={search} />
+            <VirtualSearchBox defaultRefinement={search} searchText={search} />
           </View>
 
           <HitAutoComplete />
