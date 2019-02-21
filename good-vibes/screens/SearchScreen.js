@@ -215,6 +215,9 @@ class SearchScreen extends Component {
         placeholder="Find strain and products"
         onChangeText={navigation.getParam("updateSearch", () => {})}
         value={navigation.getParam("search", "")}
+        onSubmitEditing={navigation.getParam("onSubmit", () => {
+          console.log("onSubmit not attached");
+        })}
         onKeyPress={navigation.getParam("onKeyPress", () => {
           console.log("onKeyPress not mounted");
         })}
@@ -264,18 +267,30 @@ class SearchScreen extends Component {
     };
   }
 
+  onSubmit = () => {
+    this.setState({
+      isSearching: false
+    });
+  };
+
   componentDidMount() {
     console.log("component mounted");
     this.props.navigation.setParams({
       search: this.state.search,
       updateSearch: this.updateSearch,
-      onKeyPress: this.handleOnKeyButtonDown
+      onKeyPress: this.handleOnKeyButtonDown,
+      onSubmit: this.onSubmit
     });
   }
 
   handleOnKeyButtonDown = ({ nativeEvent: { key: keyValue } }) => {
-    console.log(keyValue);
-    console.log("onKeyButtonDownPRessed Called !");
+    // console.log(keyValue);
+    // console.log("onKeyButtonDownPRessed Called !");
+    if (keyValue === "Enter") {
+      this.setState({
+        isSearching: false
+      });
+    }
   };
 
   updateSearch = search => {
@@ -304,7 +319,11 @@ class SearchScreen extends Component {
           <View style={{ flexDirection: "row" }}>
             <VirtualSearchBox defaultRefinement={search} searchText={search} />
           </View>
-          {isSearching ? <HitAutoComplete /> : <HitCardsAutoConplete />}
+          {isSearching ? (
+            <HitAutoComplete />
+          ) : (
+            <HitCardsAutoConplete defaultRefinement={search} />
+          )}
         </InstantSearch>
         <View style={{ height: 0.1, flex: 1 }} />
       </View>
