@@ -110,54 +110,15 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
 
 const HitAutoComplete = connectAutoComplete(Hits);
 
-const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
-  const styles = {
-    flex: 1,
-    backgroundColor: "transparent",
-    textAlign: "center",
-    fontSize: 16,
-    fontFamily: "sf-text",
-    borderBottomWidth: 1,
-    borderBottomColor: "#fff",
-    alignSelf: "flex-end",
-    width: 245,
-    height: 40
-  };
-
-  return (
-    <View
-      style={{ flex: 1, flexDirection: "row", alignContent: "space-around" }}
-    >
-      <Icon
-        name="SearchIcon"
-        height={20}
-        width={20}
-        viewBox="0 0 20 20"
-        fill="#fff"
-        style={{ flex: 1, alignSelf: "flex-start" }}
-      />
-      <TextInput
-        style={styles}
-        onChangeText={text => refine(text)}
-        value={currentRefinement}
-        placeholder={"Search a product..."}
-        clearButtonMode="while-editing"
-        spellCheck={false}
-        autoCorrect={false}
-        underlineColorAndroid="transparent"
-        autoFocus
-        autoCapitalize={"none"}
-        searchAsYouType={true}
-      />
-    </View>
-  );
-});
+const VirtualSearchBox = connectSearchBox(() => null);
 
 class SearchScreen extends Component {
   static navigationOptions = {
     headerTitle: (
       <SearchBar
         placeholder="Find strain and products"
+        onChangeText={() => this.updateSearch()}
+        value={this.getState("search")}
         inputContainerStyle={{
           borderWidth: 0
         }}
@@ -196,7 +157,19 @@ class SearchScreen extends Component {
     }
   };
 
+  constructor(props) {
+    super(props);
+    this.sate = {
+      search: ""
+    };
+  }
+
+  updateSearch = search => {
+    this.setState({ search });
+  };
+
   render() {
+    const { search } = this.state;
     return (
       <View style={styles.container}>
         <InstantSearch
@@ -211,7 +184,7 @@ class SearchScreen extends Component {
           }}
         >
           <View style={{ flexDirection: "row" }}>
-            <SearchBox />
+            <VirtualSearchBox defaultRefinement={search} />
           </View>
 
           <HitAutoComplete />
