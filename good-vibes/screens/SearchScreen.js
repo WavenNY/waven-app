@@ -108,7 +108,98 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
   );
 });
 
+const HitCardsInfinity = connectInfiniteHits(({ hits, hasMore, refine }) => {
+  /* if there are still results, you can
+  call the refine function to load more */
+  const onEndReached = function() {
+    if (hasMore) {
+      refine();
+    }
+  };
+
+  if (hits <= 0) return null;
+  return (
+    <View style={{ padding: 0, margin: 0 }}>
+      <Text
+        style={{
+          fontFamily: "sf-text",
+          fontSize: 16,
+          color: "#717171",
+          marginBottom: 30,
+          marginTop: 20
+        }}
+      >
+        {hits.length} Search Results
+      </Text>
+
+      <FlatList
+        data={hits}
+        onEndReached={onEndReached}
+        keyExtractor={(item, index) => item.objectID}
+        ItemSeparatorComponent={() => (
+          <View style={{ borderColor: "#f0f0f0", height: 0.5, flex: 1 }} />
+        )}
+        ListFooterComponent={() => <View style={{ height: 0.1, flex: 1 }} />}
+        renderItem={({ item }) => {
+          return (
+            <View style={{ margin: 0, padding: 0 }}>
+              <StrainCard
+                title={item.ProductName || item.Name}
+                type={item.category_name || item.Type}
+                ratings={
+                  item.Rating ||
+                  (item.StarRating ? item.StarRating.substring(0, 3) : false) ||
+                  0
+                }
+                id={item.objectID}
+                desc=""
+                image={
+                  item.main_pic ||
+                  "https://ddd33q3967xhi.cloudfront.net/OOyks6bxS8K8QF2NskhMGVVM4RA=/fit-in/700x700/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fqGlQJnAwSxmlWz41z3yR_yocan-magneto-black.jpg"
+                }
+                positiveEffects={[]}
+              />
+              {/* <View
+                style={{
+                  backgroundColor: "#fff",
+                  paddingLeft: 40,
+                  margin: 0,
+                  paddingTop: 14,
+                  paddingBottom: 14
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: "#212121",
+                    textAlign: "left",
+                    fontFamily: "sf-text",
+                    fontWeight: "bold"
+                  }}
+                >
+                  {item.ProductName || item.Name}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: "#717171",
+                    textAlign: "left",
+                    fontFamily: "sf-text"
+                  }}
+                >
+                  {item.category_name || item.Type}
+                </Text>
+              </View> */}
+            </View>
+          );
+        }}
+      />
+    </View>
+  );
+});
+
 const HitAutoComplete = connectAutoComplete(Hits);
+const HitCardsAutoConplete = connectAutoComplete(HitCardsInfinity);
 
 const VirtualSearchBox = connectSearchBox(
   ({ refine, currentRefinement, isSearchStalled, searchText }) => {
@@ -124,6 +215,9 @@ class SearchScreen extends Component {
         placeholder="Find strain and products"
         onChangeText={navigation.getParam("updateSearch", () => {})}
         value={navigation.getParam("search", "")}
+        onKeyPress={navigation.getParam("onKeyPress", () => {
+          console.log("onKeyPress not mounted");
+        })}
         inputContainerStyle={{
           borderWidth: 0
         }}
@@ -138,8 +232,7 @@ class SearchScreen extends Component {
           height: 45,
           alignSelf: "center",
           marginLeft: "20%",
-          backgroundColor: "transparent",
-          color: "#fff"
+          backgroundColor: "transparent"
         }}
         placeholderTextColor="#fff"
         inputStyle={{
@@ -165,7 +258,9 @@ class SearchScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: "Blue Dream"
+      search: "",
+      isSearching: true,
+      updateSearch: () => {}
     };
   }
 
@@ -173,9 +268,16 @@ class SearchScreen extends Component {
     console.log("component mounted");
     this.props.navigation.setParams({
       search: this.state.search,
-      updateSearch: this.updateSearch
+      updateSearch: this.updateSearch,
+      onKeyPress: this.handleOnKeyButtonDown
     });
   }
+
+  handleOnKeyButtonDown = ({ nativeEvent: { key: keyValue } }) => {
+    console.log(keyValue);
+    console.log("onKeyButtonDownPRessed Called !");
+  };
+
   updateSearch = search => {
     console.log("updateSearch function called");
     this.setState({ search });
@@ -185,7 +287,7 @@ class SearchScreen extends Component {
   };
 
   render() {
-    const { search } = this.state;
+    const { search, isSearching } = this.state;
     return (
       <View style={styles.container}>
         <InstantSearch
@@ -202,8 +304,7 @@ class SearchScreen extends Component {
           <View style={{ flexDirection: "row" }}>
             <VirtualSearchBox defaultRefinement={search} searchText={search} />
           </View>
-
-          <HitAutoComplete />
+          {isSearching ? <HitAutoComplete /> : <HitCardsAutoConplete />}
         </InstantSearch>
         <View style={{ height: 0.1, flex: 1 }} />
       </View>

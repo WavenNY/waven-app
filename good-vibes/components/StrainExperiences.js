@@ -227,6 +227,7 @@ class StrainExperiences extends Component {
           >
             {this.state.positiveEffects.map((item, i) => (
               <GoodEffect
+                key={i}
                 style={{ marginRight: 15 }}
                 title={item.effect_name}
               />

@@ -84,6 +84,7 @@ class PopularStrains extends Component {
           >
             {this.state.strains.map((items, i) => (
               <StrainData
+                key={i}
                 style={{ marginRight: 10 }}
                 strainName={items.strain_name}
                 strainType={items.type_slug}

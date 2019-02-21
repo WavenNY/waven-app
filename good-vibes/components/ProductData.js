@@ -54,7 +54,7 @@ class ProductData extends Component {
           </Text>
           <View style={{ alignItems: "center" }}>
             <Stars
-              default={this.props.productStars}
+              default={parseInt(this.props.productStars)}
               disabled={true}
               count={5}
               half={true}

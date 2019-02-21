@@ -349,7 +349,7 @@ class MedicalUse extends Component {
           >
             {// Loop and render data
             this.state.medicalEffects.map((item, i) => (
-              <MedicalEffect title={item.effect_name} />
+              <MedicalEffect key={i} title={item.effect_name} />
             ))}
           </ScrollView>
         </LinearGradient>

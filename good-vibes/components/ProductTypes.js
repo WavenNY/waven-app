@@ -353,6 +353,7 @@ class ProductTypes extends Component {
             {// Loop and render data
             this.state.prodTypes.map((item, i) => (
               <TouchableOpacity
+                key = {i}
                 onPress={() =>
                   this.props.navigation.navigate("Category", {
                     categoryName: item.category_name,

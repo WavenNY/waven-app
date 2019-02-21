@@ -88,6 +88,7 @@ class PopularProducts extends Component {
           >
             {this.state.products.map((items, i) => (
               <ProductData
+                key={i}
                 style={{ marginRight: 30 }}
                 productName={items.ProductName}
                 productType={items.category_name}

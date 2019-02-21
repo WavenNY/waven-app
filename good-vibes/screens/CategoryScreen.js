@@ -216,7 +216,7 @@ class CategoryScreen extends Component {
                   txtStyle = styles.navButton;
                 }
                 return (
-                  <Text id={item.id} style={txtStyle}>
+                  <Text id={item.id} style={txtStyle} key={i}>
                     {item.data.category_name}
                   </Text>
                 );
