@@ -214,56 +214,106 @@ const VirtualSearchBox = connectSearchBox(
     return null;
   }
 );
-
-class SearchScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    headerTitle: (
-      <SearchBar
-        placeholder="Find strain and products"
-        onChangeText={navigation.getParam("updateSearch", () => {})}
-        value={navigation.getParam("search", "")}
-        onSubmitEditing={navigation.getParam("onSubmit", () => {
-          console.log("onSubmit not attached");
-        })}
-        onKeyPress={navigation.getParam("onKeyPress", () => {
-          console.log("onKeyPress not mounted");
-        })}
-        inputContainerStyle={{
-          borderWidth: 0
-        }}
-        searchIcon={false}
-        containerStyle={{
-          borderColor: "transparent",
-          borderWidth: 0,
-          borderTopWidth: 0,
-          borderBottomWidth: 1,
-          borderBottomColor: "#fff",
-          width: 245,
-          height: 45,
-          alignSelf: "center",
-          marginLeft: "20%",
-          backgroundColor: "transparent"
-        }}
-        placeholderTextColor="#fff"
-        inputStyle={{
-          backgroundColor: "transparent",
-          textAlign: "center",
-          fontSize: 16,
-          fontFamily: "sf-text"
-        }}
-        leftIconContainerStyle={{
-          marginRight: 0,
-          color: "#fff"
-        }}
+const SearchIcon = ({ props }) => {
+  return (
+    <View style={{ elevation: 1, marginTop: 30, marginLeft: 30 }}>
+      <Icon
+        name="SearchIcon"
+        height={16}
+        width={16}
+        viewBox="0 0 16 16"
+        fill="#fff"
       />
-    ),
-    headerStyle: {
-      backgroundColor: "#ff5a5f",
-      paddingTop: 20,
-      paddingBottom: 20,
-      height: 75
-    }
-  });
+    </View>
+  );
+};
+class SearchScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      // headerLeft: (
+      //   <Icon containerStyle={styles.icon} type="ionicon" name={"md-menu"} />
+      // ),
+
+      headerTitle: (
+        <View
+          style={{
+            flex: 1,
+            margin: 0,
+            flexDirection: "row",
+            paddingLeft: 35,
+            marginLeft: 30
+          }}
+        >
+          <View
+            style={{
+              elevation: 1,
+              marginTop: 20,
+              marginLeft: 15,
+              flex: 0.1,
+              width: 16,
+              height: 16
+            }}
+          >
+            <Icon
+              name="SearchIcon"
+              height={16}
+              width={16}
+              viewBox="0 0 24 24"
+              fill="#fff"
+            />
+          </View>
+          <SearchBar
+            noIcon
+            placeholder="Find strain and products"
+            onChangeText={navigation.getParam("updateSearch", () => {})}
+            value={navigation.getParam("search", "")}
+            onSubmitEditing={navigation.getParam("onSubmit", () => {
+              console.log("onSubmit not attached");
+            })}
+            onKeyPress={navigation.getParam("onKeyPress", () => {
+              console.log("onKeyPress not mounted");
+            })}
+            inputContainerStyle={{
+              borderWidth: 0
+            }}
+            containerStyle={{
+              marginLeft: -10,
+              borderColor: "transparent",
+              borderWidth: 0,
+              borderTopWidth: 0,
+              borderBottomWidth: 1,
+              borderBottomColor: "#fff",
+              width: 235,
+              height: 40,
+              backgroundColor: "transparent"
+            }}
+            placeholderTextColor="#fff"
+            style={{
+              color: "#fff",
+              flex: 0.9,
+              marginLeft: -20,
+              marginTop: 0
+            }}
+            inputContainerStyle={{ color: "#fff", width: 230 }}
+            inputStyle={{
+              backgroundColor: "transparent",
+              fontSize: 16,
+              fontFamily: "sf-text",
+              color: "#fff",
+              textAlign: "left",
+              paddingLeft: 20
+            }}
+          />
+        </View>
+      ),
+      headerStyle: {
+        backgroundColor: "#ff5a5f",
+        paddingTop: 20,
+        paddingBottom: 20,
+        height: 75
+      }
+    };
+  };
 
   constructor(props) {
     super(props);
@@ -333,8 +383,14 @@ class SearchScreen extends Component {
             fontWeight: "500"
           }}
           style={{ margin: 0, height: 50 }}
-          renderTabBar={() => <TabBar underlineHeight={3} tabMargin={30} tabBarStyle={{ marginTop:-10, padding: 25, paddingBottom:0 }}
-          underlineColor="#ff5a5f" />}
+          renderTabBar={() => (
+            <TabBar
+              underlineHeight={3}
+              tabMargin={30}
+              tabBarStyle={{ marginTop: -10, padding: 25, paddingBottom: 0 }}
+              underlineColor="#ff5a5f"
+            />
+          )}
         >
           <View tabLabel={{ label: "All Cannabis" }} label="All Cannabis">
             <View
