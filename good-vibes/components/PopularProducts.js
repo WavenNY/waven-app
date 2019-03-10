@@ -13,7 +13,7 @@ class PopularProducts extends Component {
     this.ref = firebase
       .firestore()
       .collection("latestprods")
-      .limit(10)
+      .limit(6)
       .orderBy("StarRatings", "desc");
     // // paginate
     // this.ref.limit(10);
@@ -30,7 +30,7 @@ class PopularProducts extends Component {
 
     // get data
     querySnapshot.forEach(doc => {
-      const { ProductName, category_name, StarRatings, main_pic } = doc.data();
+      const { ProductName, category_name, StarRatings, imageUrl } = doc.data();
 
       // save to temp array
       products.push({
@@ -38,7 +38,7 @@ class PopularProducts extends Component {
         ProductName,
         category_name,
         StarRatings,
-        main_pic
+        main_pic: imageUrl
       });
       // console.log("[+] Product Data: " + doc.data());
     });

@@ -38,7 +38,7 @@ class CategoryScreen extends Component {
   constructor(props) {
     super(props);
 
-    this.ref = firebase.firestore().collection("strains");
+    this.ref = firebase.firestore().collection("strains2");
 
     this.unsubscribe = null;
     this.subheaderRef = null;
@@ -252,7 +252,7 @@ class CategoryScreen extends Component {
                   id={item.doc.id}
                   desc={item.doc.data().ProductDescription}
                   image={
-                    item.doc.data().main_pic ||
+                    item.doc.data().imageUrl ||
                     "https://ddd33q3967xhi.cloudfront.net/OOyks6bxS8K8QF2NskhMGVVM4RA=/fit-in/700x700/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fqGlQJnAwSxmlWz41z3yR_yocan-magneto-black.jpg"
                   }
                   positiveEffects={item.doc.data().Effects || []}

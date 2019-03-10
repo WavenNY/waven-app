@@ -161,7 +161,7 @@ const HitCardsInfinity = connectInfiniteHits(({ hits, hasMore, refine }) => {
                 id={item.objectID}
                 desc=""
                 image={
-                  item.main_pic ||
+                  item.imageUrl ||
                   "https://ddd33q3967xhi.cloudfront.net/OOyks6bxS8K8QF2NskhMGVVM4RA=/fit-in/700x700/https%3a%2f%2fs3.amazonaws.com%2fleafly-s3%2fproducts%2fphotos%2fqGlQJnAwSxmlWz41z3yR_yocan-magneto-black.jpg"
                 }
                 positiveEffects={[]}
@@ -273,6 +273,9 @@ class SearchScreen extends Component {
             onKeyPress={navigation.getParam("onKeyPress", () => {
               console.log("onKeyPress not mounted");
             })}
+            onFocus={navigation.getParam("onFocus", ()=>{
+              console.log("onFocus not mounted")
+            })}
             inputContainerStyle={{
               borderWidth: 0
             }}
@@ -321,7 +324,8 @@ class SearchScreen extends Component {
       search: "",
       isSearching: true,
       selectedTab: "all-cannabis",
-      updateSearch: () => {}
+      updateSearch: () => {},
+
     };
   }
 
@@ -337,7 +341,8 @@ class SearchScreen extends Component {
       search: this.state.search,
       updateSearch: this.updateSearch,
       onKeyPress: this.handleOnKeyButtonDown,
-      onSubmit: this.onSubmit
+      onSubmit: this.onSubmit,
+      onFocus: this.handleOnFocus
     });
   }
 
@@ -349,6 +354,13 @@ class SearchScreen extends Component {
         isSearching: false
       });
     }
+  };
+
+  handleOnFocus = () => {
+    console.log("handleOnFocus called")
+    this.setState({
+      isSearching: true
+    });
   };
 
   updateSearch = search => {
@@ -386,13 +398,22 @@ class SearchScreen extends Component {
           renderTabBar={() => (
             <TabBar
               underlineHeight={3}
-              tabMargin={30}
-              tabBarStyle={{ marginTop: -10, padding: 25, paddingBottom: 0 }}
+              tabMargin={0}
+              tabBarStyle={{
+                marginTop: -10,
+                padding: 25,
+                paddingBottom: 0,
+                borderBottomWidth: 2,
+                borderColor: "blue"
+              }}
               underlineColor="#ff5a5f"
             />
           )}
         >
-          <View tabLabel={{ label: "All Cannabis" }} label="All Cannabis">
+          <View
+            tabLabel={{ label: "      All Cannabis      " }}
+            label="All Cannabis"
+          >
             <View
               style={{
                 margin: 0,
@@ -455,7 +476,10 @@ class SearchScreen extends Component {
             </View>
             <View style={{ height: 0.1, flex: 1 }} />
           </View>
-          <View tabLabel={{ label: "My Cannabis" }} label="My Cannabis" />
+          <View
+            tabLabel={{ label: "        My Cannabis        " }}
+            label="My Cannabis"
+          />
         </ScrollableTabView>
       </View>
     );

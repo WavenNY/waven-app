@@ -10,9 +10,12 @@ class PopularStrains extends Component {
   // Init firebase and props in constructor
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection("strains");
+    this.ref = firebase
+      .firestore()
+      .collection("strains2")
+      .limit(6);
     // Paginate
-    this.ref.limit(10);
+    // this.ref.limit(10);
     this.unsubscribe = null;
     this.state = {
       strains: []
@@ -26,15 +29,15 @@ class PopularStrains extends Component {
 
     // get data
     querySnapshot.forEach(doc => {
-      const { strain_name, type_slug, ratings, main_pic } = doc.data();
+      const { Name, Type, Rating, main_pic } = doc.data();
 
       // save to temp array
       strains.push({
         key: doc.id,
-        strain_name,
-        type_slug,
-        ratings,
-        main_pic
+        strain_name: Name,
+        type_slug: Type,
+        ratings: Rating,
+        main_pic: ""
       });
       // console.log("[+] Strain Data: " + doc.data());
     });
@@ -90,7 +93,7 @@ class PopularStrains extends Component {
                 strainType={items.type_slug}
                 strainRating={items.ratings}
                 strainStars={items.ratings}
-                strainURL={items.main_pic}
+                strainURL={items.main_pic || "https://firebasestorage.googleapis.com/v0/b/waven-backend.appspot.com/o/strain-apollo-13_100x100_c83c-3-28.jpg?alt=media&token=8f9d72f6-1b3a-452c-9f2f-f61d3f21b5fa"}
               />
             ))}
           </ScrollView>
