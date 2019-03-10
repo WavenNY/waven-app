@@ -22,6 +22,7 @@ import Icon from "../components/SvgIcon";
 import StrainCard from "../components/StrainCard";
 import ScrollableTabView from "react-native-scrollable-tab-view";
 import TabBar from "react-native-underline-tabbar";
+import { Constants, Svg, LinearGradient } from "expo";
 
 const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
   /* if there are still results, you can
@@ -374,6 +375,21 @@ class SearchScreen extends Component {
             cancelIcon={<Text>Hi</Text>}
             selectionColor="#fff"
           />
+          {navigation.getParam("clearButton", false) ? (
+            <TouchableOpacity
+              onPress={navigation.getParam("clearSearchText", () => {
+                console.log("clearBtn not implemented");
+              })}
+            >
+              <Icon
+                name="SearchCloseButton"
+                height={16}
+                width={16}
+                fill="#fff"
+                style={{ marginTop: 19, marginLeft: -15 }}
+              />
+            </TouchableOpacity>
+          ) : null}
         </View>
       ),
       headerStyle: {
@@ -427,9 +443,9 @@ class SearchScreen extends Component {
     });
   }
 
-  handleGoBack = ()=>{
-    this.props.navigation.navigate("Explore")
-  }
+  handleGoBack = () => {
+    this.props.navigation.navigate("Explore");
+  };
 
   handleOnKeyButtonDown = ({ nativeEvent: { key: keyValue } }) => {
     // console.log(keyValue);
@@ -452,10 +468,17 @@ class SearchScreen extends Component {
 
   updateSearch = search => {
     console.log("updateSearch function called");
-    this.setState({ search });
-    this.props.navigation.setParams({
-      search: search
-    });
+    console.log("Search lenght:" + search.length);
+    if (search.length <= 0) {
+      this.setState({ uiState: 0, clearButton: false, search: null });
+      this.props.navigation.setParams({ clearButton: false, search: null });
+    } else {
+      this.setState({ search, clearButton: true, uiState: 1 });
+      this.props.navigation.setParams({
+        search: search,
+        clearButton: true
+      });
+    }
   };
 
   render() {
