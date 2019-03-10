@@ -520,10 +520,17 @@ class SearchScreen extends Component {
           tabBarActiveTextColor="#ff5a5f"
           tabBarBackgroundColor="#fff"
           tabBarInactiveTextColor="#717171"
+          activeTabTextStyle={{
+            fontSize: 14,
+            fontFamily: "sf-text",
+            fontWeight: "900",
+            width: "50%"
+          }}
           tabBarTextStyle={{
             fontSize: 14,
             fontFamily: "sf-text",
-            fontWeight: "500"
+            fontWeight: "normal",
+            width: "50%"
           }}
           style={{ margin: 0, height: 40, backgroundColor: "#fff" }}
           renderTabBar={() => (
@@ -535,6 +542,14 @@ class SearchScreen extends Component {
                 padding: 0
               }}
               underlineColor="#ff5a5f"
+              tabStyles={{
+                tab: {
+                  width: 180,
+                  marginLeft: 0,
+                  marginRight: 0,
+                  padding: 0
+                }
+              }}
             />
           )}
         >
