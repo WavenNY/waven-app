@@ -6,7 +6,8 @@ import {
   FlatList,
   Image,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  StatusBar
 } from "react-native";
 import {
   InstantSearch,
@@ -33,7 +34,9 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
 
   if (hits <= 0) return null;
   return (
-    <View style={{ padding: 0, margin: 0 }}>
+    <View
+      style={{ padding: 0, margin: 0, top: 0, left: 0, position: "absolute" }}
+    >
       {/* <Text
         style={{
           fontFamily: "sf-text",
@@ -136,15 +139,61 @@ const HitCardsInfinity = connectInfiniteHits(({ hits, hasMore, refine }) => {
 
   if (hits <= 0) return null;
   return (
-    <View style={{ padding: 0, marginLeft: 20, marginRight: 20 }}>
-      <HitStats />
-
+    <View
+      style={{
+        margin: 0,
+        padding: 0,
+        marginLeft: 20,
+        marginRight: 20,
+        backgroundColor: "#f9faf9"
+      }}
+    >
       <FlatList
         data={hits}
         onEndReached={onEndReached}
         keyExtractor={(item, index) => item.objectID}
         ItemSeparatorComponent={() => (
           <View style={{ borderColor: "#f0f0f0", height: 0.5, flex: 1 }} />
+        )}
+        ListHeaderComponent={() => (
+          <View>
+            <View
+              style={{
+                margin: 0,
+                marginTop: 20,
+                paddingLeft: 67,
+                paddingRight: 67,
+                flex: 1,
+                paddingBottom: 20
+              }}
+            >
+              <TouchableOpacity
+                style={{
+                  paddingTop: 15,
+                  paddingBottom: 15,
+                  backgroundColor: "#fff",
+                  borderRadius: 50,
+                  borderWidth: 1,
+                  borderColor: "#33000000",
+                  height: 50,
+                  width: 225
+                }}
+                activeOpacity={0.5}
+              >
+                <Text
+                  style={{
+                    color: "#ff5a5f",
+                    textAlign: "center",
+                    fontSize: 14,
+                    fontFamily: "sf-text"
+                  }}
+                >
+                  + Add Custom
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <HitStats />
+          </View>
         )}
         ListFooterComponent={() => <View style={{ height: 0.1, flex: 1 }} />}
         renderItem={({ item }) => {
@@ -233,15 +282,30 @@ class SearchScreen extends Component {
       // headerLeft: (
       //   <Icon containerStyle={styles.icon} type="ionicon" name={"md-menu"} />
       // ),
-
+      headerLeft: (
+        <TouchableOpacity
+          onPress={navigation.getParam("goBack", () => {
+            console.log("goBack not implemented");
+          })}
+        >
+          <Icon
+            name="MenuBackIcon"
+            height={20}
+            width={20}
+            fill="#fff"
+            style={{ marginLeft: 15, marginRight: 0 }}
+          />
+        </TouchableOpacity>
+      ),
       headerTitle: (
         <View
           style={{
             flex: 1,
             margin: 0,
             flexDirection: "row",
-            paddingLeft: 35,
-            marginLeft: 30
+            paddingLeft: 5,
+            marginLeft: 5,
+            marginTop: -20
           }}
         >
           <View
@@ -273,8 +337,8 @@ class SearchScreen extends Component {
             onKeyPress={navigation.getParam("onKeyPress", () => {
               console.log("onKeyPress not mounted");
             })}
-            onFocus={navigation.getParam("onFocus", ()=>{
-              console.log("onFocus not mounted")
+            onFocus={navigation.getParam("onFocus", () => {
+              console.log("onFocus not mounted");
             })}
             inputContainerStyle={{
               borderWidth: 0
@@ -306,6 +370,9 @@ class SearchScreen extends Component {
               textAlign: "left",
               paddingLeft: 20
             }}
+            tintColor="#fff"
+            cancelIcon={<Text>Hi</Text>}
+            selectionColor="#fff"
           />
         </View>
       ),
@@ -313,7 +380,19 @@ class SearchScreen extends Component {
         backgroundColor: "#ff5a5f",
         paddingTop: 20,
         paddingBottom: 20,
-        height: 75
+        height: 50,
+        borderBottomWidth: 0,
+        shadowOpacity: 0,
+        shadowOffset: {
+          height: 0
+        },
+        shadowRadius: 0,
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0
+      },
+      headerTitleStyle: {
+        alignSelf: "center"
       }
     };
   };
@@ -325,13 +404,14 @@ class SearchScreen extends Component {
       isSearching: true,
       selectedTab: "all-cannabis",
       updateSearch: () => {},
-
+      uiState: 0
     };
   }
 
   onSubmit = () => {
     this.setState({
-      isSearching: false
+      isSearching: false,
+      uiState: 2
     });
   };
 
@@ -342,8 +422,13 @@ class SearchScreen extends Component {
       updateSearch: this.updateSearch,
       onKeyPress: this.handleOnKeyButtonDown,
       onSubmit: this.onSubmit,
-      onFocus: this.handleOnFocus
+      onFocus: this.handleOnFocus,
+      goBack: this.handleGoBack
     });
+  }
+
+  handleGoBack = ()=>{
+    this.props.navigation.navigate("Explore")
   }
 
   handleOnKeyButtonDown = ({ nativeEvent: { key: keyValue } }) => {
@@ -351,15 +436,17 @@ class SearchScreen extends Component {
     // console.log("onKeyButtonDownPRessed Called !");
     if (keyValue === "Enter") {
       this.setState({
-        isSearching: false
+        isSearching: false,
+        uiState: 2
       });
     }
   };
 
   handleOnFocus = () => {
-    console.log("handleOnFocus called")
+    console.log("handleOnFocus called");
     this.setState({
-      isSearching: true
+      isSearching: true,
+      uiState: 1
     });
   };
 
@@ -372,7 +459,16 @@ class SearchScreen extends Component {
   };
 
   render() {
-    const { search, isSearching } = this.state;
+    const { search, isSearching, uiState } = this.state;
+    stateRenderData = "";
+    if (uiState == 0) {
+      stateRenderData = <Text>First State</Text>;
+    } else if (uiState == 1) {
+      stateRenderData = <HitAutoComplete />;
+    } else if (uiState == 2) {
+      stateRenderData = <HitCardsAutoConplete defaultRefinement={search} />;
+    }
+
     return (
       // <ScrollableTabView
       //   tabBarActiveTextColor="#ff5a5f"
@@ -385,70 +481,30 @@ class SearchScreen extends Component {
       // </ScrollableTabView>
 
       <View style={styles.container}>
+        <StatusBar backgroundColor="#ff5a5f" barStyle="light-content" />
         <ScrollableTabView
           tabBarActiveTextColor="#ff5a5f"
           tabBarBackgroundColor="#fff"
-          tabBarInactiveTextColor="#ff5a5f"
+          tabBarInactiveTextColor="#717171"
           tabBarTextStyle={{
             fontSize: 14,
             fontFamily: "sf-text",
             fontWeight: "500"
           }}
-          style={{ margin: 0, height: 50 }}
+          style={{ margin: 0, height: 40, backgroundColor: "#fff" }}
           renderTabBar={() => (
             <TabBar
               underlineHeight={3}
               tabMargin={0}
               tabBarStyle={{
-                marginTop: -10,
-                padding: 25,
-                paddingBottom: 0,
-                borderBottomWidth: 2,
-                borderColor: "blue"
+                margin: 0,
+                padding: 0
               }}
               underlineColor="#ff5a5f"
             />
           )}
         >
-          <View
-            tabLabel={{ label: "      All Cannabis      " }}
-            label="All Cannabis"
-          >
-            <View
-              style={{
-                margin: 0,
-                marginTop: 30,
-                paddingLeft: 67,
-                paddingRight: 67,
-                flex: 1,
-                paddingBottom: 70
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  paddingTop: 15,
-                  paddingBottom: 15,
-                  backgroundColor: "#fff",
-                  borderRadius: 50,
-                  borderWidth: 1,
-                  borderColor: "#33000000",
-                  height: 50,
-                  width: 225
-                }}
-                activeOpacity={0.5}
-              >
-                <Text
-                  style={{
-                    color: "#ff5a5f",
-                    textAlign: "center",
-                    fontSize: 14,
-                    fontFamily: "sf-text"
-                  }}
-                >
-                  + Add Custom
-                </Text>
-              </TouchableOpacity>
-            </View>
+          <View tabLabel={{ label: "All Cannabis" }} label="All Cannabis">
             <View>
               <InstantSearch
                 appId="LVTC40CNHH"
@@ -467,19 +523,12 @@ class SearchScreen extends Component {
                     searchText={search}
                   />
                 </View>
-                {isSearching ? (
-                  <HitAutoComplete />
-                ) : (
-                  <HitCardsAutoConplete defaultRefinement={search} />
-                )}
+                {stateRenderData}
               </InstantSearch>
             </View>
             <View style={{ height: 0.1, flex: 1 }} />
           </View>
-          <View
-            tabLabel={{ label: "        My Cannabis        " }}
-            label="My Cannabis"
-          />
+          <View tabLabel={{ label: "My Cannabis" }} label="My Cannabis" />
         </ScrollableTabView>
       </View>
     );
@@ -492,6 +541,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 0,
     margin: 0,
-    marginBottom: 10
+    marginBottom: 10,
+    backgroundColor: "#f9faf9"
   }
 });
