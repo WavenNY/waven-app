@@ -376,19 +376,22 @@ class SearchScreen extends Component {
             selectionColor="#fff"
           />
           {navigation.getParam("clearButton", false) ? (
-            <TouchableOpacity
-              onPress={navigation.getParam("clearSearchText", () => {
-                console.log("clearBtn not implemented");
-              })}
-            >
-              <Icon
-                name="SearchCloseButton"
-                height={16}
-                width={16}
-                fill="#fff"
-                style={{ marginTop: 19, marginLeft: -15 }}
-              />
-            </TouchableOpacity>
+            <View>
+              <TouchableOpacity
+                style={{ zIndex: 1, height: 40, width: 40 }}
+                onPress={navigation.getParam("clearSearchText", () => {
+                  console.log("clearBtn not implemented");
+                })}
+              >
+                <Icon
+                  name="SearchCloseButton"
+                  height={16}
+                  width={16}
+                  fill="#fff"
+                  style={{ marginTop: 19, marginLeft: -15 }}
+                />
+              </TouchableOpacity>
+            </View>
           ) : null}
         </View>
       ),
@@ -439,9 +442,17 @@ class SearchScreen extends Component {
       onKeyPress: this.handleOnKeyButtonDown,
       onSubmit: this.onSubmit,
       onFocus: this.handleOnFocus,
-      goBack: this.handleGoBack
+      goBack: this.handleGoBack,
+      clearSearchText: this.handleClearText
     });
   }
+
+  handleClearText = () => {
+    console.log("fn handleClearText called");
+    this.setState({ search: "" });
+    this.props.navigation.setParams({ search: "" });
+    this.updateSearch("");
+  };
 
   handleGoBack = () => {
     this.props.navigation.navigate("Explore");
