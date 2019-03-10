@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
 import Icon from "../components/SvgIcon";
 import { Constants, Svg } from "expo";
 import algoliasearch from "algoliasearch";
@@ -332,9 +332,99 @@ class MyVibesScreen extends Component {
   };
   componentDidMount() {}
   render() {
+    const dataList = [
+      { id: 1, name: "Lorem Lipsum", type: "Strain, Indica" },
+      { id: 2, name: "Lorem Lipsum", type: "Strain, Indica" },
+      { id: 3, name: "Lorem Lipsum", type: "Strain, Indica" },
+      { id: 4, name: "Lorem Lipsum", type: "Strain, Indica" },
+      { id: 5, name: "Lorem Lipsum", type: "Strain, Indica" }
+    ];
     return (
       <View style={[styles.container, { paddingTop: 20 }]}>
-       <Text>My Vibes Screen</Text>
+        <Text>Example flat list</Text>
+        <FlatList
+          data={dataList}
+          keyExtractor={(item, index) => index}
+          ListHeaderComponent={() => (
+            <Text
+              style={{
+                fontFamily: "sf-text",
+                fontSize: 14,
+                fontWeight: "bold",
+                color: "#212121",
+                backgroundColor: "#fff",
+                paddingVertical: 20,
+                paddingHorizontal: 20
+              }}
+            >
+              Recent Activity
+            </Text>
+          )}
+          ItemSeparatorComponent={() => (
+            <View style={{ borderColor: "#f0f0f0", height: 0.5, flex: 1 }} />
+          )}
+          renderItem={({ item }) => {
+            return (
+              <View
+                style={{
+                  margin: 0,
+                  padding: 0,
+                  paddingHorizontal: 20,
+                  flex: 1,
+                  backgroundColor: "#fff",
+                  flexDirection: "row"
+                }}
+              >
+                <View
+                  style={{
+                    margin: 0,
+                    paddingVertical: 14,
+                    flex: 1,
+                    alignSelf: "flex-start",
+                    alignItems: "flex-start",
+                  
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: "sf-text",
+                      fontSize: 14,
+
+                      color: "#212121",
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    {item.name}
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: "sf-text",
+                      fontSize: 12,
+
+                      color: "#717171",
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    {item.type}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    margin: 0,
+                    marginTop: -15,
+                    paddnig: 0,
+                    flex: 1,
+                    alignSelf: "center",
+                    alignItems: "flex-end",
+                    
+                  }}
+                >
+                  <Icon name="Pen" height={16} width={16} fill="#717171" />
+                </View>
+              </View>
+            );
+          }}
+        />
       </View>
     );
   }
@@ -344,7 +434,7 @@ export default MyVibesScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+
+    margin: 0
   }
 });

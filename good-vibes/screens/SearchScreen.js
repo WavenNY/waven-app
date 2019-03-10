@@ -471,18 +471,20 @@ class SearchScreen extends Component {
 
   handleOnFocus = () => {
     console.log("handleOnFocus called");
-    this.setState({
-      isSearching: true,
-      uiState: 1
-    });
+    if (this.state.search.length) {
+      this.setState({
+        isSearching: true,
+        uiState: 1
+      });
+    }
   };
 
   updateSearch = search => {
     console.log("updateSearch function called");
     console.log("Search lenght:" + search.length);
     if (search.length <= 0) {
-      this.setState({ uiState: 0, clearButton: false, search: null });
-      this.props.navigation.setParams({ clearButton: false, search: null });
+      this.setState({ uiState: 0, clearButton: false, search: "" });
+      this.props.navigation.setParams({ clearButton: false, search: "" });
     } else {
       this.setState({ search, clearButton: true, uiState: 1 });
       this.props.navigation.setParams({
@@ -495,8 +497,97 @@ class SearchScreen extends Component {
   render() {
     const { search, isSearching, uiState } = this.state;
     stateRenderData = "";
+    const dataList = [
+      { id: 1, name: "Lorem Lipsum", type: "Strain, Indica" },
+      { id: 2, name: "Lorem Lipsum", type: "Strain, Indica" },
+      { id: 3, name: "Lorem Lipsum", type: "Strain, Indica" },
+      { id: 4, name: "Lorem Lipsum", type: "Strain, Indica" },
+      { id: 5, name: "Lorem Lipsum", type: "Strain, Indica" }
+    ];
     if (uiState == 0) {
-      stateRenderData = <Text>First State</Text>;
+      stateRenderData = (
+        <FlatList
+          data={dataList}
+          keyExtractor={(item, index) => index}
+          ListHeaderComponent={() => (
+            <Text
+              style={{
+                fontFamily: "sf-text",
+                fontSize: 14,
+                fontWeight: "bold",
+                color: "#212121",
+                backgroundColor: "#fff",
+                paddingVertical: 20,
+                paddingHorizontal: 20
+              }}
+            >
+              Recent Activity
+            </Text>
+          )}
+          ItemSeparatorComponent={() => (
+            <View style={{ borderColor: "#f0f0f0", height: 0.5, flex: 1 }} />
+          )}
+          renderItem={({ item }) => {
+            return (
+              <View
+                style={{
+                  margin: 0,
+                  padding: 0,
+                  paddingHorizontal: 20,
+                  flex: 1,
+                  backgroundColor: "#fff",
+                  flexDirection: "row"
+                }}
+              >
+                <View
+                  style={{
+                    margin: 0,
+                    paddingVertical: 14,
+                    flex: 1,
+                    alignSelf: "flex-start",
+                    alignItems: "flex-start"
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontFamily: "sf-text",
+                      fontSize: 14,
+
+                      color: "#212121",
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    {item.name}
+                  </Text>
+                  <Text
+                    style={{
+                      fontFamily: "sf-text",
+                      fontSize: 12,
+
+                      color: "#717171",
+                      backgroundColor: "#fff"
+                    }}
+                  >
+                    {item.type}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    margin: 0,
+                    marginTop: -15,
+                    paddnig: 0,
+                    flex: 1,
+                    alignSelf: "center",
+                    alignItems: "flex-end"
+                  }}
+                >
+                  <Icon name="Pen" height={16} width={16} fill="#717171" />
+                </View>
+              </View>
+            );
+          }}
+        />
+      );
     } else if (uiState == 1) {
       stateRenderData = <HitAutoComplete />;
     } else if (uiState == 2) {
