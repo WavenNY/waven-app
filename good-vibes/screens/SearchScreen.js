@@ -248,7 +248,7 @@ class SearchScreen extends Component {
       // headerLeft: (
       //   <Icon containerStyle={styles.icon} type="ionicon" name={"md-menu"} />
       // ),
-      tabBarVisible :false,
+      tabBarVisible: false,
       headerLeft: (
         <TouchableOpacity
           onPress={navigation.getParam("goBack", () => {
@@ -666,19 +666,17 @@ class SearchScreen extends Component {
         <View
           style={{
             margin: 0,
-            bottom: 0,
-            flex: 0.1,
-            marginTop: 2,
-            height: 30
+            height: 40,
+            paddingBottom: 12,
+            paddingTop:12,
+            backgroundColor:"#fff"
           }}
         >
           <TouchableOpacity
             style={{
               backgroundColor: "#fff",
-              borderWidth: 1,
               borderColor: "#33000000",
               flex: 1,
-              paddingVertical: 12
             }}
             activeOpacity={0.5}
           >
