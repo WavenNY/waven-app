@@ -158,41 +158,6 @@ const HitCardsInfinity = connectInfiniteHits(({ hits, hasMore, refine }) => {
         )}
         ListHeaderComponent={() => (
           <View>
-            <View
-              style={{
-                margin: 0,
-                marginTop: 20,
-                paddingLeft: 67,
-                paddingRight: 67,
-                flex: 1,
-                paddingBottom: 20
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  paddingTop: 15,
-                  paddingBottom: 15,
-                  backgroundColor: "#fff",
-                  borderRadius: 50,
-                  borderWidth: 1,
-                  borderColor: "#33000000",
-                  height: 50,
-                  width: 225
-                }}
-                activeOpacity={0.5}
-              >
-                <Text
-                  style={{
-                    color: "#ff5a5f",
-                    textAlign: "center",
-                    fontSize: 14,
-                    fontFamily: "sf-text"
-                  }}
-                >
-                  + Add Custom
-                </Text>
-              </TouchableOpacity>
-            </View>
             <HitStats />
           </View>
         )}
@@ -376,9 +341,19 @@ class SearchScreen extends Component {
             selectionColor="#fff"
           />
           {navigation.getParam("clearButton", false) ? (
-            <View>
+            <View
+              style={{
+                marginTop: 18,
+                marginLeft: -17,
+                height: 25,
+                width: 25
+              }}
+            >
               <TouchableOpacity
-                style={{ zIndex: 1, height: 40, width: 40 }}
+                style={{
+                  zIndex: 1,
+                  flex: 1
+                }}
                 onPress={navigation.getParam("clearSearchText", () => {
                   console.log("clearBtn not implemented");
                 })}
@@ -388,7 +363,7 @@ class SearchScreen extends Component {
                   height={16}
                   width={16}
                   fill="#fff"
-                  style={{ marginTop: 19, marginLeft: -15 }}
+                  style={{}}
                 />
               </TouchableOpacity>
             </View>
@@ -518,14 +493,23 @@ class SearchScreen extends Component {
                 color: "#212121",
                 backgroundColor: "#fff",
                 paddingVertical: 20,
-                paddingHorizontal: 20
+                paddingHorizontal: 20,
+                borderBottomColor: "#f0f0f0",
+                borderBottomWidth: 1
               }}
             >
               Recent Activity
             </Text>
           )}
           ItemSeparatorComponent={() => (
-            <View style={{ borderColor: "#f0f0f0", height: 0.5, flex: 1 }} />
+            <View
+              style={{
+                borderColor: "#f0f0f0",
+                height: 2,
+                flex: 1,
+                borderWidth: 1
+              }}
+            />
           )}
           renderItem={({ item }) => {
             return (
@@ -623,7 +607,15 @@ class SearchScreen extends Component {
             fontWeight: "normal",
             width: "50%"
           }}
-          style={{ margin: 0, height: 40, backgroundColor: "#fff" }}
+          style={{
+            marginTop: 0,
+            backgroundColor: "#fff",
+            flex: 1,
+            shadowColor: "#19000000",
+            shadowRadius: 3,
+            elevation: 1,
+            shadowOpacity: 0.2
+          }}
           renderTabBar={() => (
             <TabBar
               underlineHeight={3}
@@ -670,6 +662,37 @@ class SearchScreen extends Component {
           </View>
           <View tabLabel={{ label: "My Cannabis" }} label="My Cannabis" />
         </ScrollableTabView>
+        <View
+          style={{
+            margin: 0,
+            bottom: 0,
+            flex: 0.1,
+            marginTop: 2,
+            height: 30
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#fff",
+              borderWidth: 1,
+              borderColor: "#33000000",
+              flex: 1,
+              paddingVertical: 12
+            }}
+            activeOpacity={0.5}
+          >
+            <Text
+              style={{
+                color: "#ff5a5f",
+                textAlign: "center",
+                fontSize: 14,
+                fontFamily: "sf-text"
+              }}
+            >
+              + Add Custom
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -681,7 +704,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 0,
     margin: 0,
-    marginBottom: 10,
+
     backgroundColor: "#f9faf9"
   }
 });
