@@ -51,6 +51,14 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
       </Text> */}
 
       <FlatList
+        style={{
+          shadowColor: "#19000000",
+          shadowRadius: 3,
+          elevation: 1,
+          shadowOpacity: 0.2,
+          paddingTop: 5,
+          paddingBottom: 5
+        }}
         data={hits}
         onEndReached={onEndReached}
         keyExtractor={(item, index) => item.objectID}
@@ -144,12 +152,19 @@ const HitCardsInfinity = connectInfiniteHits(({ hits, hasMore, refine }) => {
       style={{
         margin: 0,
         padding: 0,
-        marginLeft: 20,
-        marginRight: 20,
+        paddingHorizontal: 20,
         backgroundColor: "#f9faf9"
       }}
     >
       <FlatList
+        style={{
+          shadowColor: "#19000000",
+          shadowRadius: 3,
+          elevation: 1,
+          shadowOpacity: 0.2,
+          paddingTop: 5,
+          paddingBottom: 5
+        }}
         data={hits}
         onEndReached={onEndReached}
         keyExtractor={(item, index) => item.objectID}
@@ -483,6 +498,14 @@ class SearchScreen extends Component {
     if (uiState == 0) {
       stateRenderData = (
         <FlatList
+          style={{
+            shadowColor: "#19000000",
+            shadowRadius: 3,
+            elevation: 1,
+            shadowOpacity: 0.2,
+            paddingTop: 5,
+            paddingBottom: 5
+          }}
           data={dataList}
           keyExtractor={(item, index) => index}
           ListHeaderComponent={() => (
@@ -609,7 +632,7 @@ class SearchScreen extends Component {
             width: "50%"
           }}
           style={{
-            marginTop: 0,
+            margin: 0,
             backgroundColor: "#fff",
             flex: 1,
             shadowColor: "#19000000",
@@ -668,15 +691,15 @@ class SearchScreen extends Component {
             margin: 0,
             height: 40,
             paddingBottom: 12,
-            paddingTop:12,
-            backgroundColor:"#fff"
+            paddingTop: 12,
+            backgroundColor: "#fff"
           }}
         >
           <TouchableOpacity
             style={{
               backgroundColor: "#fff",
               borderColor: "#33000000",
-              flex: 1,
+              flex: 1
             }}
             activeOpacity={0.5}
           >
