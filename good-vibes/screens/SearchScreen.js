@@ -248,6 +248,7 @@ class SearchScreen extends Component {
       // headerLeft: (
       //   <Icon containerStyle={styles.icon} type="ionicon" name={"md-menu"} />
       // ),
+      tabBarVisible :false,
       headerLeft: (
         <TouchableOpacity
           onPress={navigation.getParam("goBack", () => {

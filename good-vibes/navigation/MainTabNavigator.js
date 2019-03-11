@@ -28,6 +28,7 @@ const SearchStack = createStackNavigator({
 // Search screen stack navigation options
 SearchStack.navigationOptions = {
   tabBarLabel: "Search",
+  tabBarVisible: false,
   tabBarIcon: ({ focused }) => {
     if (focused) {
       return (
@@ -65,6 +66,7 @@ const MyVibeStack = createStackNavigator({
 // MyvVibe screen stack navigation options
 MyVibeStack.navigationOptions = {
   tabBarLabel: "My Vibes",
+
   tabBarIcon: ({ focused }) => {
     if (focused) {
       return (
