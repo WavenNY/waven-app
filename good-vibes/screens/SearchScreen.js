@@ -390,7 +390,7 @@ class SearchScreen extends Component {
         backgroundColor: "#ff5a5f",
         paddingTop: 20,
         paddingBottom: 20,
-        height: 50,
+        height: 40,
         borderBottomWidth: 0,
         shadowOpacity: 0,
         shadowOffset: {
@@ -636,29 +636,42 @@ class SearchScreen extends Component {
             backgroundColor: "#fff",
             flex: 1,
             shadowColor: "#19000000",
-            shadowRadius: 3,
-            elevation: 1,
-            shadowOpacity: 0.2
+            shadowRadius: 7,
+            elevation: 3,
+            shadowOpacity: 0.1
           }}
-          renderTabBar={() => (
-            <TabBar
-              underlineHeight={3}
-              tabMargin={0}
-              tabBarStyle={{
-                margin: 0,
-                padding: 0
-              }}
-              underlineColor="#ff5a5f"
-              tabStyles={{
-                tab: {
-                  width: 180,
-                  marginLeft: 0,
-                  marginRight: 0,
-                  padding: 0
-                }
-              }}
-            />
-          )}
+          renderTabBar={() => {
+            const { uiState } = this.state;
+            if (uiState == 1) {
+              return <View />;
+            } else {
+              return (
+                <TabBar
+                  underlineHeight={3}
+                  tabMargin={0}
+                  tabBarStyle={{
+                    marginTop: 0,
+                    padding: 0,
+                    shadowColor: "#19000000",
+                    shadowRadius: 7,
+                    elevation: 3,
+                    shadowOpacity: 0.1,
+
+                    paddingTop: 10
+                  }}
+                  underlineColor="#ff5a5f"
+                  tabStyles={{
+                    tab: {
+                      width: 180,
+                      marginLeft: 0,
+                      marginRight: 0,
+                      padding: 0
+                    }
+                  }}
+                />
+              );
+            }
+          }}
         >
           <View tabLabel={{ label: "All Cannabis" }} label="All Cannabis">
             <View>
