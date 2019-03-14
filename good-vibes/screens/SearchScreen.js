@@ -58,7 +58,9 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
           elevation: 1,
           shadowOpacity: 0.2,
           paddingTop: 5,
-          paddingBottom: 5
+          paddingBottom: 5,
+          margin: 0,
+          width: 360
         }}
         data={hits}
         onEndReached={onEndReached}
@@ -529,7 +531,8 @@ class SearchScreen extends Component {
             elevation: 1,
             shadowOpacity: 0.2,
             paddingTop: 5,
-            paddingBottom: 5
+            paddingBottom: 5,
+            margin: 0
           }}
           data={dataList}
           keyExtractor={(item, index) => index}
@@ -614,7 +617,7 @@ class SearchScreen extends Component {
                     alignItems: "flex-end"
                   }}
                 >
-                  <Icon name="Pen" height={16} width={16} fill="#717171" />
+                  <Icon name="Pen2" height={16} width={16} fill="#717171" />
                 </View>
               </View>
             );
@@ -672,7 +675,7 @@ class SearchScreen extends Component {
               return (
                 <TabBar
                   underlineHeight={3}
-                  tabMargin={-2}
+                  tabMargin={-1}
                   tabBarStyle={{
                     marginTop: 0,
                     marginRight: 0,
@@ -700,7 +703,7 @@ class SearchScreen extends Component {
           }}
         >
           <View tabLabel={{ label: "All Cannabis" }} label="All Cannabis">
-            <View style={{ flex: 1, margin: 0, paddding: 0 }}>
+            <View>
               <InstantSearch
                 appId="LVTC40CNHH"
                 apiKey="7d8b604b303f98f330876f9b177d1f73"
