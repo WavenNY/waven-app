@@ -53,6 +53,7 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
       <FlatList
         style={{
           shadowColor: "#19000000",
+          flex: 1,
           shadowRadius: 3,
           elevation: 1,
           shadowOpacity: 0.2,
@@ -63,12 +64,19 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
         onEndReached={onEndReached}
         keyExtractor={(item, index) => item.objectID}
         ItemSeparatorComponent={() => (
-          <View style={{ borderColor: "#f0f0f0", height: 0.5, flex: 1 }} />
+          <View
+            style={{
+              borderColor: "#f0f0f0",
+              height: 1,
+              flex: 1,
+              borderBottomWidth: 1
+            }}
+          />
         )}
         ListFooterComponent={() => <View style={{ height: 0.1, flex: 1 }} />}
         renderItem={({ item }) => {
           return (
-            <View style={{ margin: 0, padding: 0 }}>
+            <View style={{ margin: 0, padding: 0, flex: 1 }}>
               {/* <StrainCard
                 title={item.ProductName || item.Name}
                 type={item.category_name || item.Type}
@@ -91,7 +99,8 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
                   paddingLeft: 40,
                   margin: 0,
                   paddingTop: 14,
-                  paddingBottom: 14
+                  paddingBottom: 14,
+                  flex: 1
                 }}
               >
                 <Text
@@ -100,7 +109,8 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
                     color: "#212121",
                     textAlign: "left",
                     fontFamily: "sf-text",
-                    fontWeight: "bold"
+                    fontWeight: "bold",
+                    flex: 1
                   }}
                 >
                   {item.ProductName || item.Name}
@@ -110,7 +120,8 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
                     fontSize: 12,
                     color: "#717171",
                     textAlign: "left",
-                    fontFamily: "sf-text"
+                    fontFamily: "sf-text",
+                    flex: 1
                   }}
                 >
                   Strain, {item.category_name || item.Type}
@@ -125,17 +136,31 @@ const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
 });
 
 const HitStats = connectStats(({ nbHits }) => (
-  <Text
-    style={{
-      fontFamily: "sf-text",
-      fontSize: 16,
-      color: "#717171",
-      marginBottom: 30,
-      marginTop: 20
-    }}
-  >
-    {nbHits} Search Results
-  </Text>
+  <View style={{ flex: 1, flexDirection: "row" }}>
+    <Text
+      style={{
+        fontFamily: "sf-text",
+        fontSize: 22,
+        color: "#717171",
+        marginBottom: 30,
+        marginTop: 20
+      }}
+    >
+      {nbHits}
+    </Text>
+    <Text
+      style={{
+        fontFamily: "sf-text",
+        fontSize: 14,
+        color: "#717171",
+        marginBottom: 30,
+        marginTop: 25,
+        marginLeft: 5
+      }}
+    >
+      Search Results
+    </Text>
+  </View>
 ));
 const HitCardsInfinity = connectInfiniteHits(({ hits, hasMore, refine }) => {
   /* if there are still results, you can
@@ -513,7 +538,7 @@ class SearchScreen extends Component {
               style={{
                 fontFamily: "sf-text",
                 fontSize: 14,
-                fontWeight: "bold",
+                fontWeight: "500",
                 color: "#212121",
                 backgroundColor: "#fff",
                 paddingVertical: 20,
@@ -529,9 +554,9 @@ class SearchScreen extends Component {
             <View
               style={{
                 borderColor: "#f0f0f0",
-                height: 2,
+                height: 1,
                 flex: 1,
-                borderWidth: 1
+                borderBottomWidth: 1
               }}
             />
           )}
@@ -616,29 +641,28 @@ class SearchScreen extends Component {
       <View style={styles.container}>
         <StatusBar backgroundColor="#ff5a5f" barStyle="light-content" />
         <ScrollableTabView
+          locked={true}
           tabBarActiveTextColor="#ff5a5f"
           tabBarBackgroundColor="#fff"
           tabBarInactiveTextColor="#717171"
           activeTabTextStyle={{
             fontSize: 14,
             fontFamily: "sf-text",
-            fontWeight: "900",
-            width: "50%"
+            fontWeight: "900"
           }}
           tabBarTextStyle={{
             fontSize: 14,
             fontFamily: "sf-text",
-            fontWeight: "normal",
-            width: "50%"
+            fontWeight: "normal"
           }}
           style={{
             margin: 0,
             backgroundColor: "#fff",
             flex: 1,
             shadowColor: "#19000000",
-            shadowRadius: 7,
-            elevation: 3,
-            shadowOpacity: 0.1
+            shadowRadius: 3,
+            elevation: 7,
+            shadowOpacity: 1
           }}
           renderTabBar={() => {
             const { uiState } = this.state;
@@ -653,10 +677,9 @@ class SearchScreen extends Component {
                     marginTop: 0,
                     padding: 0,
                     shadowColor: "#19000000",
-                    shadowRadius: 7,
-                    elevation: 3,
-                    shadowOpacity: 0.1,
-
+                    shadowRadius: 3,
+                    elevation: 7,
+                    shadowOpacity: 1,
                     paddingTop: 10
                   }}
                   underlineColor="#ff5a5f"
@@ -665,7 +688,9 @@ class SearchScreen extends Component {
                       width: 180,
                       marginLeft: 0,
                       marginRight: 0,
-                      padding: 0
+                      padding: 0,
+                      borderColor: "blue",
+                      borderWidth: 2
                     }
                   }}
                 />
