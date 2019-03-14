@@ -672,9 +672,10 @@ class SearchScreen extends Component {
               return (
                 <TabBar
                   underlineHeight={3}
-                  tabMargin={0}
+                  tabMargin={-2}
                   tabBarStyle={{
                     marginTop: 0,
+                    marginRight: 0,
                     padding: 0,
                     shadowColor: "#19000000",
                     shadowRadius: 3,
@@ -689,8 +690,8 @@ class SearchScreen extends Component {
                       marginLeft: 0,
                       marginRight: 0,
                       padding: 0,
-                      borderColor: "blue",
-                      borderWidth: 2
+
+                      alignItems: "stretch"
                     }
                   }}
                 />
@@ -699,7 +700,7 @@ class SearchScreen extends Component {
           }}
         >
           <View tabLabel={{ label: "All Cannabis" }} label="All Cannabis">
-            <View>
+            <View style={{ flex: 1, margin: 0, paddding: 0 }}>
               <InstantSearch
                 appId="LVTC40CNHH"
                 apiKey="7d8b604b303f98f330876f9b177d1f73"
