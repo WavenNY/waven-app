@@ -21,6 +21,7 @@ import MedicalScreen from "../screens/MedicalScreen";
 import GoodForScreen from "../screens/GoodForScreen";
 import FlavorsScreen from "../screens/FlavorsScreen";
 import ReviewScreen from "../screens/ReviewScreen";
+import StrainInfoScreen from "../screens/StrainInfoScreen";
 /**
  * setup Stack navigatos and thier navigation options
  */
@@ -71,7 +72,8 @@ const MyVibeStack = createStackNavigator({
   Medical:MedicalScreen,
   GoodFor:GoodForScreen,
   Flavors:FlavorsScreen,
-  Review:ReviewScreen
+  Review:ReviewScreen,
+  StrainInfo:StrainInfoScreen
 });
 
 // MyvVibe screen stack navigation options

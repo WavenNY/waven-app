@@ -38,30 +38,30 @@ export default class ReviewScreen extends Component {
       // <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
 
       <View style={styles.container}>
-        <View style={{backgroundColor:'rgb(255,88,98)',width:Dimensions.get('window').width,height:71,flexDirection:"row"}}>
-          <Text style={{height:20,marginLeft:123,textAlign:'center',marginTop:36,color:'white',fontSize:17}}>Review</Text>
+        <View style={{backgroundColor:'rgb(255,88,98)',width:Dimensions.get('window').width,height:71,alignItems:'center'}}>
+          <Text style={{height:20,marginTop:36,color:'white',fontSize:17}}>Review</Text>
        </View> 
-      
-      <TextInput style={styles.input}
+      <View style={{marginLeft:20,marginTop:220,width:320,height:158,marginRight:20,backgroundColor:'white'}}>
+        <TextInput style={styles.input}
                     autoCapitalize="none"
                     //onChangeText={(email) => this.setState({ email })}
                    // onSubmitEditing={() => this.passwordInput.focus()}
                     autoCorrect={false}
                     keyboardType='email-address'
-                    returnKeyType="next"
+                    returnKeyType="done"
                     placeholder='Type anything you like'
                     underlineColorAndroid='rgba(0,0,0,0)'
                     multiline={true}
                   />
-        
+        </View>
       
       
-      <View style={{height:75,backgroundColor:"white",shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5,flexDirection:'row'}}>
-      <Text  style={{marginTop:30,marginLeft:50,width:46,height:16,color:'#717171',}}>Cancel</Text> 
-
-          <Text  style={{textAlign:'center',fontSize:14,color:'red',marginLeft:240/2,marginRight:20,width:240 ,borderWidth:1,borderColor:'red',shadowColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Add</Text>
+      <View style={{height:75,bottom:0,position:'absolute',backgroundColor:"white",shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5,flexDirection:'row'}}>
+        <Text  style={{marginTop:30,marginLeft:50,width:46,height:16,color:'#717171',}}>Cancel</Text> 
+        <Text  style={{textAlign:'center',fontSize:14,color:'red',marginLeft:50,marginRight:20,width:194 ,borderWidth:1,borderColor:'red',shadowColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Add</Text>
             
         </View>
+       
    
       </View>
 
@@ -87,14 +87,12 @@ buttonText: {
 input: {
     height: 158,
     color: '#717171',
-    margin: 20,
-    borderRadius: 25,
-    borderColor: 'rgba(206,206,206,1.0)',
-    textAlign: 'center',
-    marginLeft: 20,
-    marginRight: 20,
-
+    marginLeft:20,
+    marginRight:20,
+    textAlign: 'left',
     fontSize: 14,
-    fontFamily: 'sf-text'
+    fontFamily: 'sf-text',
+    backgroundColor:'white',
+    lineHeight:10
   },
 });

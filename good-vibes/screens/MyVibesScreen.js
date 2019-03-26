@@ -78,7 +78,8 @@ class MyVibesScreen extends Component {
   }
 
   moveToStrainInfoScreen=()=>{
-
+    const {navigate} = this.props.navigation;
+    navigate('StrainInfo')
   }
 
   moveToReviewScreen=()=>{
