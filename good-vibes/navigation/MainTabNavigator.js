@@ -15,7 +15,12 @@ import ExploreScreen from "../screens/ExploreScreen";
 import MyVibesScreen from "../screens/MyVibesScreen";
 import SearchScreen from "../screens/SearchScreen";
 import CategoryScreen from "../screens/CategoryScreen";
-
+import FormStatesScreen from "../screens/FormStatesScreen";
+import EffectsScreen from "../screens/EffectsScreen";
+import MedicalScreen from "../screens/MedicalScreen";
+import GoodForScreen from "../screens/GoodForScreen";
+import FlavorsScreen from "../screens/FlavorsScreen";
+import ReviewScreen from "../screens/ReviewScreen";
 /**
  * setup Stack navigatos and thier navigation options
  */
@@ -23,6 +28,7 @@ import CategoryScreen from "../screens/CategoryScreen";
 // Search screen stack navigator
 const SearchStack = createStackNavigator({
   Search: SearchScreen
+  
 });
 
 // Search screen stack navigation options
@@ -59,7 +65,13 @@ SearchStack.navigationOptions = {
 
 // MyVibe screen stack navigator
 const MyVibeStack = createStackNavigator({
-  MyVibes: MyVibesScreen
+  MyVibes: MyVibesScreen,
+  FormStates:FormStatesScreen,
+  Effects:EffectsScreen,
+  Medical:MedicalScreen,
+  GoodFor:GoodForScreen,
+  Flavors:FlavorsScreen,
+  Review:ReviewScreen
 });
 
 // MyvVibe screen stack navigation options
