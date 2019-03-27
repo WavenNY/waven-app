@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text,TextInput, StyleSheet ,ScrollView,Dimensions,TouchableOpacity} from "react-native";
+import { View, Text,TextInput, StyleSheet ,Keyboard,Dimensions,TouchableOpacity} from "react-native";
 import Icon from "../components/SvgIcon";
 let {width} = Dimensions.get('window').width;
  
@@ -12,26 +12,15 @@ export default class ReviewScreen extends Component {
     };
  
 
-  constructor(props)
-  {
-    super(props)
-    this.state={
-        isActive:true,
-        
-          
-    }
-  }
-
-
-  
-
-  
-   
-  
-    componentDidMount()
-    {
+    constructor(props){
+      super(props)
+      this.state ={
+              behavior: 'position',
+      }
+      }
       
-    }
+    
+  
 
   render() {
     return (
@@ -41,23 +30,26 @@ export default class ReviewScreen extends Component {
         <View style={{backgroundColor:'rgb(255,88,98)',width:Dimensions.get('window').width,height:71,alignItems:'center'}}>
           <Text style={{height:20,marginTop:36,color:'white',fontSize:17}}>Review</Text>
        </View> 
-      <View style={{marginLeft:20,marginTop:220,width:320,height:158,marginRight:20,backgroundColor:'white'}}>
+     
+     
+      <View style={{marginLeft:20,marginTop:220,height:158,marginRight:20,backgroundColor:'white'}}>
         <TextInput style={styles.input}
                     autoCapitalize="none"
-                    //onChangeText={(email) => this.setState({ email })}
-                   // onSubmitEditing={() => this.passwordInput.focus()}
                     autoCorrect={false}
                     keyboardType='email-address'
-                    returnKeyType="done"
+                    returnKeyType="default"
                     placeholder='Type anything you like'
                     underlineColorAndroid='rgba(0,0,0,0)'
                     multiline={true}
+                    blurOnSubmit={true}
+                    onSubmitEditing={()=>{Keyboard.dismiss()}}
+                   
                   />
         </View>
       
       
-      <View style={{height:75,bottom:0,position:'absolute',backgroundColor:"white",shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5,flexDirection:'row'}}>
-        <Text  style={{marginTop:30,marginLeft:50,width:46,height:16,color:'#717171',}}>Cancel</Text> 
+      <View style={{height:75,width:Dimensions.get('window').width,bottom:0,position:'absolute',backgroundColor:"white",shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5,flexDirection:'row'}}>
+        <Text  style={{marginTop:30,marginLeft:65,width:46,height:16,color:'#717171',}}>Cancel</Text> 
         <Text  style={{textAlign:'center',fontSize:14,color:'red',marginLeft:50,marginRight:20,width:194 ,borderWidth:1,borderColor:'red',shadowColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Add</Text>
             
         </View>
@@ -86,13 +78,15 @@ buttonText: {
 },
 input: {
     height: 158,
+    paddingTop:10,
+    backgroundColor:'white',
+    textAlignVertical: "top",
     color: '#717171',
     marginLeft:20,
     marginRight:20,
     textAlign: 'left',
     fontSize: 14,
     fontFamily: 'sf-text',
-    backgroundColor:'white',
     lineHeight:10
   },
 });
