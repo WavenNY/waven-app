@@ -129,18 +129,18 @@ class FormStatesScreen extends Component {
              </TouchableOpacity>
          </View>
       <View style={{backgroundColor:"white",width:Dimensions.get('window').width,height:120,shadowColor:'gray',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5}}>
-        <Text style={{fontSize:18,height:20,marginLeft:20,marginTop:46}}>Blue Dream</Text>
-        <Text style={{fontSize:12,height:14,marginLeft:20}}>Indica</Text>
+        <Text style={{fontSize:18,height:20,marginLeft:20,marginTop:46,color:'#212121'}}>Blue Dream</Text>
+        <Text style={{fontSize:12,height:14,marginLeft:20,color:'#212121'}}>Indica</Text>
        
        <View style={{flexDirection:'row'}}> 
-        <Text style={{fontSize:14,height:16,marginLeft:20}}>Strain</Text>
+        <Text style={{fontSize:14,height:16,marginLeft:20,color:'#212121'}}>Strain</Text>
         <TouchableOpacity >
             <Icon name="DropdownIcon" fill="red" width="9" height="12" style={{marginTop:5,marginLeft:3}} />
           </TouchableOpacity>
        </View>
       </View>
 
-      <View style={{borderRadius:4,backgroundColor:"white",marginTop:1,height:40,flexDirection:'row',shadowColor: '#000000',shadowOffset: {width: 0,height: 3},shadowRadius: 2,shadowOpacity: 0.5}}>
+      <View style={{borderRadius:4,backgroundColor:"white",marginTop:1,height:40,flexDirection:'row',shadowColor: '#19000000',shadowOffset: {width: 0,height: 3},shadowRadius: 2,shadowOpacity:7}}>
         <Text style={{color:"#00c853",marginLeft:20,fontSize:12,width:36,height:14,marginTop:14,textAlign:'center'}}>Active</Text>
         <Text style={{color:"#212121",marginLeft:110,fontSize:16,width:42,height:19,marginTop:11,textAlign:'center'}}>today</Text>
         <Text style={{color:"#212121",marginLeft:100,fontSize:16,width:8,height:19,marginTop:11,textAlign:'center'}}>1</Text>
@@ -150,8 +150,8 @@ class FormStatesScreen extends Component {
       </View>
 
       <ScrollView scrollEnabled={this.state.isMedicalPressed}>
-      <View style={{backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:120,shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5}}>
-       {this.state.ratingCount == 0.0?<Text style={{fontSize:16,height:19,marginTop:27,textAlign:'center'}}>Experience Rating</Text>:<Text style={{fontSize:16,height:19,marginTop:27,textAlign:'center'}}>{this.state.ratingCount}</Text>} 
+      <View style={{backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:120,shadowColor: '#33000000',shadowOffset: {width: 0,height: 1},shadowRadius: 1,shadowOpacity: 0.5,borderRadius:4}}>
+       {this.state.ratingCount == 0.0?<Text style={{fontSize:16,height:19,marginTop:27,textAlign:'center',color:'#212121'}}>Experience Rating</Text>:<Text style={{fontSize:16,height:19,marginTop:27,textAlign:'center'}}>{this.state.ratingCount}</Text>} 
        
         <Rating
             type='custom'
@@ -186,7 +186,7 @@ class FormStatesScreen extends Component {
 
         </View> */}
       </View>
-      <View style={{backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:120,shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5,flexDirection:'column'}}>
+      <View style={{backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:120,shadowColor: '#33000000',shadowOffset: {width: 0,height: 1},shadowRadius: 1,shadowOpacity: 0.5,borderRadius:4,flexDirection:'column'}}>
 
           <View style={{flexDirection:'row',justifyContent:'center'}}>
           <TouchableOpacity onPress={this.puffDecrementCount}>
@@ -201,21 +201,21 @@ class FormStatesScreen extends Component {
 
           </View>  
           <View style={{flexDirection:"row",justifyContent:'center',marginTop:11}}>
-          <Text style={{width:36,height:16,}}>Puff</Text>
+          <Text style={{width:36,height:16,color:'#212121'}}>Puff</Text>
           <TouchableOpacity>
             <Icon name="DropdownIcon" fill="red" width="9" height="12" style={{width:9,height:12,marginTop:5}} />
           </TouchableOpacity>
           </View>
       </View>
       
-      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'column',shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2}}>
+      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'column',shadowColor: '#33000000',shadowOffset: {width: 0,height: 1},shadowRadius: 1,shadowOpacity: 0.2,borderRadius:4}}>
         
         <View style={{flexDirection:"row"}}>
         <Icon name="EffectsIcon" width="13" height="15" style={{color:"white",marginTop:22,width:15,marginLeft:20,height:15}} />
-        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left'}}>Effects</Text>
+        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left',color:'#212121'}}>Effects</Text>
 
        </View>
-       <Text style={{marginLeft:39,fontSize:16,width:206,height:20,marginTop:1,textAlign:'left'}}>Uplifted,Relaxed,Creative</Text>
+       <Text style={{marginLeft:39,fontSize:16,width:206,height:20,marginTop:1,textAlign:'left',color:'#212121'}}>Uplifted,Relaxed,Creative</Text>
 
 
       </View>
@@ -223,10 +223,10 @@ class FormStatesScreen extends Component {
     
       <TouchableOpacity onPress={this.medicalPressed}>
     
-    <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:350,shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2}}>
+    <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:350,shadowColor: '#33000000',shadowOffset: {width: 0,height: 1},shadowRadius: 1,shadowOpacity: 0.2,borderRadius:4}}>
        <View style={{flexDirection:"row"}}>
        <Icon name="MedicalIcon" width="13" height="15" style={{color:"white",marginTop:22,width:15,marginLeft:20,height:15}} />
-        <Text style={{marginLeft:6,fontSize:14,width:52,height:16,marginTop:20,textAlign:'left'}}>Medical</Text>
+        <Text style={{marginLeft:6,fontSize:14,width:52,height:16,marginTop:20,textAlign:'left',color:'#212121'}}>Medical</Text>
         <Text style={{marginLeft:(Dimensions.get('window').width-12)/2,fontSize:14,width:23,height:14,marginTop:20,textAlign:'right'}}>edit</Text>
        </View>
       
@@ -323,28 +323,28 @@ class FormStatesScreen extends Component {
 
       </View>
       </TouchableOpacity>
-      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'row',shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2}}>
+      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'row',shadowColor: '#33000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2,borderRadius:4}}>
         <Icon name="GoodForIcon" width="13" height="15" style={{color:"white",marginTop:22,width:15,marginLeft:20,height:15}} />
-        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left'}}>Good for</Text>
-        <Icon name="AddIcon" width="12" height="12" fill="gray" style={{position: 'absolute', top: 32, left: (Dimensions.get('window').width-32)/2, right: 0, bottom: 0,width:Dimensions.get('window').width}}/>
+        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left',color:'#212121'}}>Good for</Text>
+        <Icon name="AddIcon" width="16" height="16" fill="#dfdfdf" style={{position: 'absolute', top: 38, left: (Dimensions.get('window').width-32)/2, right: 0, bottom: 0,width:Dimensions.get('window').width}}/>
       </View>
 
-      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'row',shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2}}>
+      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'row',shadowColor: '#33000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2,borderRadius:4}}>
         <Icon name="FlavorsIcon" width="13" height="15" style={{color:"white",marginTop:22,width:15,marginLeft:20,height:15}} />
-        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left'}}>Flavors</Text>
-        <Icon name="AddIcon" width="12" height="12" fill="gray" style={{position: 'absolute', top: 32, left: (Dimensions.get('window').width-32)/2, right: 0, bottom: 0,width:Dimensions.get('window').width}}/>
+        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left',color:'#212121'}}>Flavors</Text>
+        <Icon name="AddIcon" width="16" height="16" fill="#dfdfdf" style={{position: 'absolute', top: 38, left: (Dimensions.get('window').width-32)/2, right: 0, bottom: 0,width:Dimensions.get('window').width}}/>
       </View>
 
-      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'row',shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2}}>
+      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'row',shadowColor: '#33000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2,borderRadius:4}}>
         <Icon name="StrainInfoIcon" width="13" height="15" style={{color:"white",marginTop:22,width:15,marginLeft:20,height:15}} />
-        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left'}}>Strain Info</Text>
-        <Icon name="AddIcon" width="12" height="12" fill="gray" style={{position: 'absolute', top: 32, left: (Dimensions.get('window').width-32)/2, right: 0, bottom: 0,width:Dimensions.get('window').width}}/>
+        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left',color:'#212121'}}>Strain Info</Text>
+        <Icon name="AddIcon" width="16" height="16" fill="#dfdfdf" style={{position: 'absolute', top: 38, left: (Dimensions.get('window').width-32)/2, right: 0, bottom: 0,width:Dimensions.get('window').width}}/>
       </View>
 
-      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'row',shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2}}>
+      <View style={{borderRadius:4,backgroundColor:"white",marginLeft:20,marginRight:20,marginTop:20,height:80,flexDirection:'row',shadowColor: '#33000000',shadowOffset: {width: 0,height: 1},shadowRadius: 2,shadowOpacity: 0.2,borderRadius:4}}>
         <Icon name="Pen" width="13" height="15" style={{color:"white",marginTop:22,width:15,marginLeft:20,height:15}} />
-        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left'}}>Review</Text>
-        <Icon name="AddIcon" width="12" height="12" fill="gray" style={{position: 'absolute', top: 32, left: (Dimensions.get('window').width-32)/2, right: 0, bottom: 0,width:Dimensions.get('window').width}}/>
+        <Text style={{marginLeft:6.5,fontSize:14,height:16,marginTop:20,textAlign:'left',color:'#212121'}}>Review</Text>
+        <Icon name="AddIcon" width="16" height="16" fill="#dfdfdf" style={{position: 'absolute', top: 38, left: (Dimensions.get('window').width-32)/2, right: 0, bottom: 0,width:Dimensions.get('window').width}}/>
       </View>
       {/* {
       this.state.itemArray.map((item, index) => (
@@ -358,7 +358,7 @@ class FormStatesScreen extends Component {
       </ScrollView>
       <View style={{height:70,backgroundColor:"white",shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5}}>
           
-          <Text  style={{overflow: 'hidden',textAlign:'center',marginLeft:20,marginRight:20,width: Dimensions.get('window').width - 40,borderWidth:1,borderColor:'rgb(180,180,180)',shadowColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Log</Text>
+      <Text  style={{overflow: 'hidden',color:'#ff5a5f',textAlign:'center',marginLeft:20,marginRight:20,width: Dimensions.get('window').width - 40,borderWidth:1.5,borderColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Done</Text>
             
         </View>
         <View style={{width:75,height:75,borderRadius:37.5,borderColor:'red',borderWidth:1,position:'absolute',top:30,backgroundColor:"white",alignItems:'center',marginLeft:(Dimensions.get('window').width-75)/2,flexDirection:'column'}}/>
@@ -373,6 +373,7 @@ export default FormStatesScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
+    backgroundColor:"#f3f6f3"
+
   }
 });

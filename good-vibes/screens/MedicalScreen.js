@@ -48,7 +48,9 @@ export default class MedicalScreen extends Component {
 
   }
  
-
+  closeButtonPressed=()=>{
+    this.props.navigation.pop();
+  }
   
     getComponent=(item)=>{
 
@@ -87,14 +89,14 @@ export default class MedicalScreen extends Component {
                       height:50,
                       justifyContent:'center',
                       alignItems:"center"},
-                      {borderBottomColor:"red",borderBottomWidth:2}]}>
+                      {borderBottomColor:"red",borderBottomWidth:2,backgroundColor:'#ffff'}]}>
         <Text onPress={this.switchCannabis} style={[{ color:'red',width:74,height:16,fontSize:14}]}>Symptoms</Text>
       </View>  
       <View style={[{width:Dimensions.get('window').width/2,
                       height:50,
                       justifyContent:'center',
                       alignItems:"center"},
-                      {borderBottomColor:"white",borderBottomWidth:0}]}>
+                      {borderBottomColor:"white",borderBottomWidth:0,backgroundColor:'#ffff'}]}>
         <Text onPress={this.switchCannabisCheck} style={[{ color:'black',width:71,height:16,fontSize:14}]}>Conditions</Text>
       </View>    
 
@@ -104,14 +106,14 @@ export default class MedicalScreen extends Component {
                       height:50,
                       justifyContent:'center',
                       alignItems:"center"},
-                      {borderBottomColor:"black",borderBottomWidth:0}]}>
+                      {borderBottomColor:"black",borderBottomWidth:0,backgroundColor:'#ffff'}]}>
         <Text onPress={this.switchCannabis} style={[{ color:'black',width:74,height:16,fontSize:14}]}>Symptoms</Text>
       </View>  
       <View style={[{width:Dimensions.get('window').width/2,
                       height:50,
                       justifyContent:'center',
                       alignItems:"center"},
-                      {borderBottomColor:"red",borderBottomWidth:2}]}>
+                      {borderBottomColor:"red",borderBottomWidth:2,backgroundColor:'#ffff'}]}>
         <Text onPress={this.switchCannabisCheck} style={[{ color:'red',width:71,height:16,fontSize:14}]}>Conditions</Text>
       </View>    
      </View> 
@@ -138,9 +140,10 @@ export default class MedicalScreen extends Component {
       
       </ScrollView>
       <View style={{height:75,backgroundColor:"white",shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5,flexDirection:'row'}}>
+      <TouchableOpacity onPress={this.closeButtonPressed}>
       <Icon name="CloseIcon"   fill="#b0b0b0" height="16" width="16" style={{marginTop:30,marginLeft:42}} />
-
-          <Text  style={{textAlign:'center',fontSize:14,color:'red',marginLeft:100,marginRight:20,width:240 ,borderWidth:1,borderColor:'red',shadowColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Select</Text>
+      </TouchableOpacity>
+          <Text  style={{textAlign:'center',fontSize:14,color:'red',marginLeft:42,marginRight:20,width:240 ,borderWidth:1.5,borderColor:'red',shadowColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Select</Text>
             
         </View>
    
@@ -154,7 +157,8 @@ export default class MedicalScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'rgb(248,248,248)'
+    backgroundColor:"#f3f6f3"
+
   },
 buttonText: {
   color: 'red',

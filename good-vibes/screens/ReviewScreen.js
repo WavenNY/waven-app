@@ -19,7 +19,9 @@ export default class ReviewScreen extends Component {
       }
       }
       
-    
+      closeButtonPressed=()=>{
+        this.props.navigation.pop();
+      }
   
 
   render() {
@@ -49,8 +51,8 @@ export default class ReviewScreen extends Component {
       
       
       <View style={{height:75,width:Dimensions.get('window').width,bottom:0,position:'absolute',backgroundColor:"white",shadowColor: '#000000',shadowOffset: {width: 0,height: 1},shadowRadius: 5,shadowOpacity: 0.5,flexDirection:'row'}}>
-        <Text  style={{marginTop:30,marginLeft:65,width:46,height:16,color:'#717171',}}>Cancel</Text> 
-        <Text  style={{textAlign:'center',fontSize:14,color:'red',marginLeft:50,marginRight:20,width:194 ,borderWidth:1,borderColor:'red',shadowColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Add</Text>
+        <Text onPress={this.closeButtonPressed} style={{marginTop:30,marginLeft:65,width:46,height:16,color:'#717171',}}>Cancel</Text> 
+        <Text  style={{textAlign:'center',fontSize:14,color:'red',marginLeft:50,marginRight:20,width:194 ,borderWidth:1.5,borderColor:'red',shadowColor:'red',borderRadius:20,height:35,marginTop:17.5,paddingTop:8}}>Add</Text>
             
         </View>
        
