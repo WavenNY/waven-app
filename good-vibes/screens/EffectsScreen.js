@@ -55,12 +55,10 @@ export default class EffectsScreen extends Component {
     getComponent=(item)=>{
 
       return(
-        <View style={{backgroundColor:"white",marginTop:2,height:80,flexDirection:'row'}}>
-       
-        <Text style={{marginLeft:50,fontSize:14,width:81,height:20,marginTop:36,textAlign:'center'}}>{item.name}</Text>
-        <Icon name={item.icon}   fill='white' height="16" width="16" style={{borderWidth:1,borderColor:'#b0b0b0',marginTop:36,marginLeft:184,marginRight:20}} />
-
-      </View>
+        <View style={{backgroundColor:"white",marginTop:0,height:60,flexDirection:'row'}}>      
+         <Text style={{marginLeft:50,fontSize:14,width:81,height:20,marginTop:36,textAlign:'center'}}>{item.name}</Text>
+         <Icon name={item.icon}   fill='white' height="16" width="16" style={{borderWidth:1,borderColor:'#b0b0b0',marginTop:36,marginLeft:184,marginRight:20}} />
+        </View>
 
       )
 
