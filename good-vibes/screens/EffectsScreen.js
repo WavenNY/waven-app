@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet ,ScrollView,Dimensions,TouchableOpacity} from "react-native";
 import Icon from "../components/SvgIcon";
 let {width} = Dimensions.get('window').width;
- 
-
+import SelectMultiple from 'react-native-select-multiple'
 
 export default class EffectsScreen extends Component {
   
