@@ -18,12 +18,12 @@ export default class GoodForScreen extends Component {
     this.state={
         isActive:true,
         itemArray:[
-            {"name":"Lore Ipsum","icon":"CheckBoxSelectedIcon","color":"red"},
-            {"name":"Lore Ipsum","icon":"CheckBoxUnselectedIcon","color":"white"},
-            {"name":"Lore Ipsum","icon":"CheckBoxSelectedIcon","color":"white"},
-            {"name":"Lore Ipsum","icon":"CheckBoxUnselectedIcon","color":"red"},
-            {"name":"Lore Ipsum","icon":"CheckBoxSelectedIcon","color":"white"},
-            {"name":"Lore Ipsum","icon":"CheckBoxUnselectedIcon","color":"red"},
+          {"name":"Lore Ipsum","color":"red","isSelect":false},
+          {"name":"Lore Ipsum","color":"white","isSelect":false},
+          {"name":"Lore Ipsum","color":"white","isSelect":false},
+          {"name":"Lore Ipsum","color":"red","isSelect":false},
+          {"name":"Lore Ipsum","color":"white","isSelect":false},
+          {"name":"Lore Ipsum","color":"red","isSelect":false},
           ],
           
     }
@@ -48,17 +48,50 @@ export default class GoodForScreen extends Component {
     getComponent=(item)=>{
 
       return(
+        <TouchableOpacity onPress={this.chooseitem.bind(this,item)} >
         <View style={{backgroundColor:"white",marginTop:0,height:60,flexDirection:'row'}}>
        
-        <Text style={{marginLeft:50,fontSize:14,width:81,height:20,marginTop:36,textAlign:'center'}}>{item.name}</Text>
-        <Icon name={item.icon}   fill='white' height="16" width="16" style={{borderWidth:1,borderColor:'#b0b0b0',marginTop:36,marginLeft:184,marginRight:20}} />
-
+        <Text onPress={this.chooseitem.bind(this,item)} style={{marginLeft:50,fontSize:14,width:81,height:20,marginTop:36,textAlign:'center',fontWeight:item.isselect==false?'normal':'bold' }}>{item.name}</Text>
+{item.isselect==false?  <Icon name={"CheckBoxUnselectedIcon"}   fill='white' height="16" width="16" style={{borderWidth:1,borderColor:'#b0b0b0',borderRadius:4,marginTop:36,marginLeft:183,marginRight:40}} />
+:  <Icon name={"CheckBoxSelectedIcon"}   fill='red' height="16" width="16" style={{borderWidth:1,borderColor:'#b0b0b0',borderRadius:4,marginTop:36,marginLeft:183,marginRight:40}} />
+}
       </View>
-
+</TouchableOpacity>
       )
 
     }
   
+    chooseitem=(item)=>{
+  
+    
+      for(var i = 0; i<this.state.itemArray.length; i++){
+        var obj = this.state.itemArray[i];
+      
+        console.log(obj)
+  
+        if(obj.name == item.name){
+  
+            if (item.isselect == false)
+            {
+              this.state.itemArray[i] = {"name":obj.name,"isselect":true},
+              console.log(obj.name)
+            }
+            else if (item.isselect == true)
+            {
+              this.state.itemArray[i] = {"name":obj.name,"isselect":false},
+              console.log(obj.name)
+            }
+              break
+        }
+      
+  
+      }
+  
+
+      this.setState({itemArray:this.state.itemArray})
+      console.log(this.state.itemArray)
+    }
+
     componentDidMount()
     {
       
@@ -71,7 +104,7 @@ export default class GoodForScreen extends Component {
       <View style={styles.container}>
         <View style={{backgroundColor:'rgb(255,88,98)',width:Dimensions.get('window').width,height:71,flexDirection:"row"}}>
            <Text style={{marginLeft:20,width:36,height:16,marginTop:36,color:'white',fontSize:14}}>Clear</Text>
-          <Text style={{marginLeft:123,width:115,height:20,marginTop:36,color:'white',fontSize:17}}>Good for</Text>
+          <Text style={{marginLeft:67,width:115,height:20,lineHeight:20,marginTop:36,color:'white',fontSize:17,textAlign:'center'}}>Good for</Text>
           <Icon name="AddIcon"   fill="white" height="16" width="16" style={{marginTop:36,marginLeft:86,marginRight:20}} />
        </View>
 
